@@ -9,6 +9,9 @@ branches:
     - master # build master branch only
 script:
   - hexo generate # generate static files
+after_script:
+- pwd
+- scp -o StrictHostKeyChecking=no -r public/*  root@106.54.112.99:/opt/nginx/html
 deploy:
   provider: pages
   skip-cleanup: true
