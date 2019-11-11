@@ -89,4 +89,6 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:weibo785424079/weibo785424079.github.io.git
+  branch: master
