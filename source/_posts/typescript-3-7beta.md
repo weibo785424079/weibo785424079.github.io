@@ -9,7 +9,7 @@ tags:
 
 
 ```ts
-  let x = foo.bar.baz()
+  let x = foo?.bar.baz()
     =>
   let x = (f===null || foo === undefined) ?
         Undefined :
