@@ -211,3 +211,25 @@ function data2Url(data) {
 }
 // jsonp({url:'www.xxx.com',data:{a:1,b:2}})\
 ```
+
+### 转为二维数组
+```js
+let count = 32
+let arr = []
+while (count > 0) {
+  arr.unshift(count--)
+}
+const toTwoMatrix = (arr, scale = 4) => {
+  for (let i = 0; i < arr.length; i++) {
+    const first = Math.floor(i / scale)
+    const second = i % scale
+    if (second !== 0) {
+      arr[first][second] = arr[i]
+    } else {
+      arr[first] = [arr[i]]
+    }
+  }
+  arr.length = Math.ceil(arr.length / 4)
+  return arr
+}
+```
