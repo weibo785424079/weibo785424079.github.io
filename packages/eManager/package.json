@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "cross-env mode=local webpack-dev-server --env emanager=development --config config/webpack.dev.config.js --progress",
-    "build": "webpack --config config/webpack.prod.config.js"
+    "start:test": "cross-env mode=test webpack-dev-server --env emanager=development --config config/webpack.dev.config.js --progress",
+    "build:prod": "webpack --mode=production --config config/webpack.prod.config.js"
   },
   "keywords": [],
   "author": "bo.wei <bo.wei@ifchange.com>",
