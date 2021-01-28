@@ -5,7 +5,13 @@
         "paths": {
             "@/*": ["./src/*"],
             "hooks/*": ["./src/hooks/*"],
-            "components/*": ["./src/components/*"]
+            "utils/*": ["./src/utils/*"],
+            "views/*": ["./src/views/*"],
+            "action/*": ["./src/action/*"],
+            "store/*": ["./src/store/*"],
+            "styles/*": ["./src/styles/*"],
+            "components/*": ["./src/components/*"],
+            "asserts/*": ["./src/asserts/*"]
         },
         "incremental": true,
         "outDir": "dist",

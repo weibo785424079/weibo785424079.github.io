@@ -4,35 +4,42 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const createErrorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
-
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 const root = path.resolve(__dirname, '..');
+
+const publicPath = '/e-manager'
 
 module.exports = {
     entry: {
         main: path.resolve(root, './src/index.tsx')
     },
     output: {
-        publicPath: '/',
+        publicPath,
         path: path.resolve(root, 'dist'),
-        filename: '[name].[hash:8].js',
+        filename: `[name].[hash:8].js`,
         chunkFilename: '[name].[contentHash:8].js'
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.json'],
         alias: {
-            'react-dom': '@hot-loader/react-dom',
             '@': path.resolve(root, 'src'),
-            hooks: path.resolve(root, 'src/hooks'),
-            components: path.resolve(root, 'src/components')
+            'react-dom': '@hot-loader/react-dom',
+            'hooks': path.resolve(root, 'src/hooks'),
+            'components': path.resolve(root, 'src/components'),
+            'utils': path.resolve(root, 'src/utils'),
+            'action': path.resolve(root, 'src/action'),
+            'view': path.resolve(root, 'src/view'),
+            'styles': path.resolve(root, 'src/styles'),
+            'asserts': path.resolve(root, 'src/asserts')
         }
     },
     devServer: {
         before(app) {
             app.use(createErrorOverlayMiddleware());
         },
+        publicPath,
         disableHostCheck: true,
         contentBase: path.resolve(root, 'dist'),
         compress: true,
@@ -40,16 +47,7 @@ module.exports = {
         open: true,
         hot: true,
         historyApiFallback: true,
-        proxy: {
-            '/api': {
-                target: 'http://localhost:3000',
-                pathRewrite: { '^/api': '' }
-            },
-            '/mock': {
-                target: 'http://localhost:3001',
-                pathRewrite: { '^/mock': '' }
-            }
-        }
+        proxy: {}
     },
     optimization: {
         splitChunks: {
@@ -69,20 +67,22 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 use: [
                     {
-                        loader: 'babel-loader'
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
                     },
-                    {
+                    process.env.mode === 'local'? {
                         loader: 'react-dev-inspector/plugins/webpack/inspector-loader',
                         options: { exclude: [path.resolve(__dirname, '想要排除的目录')] }
-                    },
+                    }: null,
                     {
                         loader: 'ts-loader',
                         options: {
                             transpileOnly: true
                         }
                     }
-                ],
-                exclude: /node_modules/
+                ].filter(Boolean)
             },
             {
                 test: sassModuleRegex,

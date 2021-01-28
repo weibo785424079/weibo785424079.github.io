@@ -1,11 +1,11 @@
-# `eManager`
+## 
+* 尽量不使用sessionStorage
+* 尽量不使用any
+## todo
 
-> TODO: description
-
-## Usage
-
-```
-const eManager = require('eManager');
-
-// TODO: DEMONSTRATE API
-```
+## store
+## webpack配置完善
+## eslint规则
+## base.css
+## less-loader
+## proxy.example
