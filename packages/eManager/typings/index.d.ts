@@ -6,4 +6,5 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 declare module '*.scss';
+declare module 'react-hot-loader/root'
 declare module 'react-dom'

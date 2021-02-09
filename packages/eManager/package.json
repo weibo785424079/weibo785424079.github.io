@@ -4,8 +4,8 @@
   "description": "> TODO: description",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env mode=local webpack-dev-server --env emanager=development --config config/webpack.dev.config.js --progress",
-    "start:test": "cross-env mode=test webpack-dev-server --env emanager=development --config config/webpack.dev.config.js --progress",
+    "start:dev": "cross-env mode=local webpack-dev-server --config config/webpack.dev.config.js --progress",
+    "start:test": "cross-env mode=test webpack-dev-server --config config/webpack.dev.config.js --progress",
     "build:prod": "webpack --mode=production --config config/webpack.prod.config.js"
   },
   "keywords": [],
@@ -18,6 +18,7 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@types/react-dom": "^17.0.0",
     "@types/react-loadable": "^5.5.4",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
