@@ -14,7 +14,7 @@
     "test": "jest --collectCoverage"
   },
   "sideEffects": false,
-  "homepage": "https://github.com/weibo785424079/hook",
+  "homepage": "https://github.com/weibo785424079/monorepo",
   "types": "dist/esm/index.d.ts",
   "files": [
     "dist",

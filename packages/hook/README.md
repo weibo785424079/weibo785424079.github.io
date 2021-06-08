@@ -22,4 +22,4 @@ const App = () => {
 export default App;
 ```
 
-[文档](https://weibo785424079.github.io/hook/)
+[文档](https://weibo785424079.github.io/monorepo/)
