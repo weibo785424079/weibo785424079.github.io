@@ -1,9 +1,13 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "docs:dev": "site docs dev"
+  },
   "devDependencies": {
     "lerna": "^3.22.1",
-    "@tms/eslint-config-site": "^0.0.1"
+    "@tms/eslint-config-site": "^0.0.1",
+    "@tms/site-cli": "^0.0.1"
   },
   "workspaces": [
     "packages/*"

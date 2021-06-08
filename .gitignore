@@ -1,3 +1,8 @@
 node_modules
 dist
 *.error
+.umi
+.umi-production
+dist
+docs_dist
+coverage
