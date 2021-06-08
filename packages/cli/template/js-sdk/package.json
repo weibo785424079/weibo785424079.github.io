@@ -1,0 +1,27 @@
+{
+    "name": "@tms/js-sdk",
+    "version": "0.0.1",
+    "main": "dist/esm/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts",
+    "license": "MIT",
+    "scripts": {
+        "dev": "site build src/index.ts -w",
+        "build:umd": "site build src/index.ts",
+        "build:esm": "site compile src",
+        "build": "yarn build:umd && yarn build:esm",
+        "docs:dev": "site docs dev",
+        "docs:build": "site docs build",
+        "test": "jest --collectCoverage"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.22",
+        "@tms/eslint-config-site": "^0.0.1",
+        "jest": "^26.6.3",
+        "ts-jest": "^26.5.6",
+        "typescript": "^4.2.4"
+    },
+    "resolutions": {
+        "@types/react": "16.14.6"
+    }
+}
