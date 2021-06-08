@@ -128,5 +128,6 @@
     "browserslist": [
         "> 0.1%",
         "ie 11"
-    ]
+    ],
+    "private": "true"
 }
