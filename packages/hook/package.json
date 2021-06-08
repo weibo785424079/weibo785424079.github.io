@@ -1,0 +1,29 @@
+{
+  "name": "hook",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "bo.wei <bo.wei@mobilemd.cn>",
+  "homepage": "https://github.com/weibo785424079/esite#readme",
+  "license": "ISC",
+  "main": "lib/hook.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://npm.taimei.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weibo785424079/esite.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/weibo785424079/esite/issues"
+  }
+}
