@@ -1,29 +1,50 @@
 {
-  "name": "hook",
+  "name": "@tms/site-hook",
   "version": "1.0.0",
-  "description": "> TODO: description",
-  "author": "bo.wei <bo.wei@mobilemd.cn>",
-  "homepage": "https://github.com/weibo785424079/esite#readme",
-  "license": "ISC",
-  "main": "lib/hook.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "registry": "http://npm.taimei.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/weibo785424079/esite.git"
-  },
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "compile": "site compile src",
+    "compile:watch": "site compile src -w",
+    "docs:dev": "site docs dev",
+    "docs:build": "site docs build",
+    "predeploy": "yarn docs:build",
+    "deploy": "gh-pages -d docs_dist",
+    "test": "jest --collectCoverage"
   },
-  "bugs": {
-    "url": "https://github.com/weibo785424079/esite/issues"
+  "sideEffects": false,
+  "homepage": "https://github.com/weibo785424079/hook",
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "dependencies": {
+    "query-string": "^7.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^5.1.1",
+    "@tms/site-cli": "^0.0.1",
+    "@types/jest": "^26.0.22",
+    "@types/react": ">=16.8.6",
+    "@types/react-dom": ">=16.8.6",
+    "@typescript-eslint/eslint-plugin": "4.0.1",
+    "@typescript-eslint/parser": "^4.25.0",
+    "antd": "^4.16.2",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "gh-pages": "^3.1.0",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.2",
+    "redux-actions": "^2.6.5",
+    "ts-jest": "^26.5.6"
+  },
+  "peerDependencies": {
+    "antd": "^4.16.1",
+    "react": ">=16.8.6"
   }
 }
