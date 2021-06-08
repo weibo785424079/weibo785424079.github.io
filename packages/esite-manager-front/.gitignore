@@ -1,0 +1,7 @@
+node_modules
+dist
+yarn.*.log
+*.log
+.DS_Store
+.proxy.js
+/swagger2ts

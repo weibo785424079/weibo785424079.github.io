@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="Web site created using create-react-app" />
+        <title>Site运营后台（快速启动）</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="//static.mobilemd.cn/public/lib/react/16.13.0/react.production.min.js"></script>
+        <script src="//static.mobilemd.cn/public/lib/react-dom/16.13.0/react-dom.production.min.js"></script>
+        <script src="//static.mobilemd.cn/public/lib/react-router-dom/5.2.0/react-router-dom.min.js"></script>
+        <script src="//static.mobilemd.cn/public/lib/moment/2.24.0/moment.min.js"></script>
+        <script src="//static.mobilemd.cn/public/lib/axios/0.19.0/axios.min.js"></script>
+        <script src="//static.mobilemd.cn/public/lib/uuid/latest/uuidv4.min.js"></script>
+        <script src="https://static.mobilemd.cn/public/lib/blueimp-md5/2.12.0/md5.min.js"></script>
+        <!-- 添加前端监控相关代码 -->
+        <script>
+            const TMS_ENV = `<%= process.env.TMS_ENV %>`;
+            const NODE_ENV = `<%= process.env.NODE_ENV %>`;
+            (function () {
+                console.log('TMS_ENV', `<%= process.env.TMS_ENV %>`, TMS_ENV);
+                console.log('NODE_ENV', `<%= process.env.NODE_ENV %>`, NODE_ENV);
+                if (TMS_ENV === 'prod' && NODE_ENV === 'production') {
+                    document.write('<script src="/common-env.js"><\/script>');
+                    document.write(
+                        '<script src="//static.mobilemd.cn/public/dyn/skynet-sdk/v1/dist.js" appId="site-manager" appSecret="1a9dcb41f29d33ccb05a7b2311eb3b2b" appVer="1.0.0" httpEvent iframe><\/script>'
+                    );
+                } else if (TMS_ENV === 'test' && NODE_ENV === 'production') {
+                    // 测服监控
+                    document.write('<script src="/common-env.js"><\/script>');
+                    document.write(
+                        '<script src="//static.mobilemd.cn/public/dyn/skynet-sdk/v1/dist.js" appId="site-manager" appSecret="741ef124ec8ccfa17f25815f83da3833" appVer="1.0.0" ><\/script>',
+                    );
+                }
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+declare module '*.svg';
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.gif';
+declare module '*.bmp';
+declare module '*.tiff';
+declare module '*.scss';
+declare module 'react-dom';
+declare module '@tms/react-dev-inspector';
+declare module '@tms/eCollegePackage';
+declare module 'redux-logger';

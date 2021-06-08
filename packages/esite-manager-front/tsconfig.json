@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "rootDir": "./",
+        "paths": {
+            "@/*": ["./src/*"],
+            "src/*": ["./src/*"],
+            "hooks/*": ["./src/hooks/*"],
+            "utils/*": ["./src/utils/*"],
+            "view/*": ["./src/view/*"],
+            "action/*": ["./src/action/*"],
+            "store/*": ["./src/store/*"],
+            "component/*": ["src/component/*"],
+            "assets/*": ["./src/assets/*"]
+        },
+        "incremental": true,
+        "outDir": "dist",
+        "module": "ESNext",
+        "target": "ESNEXT",
+        "lib": ["es6", "dom"],
+        "sourceMap": true,
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": false,
+        "importHelpers": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "downlevelIteration": true,
+        "strict": true
+    },
+    "include": ["./src/**/*", "./typings/**/*"],
+    "exclude": ["node_modules", "dist", "config"]
+}
