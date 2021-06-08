@@ -12,7 +12,8 @@
     "bin",
     "libs",
     "package.json",
-    "template"
+    "template",
+    "README.md"
   ],
   "scripts": {
     "watch": "tsc --watch",

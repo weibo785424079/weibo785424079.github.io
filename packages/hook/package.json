@@ -18,7 +18,8 @@
   "types": "dist/esm/index.d.ts",
   "files": [
     "dist",
-    "package.json"
+    "package.json",
+    "README.md"
   ],
   "dependencies": {
     "query-string": "^7.0.0"
