@@ -1,1 +1,1 @@
-# site-cli react-component模板代码
+# rsite-component

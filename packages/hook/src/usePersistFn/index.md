@@ -1,8 +1,8 @@
 ---
 title: usePersistFn
 group:
-  title: 组件
-  path: /
+  title: hook
+  path: /hook
   order: 2
 ---
 

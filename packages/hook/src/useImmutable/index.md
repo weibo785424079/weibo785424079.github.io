@@ -1,8 +1,8 @@
 ---
 title: useImmutable
 group:
-  title: 高频
-  path: /n
+  title: hook
+  path: /hook
   order: 2
 ---
 

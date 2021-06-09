@@ -1,9 +1,9 @@
 ---
 title: useRequest
 group:
-  title: 高频
-  path: /n
-  order: 2
+  title: 常用-hook
+  path: /hook-usually
+  order: 1
 ---
 
 # useRequest

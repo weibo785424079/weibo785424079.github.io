@@ -13,6 +13,7 @@
     "deploy": "gh-pages -d docs_dist",
     "test": "jest --collectCoverage"
   },
+  "author": "bo.wei",
   "sideEffects": false,
   "homepage": "https://github.com/weibo785424079/monorepo",
   "types": "dist/esm/index.d.ts",
@@ -32,7 +33,7 @@
     "@types/react-dom": ">=16.8.6",
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "^4.25.0",
-    "antd": "^4.16.2",
+    "antd": "^3.26.20",
     "eslint": "^7.26.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.2",
@@ -45,7 +46,7 @@
     "ts-jest": "^26.5.6"
   },
   "peerDependencies": {
-    "antd": "^4.16.1",
+    "antd": "^3.26.20",
     "react": ">=16.8.6"
   }
 }

@@ -1,9 +1,9 @@
 ---
 title: useEventListener
 group:
-  title: 组件
-  path: /
-  order: 1
+  title: hook
+  path: /hook
+  order: 2
 ---
 
 # useEventListener

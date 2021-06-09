@@ -1,8 +1,8 @@
 ---
 title: useDocumentVisibility
 group:
-  title: 高频
-  path: /n
+  title: 常用-hook
+  path: /hook-usually
   order: 1
 ---
 

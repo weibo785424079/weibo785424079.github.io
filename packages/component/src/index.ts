@@ -1,5 +1,10 @@
-import FormBuilder from './Formbuilder'
+import FormBuilder from './Formbuilder';
+import Operations from './Operations';
+import { FormUpload, getValueFromEvent } from './FormUpload';
 
 export {
-    FormBuilder
-}
+  FormBuilder,
+  Operations,
+  FormUpload,
+  getValueFromEvent,
+};
