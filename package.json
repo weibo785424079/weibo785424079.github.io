@@ -5,13 +5,19 @@
     "docs:dev": "site docs dev",
     "docs:build": "site docs build",
     "predeploy": "yarn docs:build",
-    "deploy": "gh-pages -d docs_dist"
+    "deploy": "gh-pages -d docs_dist",
+    "test": "jest --collectCoverage"
   },
   "devDependencies": {
-    "lerna": "^3.22.1",
+    "@types/jest": "^26.0.22",
     "@tms/eslint-config-site": "^0.0.1",
-    "@tms/site-cli": "^0.0.1",
-    "gh-pages": "^3.1.0"
+    "@tms/site-cli": "^0.0.3",
+    "lerna": "^3.22.1",
+    "gh-pages": "^3.1.0",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.2",
+    "redux-actions": "^2.6.5",
+    "ts-jest": "^26.5.6"
   },
   "workspaces": [
     "packages/*"
