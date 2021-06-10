@@ -1,6 +1,6 @@
 {
-    "catagory": ["site", "site前端文档"],
+    "catagory": ["Site", "site前端"],
     "name": "site的前端文档",
-    "description": "site,cli,react,hook,eslint",
+    "description": "site cli react hook eslint",
     "authors": ["bo.wei"]
   }

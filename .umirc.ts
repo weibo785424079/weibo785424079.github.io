@@ -1,7 +1,6 @@
 export default {
     mode: 'site',
     title: 'site的前端文档',
-    outputPath: "docs_dist",
     navs: [
         {
           title: 'Cli',
