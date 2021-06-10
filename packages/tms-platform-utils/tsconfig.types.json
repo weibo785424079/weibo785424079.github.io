@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "declarationDir": "lib",
+        "declaration": true,
+        "isolatedModules": false,
+        "emitDeclarationOnly": true
+    }
+}

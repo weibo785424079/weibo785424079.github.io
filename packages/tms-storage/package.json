@@ -1,0 +1,15 @@
+{
+  "name": "@tms/storage",
+  "version": "0.0.54",
+  "description": "便捷操作浏览器的 localStorage 和 sessionStorage",
+  "scripts": {
+    "build": "tsc"
+  },
+  "main": "./dist/index.js",
+  "repository": "git@git.taimei.com:fe/tms-storage.git",
+  "author": "ziyang.liu <ziyang.liu@mobilemd.cn>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.1.5"
+  }
+}

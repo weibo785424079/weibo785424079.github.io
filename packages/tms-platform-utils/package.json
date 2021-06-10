@@ -1,0 +1,40 @@
+{
+  "name": "@tms/platform-utils",
+  "version": "0.0.2-alpha",
+  "description": "utils 封装",
+  "author": "刘紫阳 <ziyang.liu@mobilemd.cn>",
+  "homepage": "https://github.com/zeayal/platform#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeayal/platform.git"
+  },
+  "scripts": {
+    "build": "rimraf lib && yarn build:types && yarn build:lib",
+    "build:lib": "rollup --config rollup.config.js",
+    "build:types": "tsc -p tsconfig.types.json",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/zeayal/platform/issues"
+  },
+  "dependencies": {
+    "@types/crypto-js": "^4.0.1",
+    "crypto-js": "^4.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.46.0",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  }
+}

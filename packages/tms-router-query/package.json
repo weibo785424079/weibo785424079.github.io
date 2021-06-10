@@ -1,0 +1,12 @@
+{
+  "name": "@tms/router-query",
+  "version": "0.0.5",
+  "description": "通用路由参数获取",
+  "main": "index.js",
+  "repository": "git@git.taimei.com:fe/tms-router-query.git",
+  "author": "ziyang.liu <ziyang.liu@mobilemd.cn>",
+  "license": "MIT",
+  "dependencies": {
+    "querystring": "^0.2.1"
+  }
+}
