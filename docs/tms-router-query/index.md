@@ -2,6 +2,7 @@
 
 ## 安装
 ```bash
+
 yarn add @tms/router-query
 
 ```
