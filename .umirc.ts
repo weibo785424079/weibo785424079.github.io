@@ -1,4 +1,6 @@
-export default {
+import { defineConfig } from 'umi'
+
+export default defineConfig({
     mode: 'site',
     title: 'site的前端文档',
     navs: [
@@ -19,4 +21,4 @@ export default {
           path: '/eslint',
         },
     ],
-};
+});
