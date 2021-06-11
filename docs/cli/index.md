@@ -1,9 +1,5 @@
 ---
 title: 脚手架
-group:
-  title: 脚手架
-  path: /cli
-  order: 1
 ---
 
 ### @tms/site-cli 脚手架

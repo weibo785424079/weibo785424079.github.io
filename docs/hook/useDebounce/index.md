@@ -1,9 +1,7 @@
 ---
-title: useBoolean
+title: useDebounce
 group:
-  title: hook
   path: /hook
-  order: 2
 ---
 
 # useDebounce

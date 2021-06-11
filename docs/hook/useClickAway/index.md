@@ -1,9 +1,7 @@
 ---
 title: useClickAway
 group:
-  title: hook
   path: /hook
-  order: 2
 ---
 
 # useClickAway

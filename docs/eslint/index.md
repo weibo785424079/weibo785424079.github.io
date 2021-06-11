@@ -1,9 +1,5 @@
 ---
 title: eslint
-group:
-  title: Eslint
-  path: /eslint
-  order: 4
 ---
 
 ## @tms/eslint-config-site

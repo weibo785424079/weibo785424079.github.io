@@ -13,7 +13,7 @@ export default defineConfig({
           path: '/hook',
         },
         {
-          title: '组件',
+          title: 'Component',
           path: '/component',
         },
         {

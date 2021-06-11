@@ -3,7 +3,6 @@ title: useDocumentVisibility
 group:
   title: 常用-hook
   path: /hook-usually
-  order: 1
 ---
 
 # useDocumentVisibility

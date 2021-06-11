@@ -1,9 +1,7 @@
 ---
 title: useCountDown
 group:
-  title: hook
   path: /hook
-  order: 2
 ---
 
 # useCountDown
