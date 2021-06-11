@@ -6,7 +6,7 @@ import querystring from 'querystring';
  * @param {*} obj
  */
 function isObj(obj) {
-    return Object.prototype.toString.call(obj) === '[object Object]';
+  return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
 /**
@@ -20,13 +20,13 @@ function isObj(obj) {
  * ```
  */
 export function queryStringify(param) {
-    if (isObj(param)) {
-        return Object.keys(param).reduce((acc, current) => {
-            const val = encodeURIComponent(param[current]);
-            return acc ? `${acc}&${current}=${val}` : `${current}=${val}`;
-        }, '');
-    }
-    return '';
+  if (isObj(param)) {
+    return Object.keys(param).reduce((acc, current) => {
+      const val = encodeURIComponent(param[current]);
+      return acc ? `${acc}&${current}=${val}` : `${current}=${val}`;
+    }, '');
+  }
+  return '';
 }
 
 /**
@@ -40,39 +40,38 @@ export function queryStringify(param) {
  * ```
  */
 export function getQueryString(name) {
-    const obj = queryStringToQueryObj(window.location.search) || {};
-    return obj[name] || '';
+  const obj = queryStringToQueryObj(window.location.search) || {};
+  return obj[name] || '';
 }
 
-export const queryStringToQueryObj = search => {
-    const queryUri = search.slice(1);
-    return querystring.parse(queryUri);
+export const queryStringToQueryObj = (search) => {
+  const queryUri = search.slice(1);
+  return querystring.parse(queryUri);
 };
 
 /**
  * 从 url上 移除特定的键值对
- * @param {*} search     window.loaction.search    example: ?user=321321&access_token=5fc610ab-43eb-4682-a0b9-d27943b171b6
+ * @param {*} search
+ * window.loaction.search    example: ?user=321321&access_token=5fc610ab-43eb-4682-a0b9-d27943b171b6
  * @param {*} removeKey 要移除的 query key          example: access_token
  * @return { string }                              example: ?user=321321
  */
 export const removeQueryFromSearch = (search, removeKey) => {
-    const queryObj = queryStringToQueryObj(search);
-    const newQueryObj = [];
-    Object.keys(queryObj)
-        .filter(key => {
-            return key !== removeKey;
-        })
-        .forEach(key => {
-            newQueryObj[key] = queryObj[key];
-        });
-    // newQueryObj 合成 newQueryUri 带?号
-    return Object.keys(newQueryObj).length > 0
-        ? `?${querystring.stringify(newQueryObj)}`
-        : `${querystring.stringify(newQueryObj)}`;
+  const queryObj = queryStringToQueryObj(search);
+  const newQueryObj = [];
+  Object.keys(queryObj)
+    .filter((key) => key !== removeKey)
+    .forEach((key) => {
+      newQueryObj[key] = queryObj[key];
+    });
+  // newQueryObj 合成 newQueryUri 带?号
+  return Object.keys(newQueryObj).length > 0
+    ? `?${querystring.stringify(newQueryObj)}`
+    : `${querystring.stringify(newQueryObj)}`;
 };
 
 export default {
-    queryStringify,
-    getQueryString,
-    removeQueryFromSearch
+  queryStringify,
+  getQueryString,
+  removeQueryFromSearch,
 };

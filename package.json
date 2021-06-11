@@ -6,13 +6,16 @@
     "docs:build": "site docs build",
     "predeploy": "yarn docs:build",
     "deploy": "gh-pages -d docs_dist",
-    "test": "jest --collectCoverage"
+    "test": "jest --collectCoverage",
+    "lint": "eslint packages"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
-    "lerna": "^3.22.1",
+    "eslint": "^7.28.0",
     "gh-pages": "^3.1.0",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
+    "lerna": "^3.22.1",
     "react-test-renderer": "^17.0.2",
     "redux-actions": "^2.6.5",
     "ts-jest": "^26.5.6"

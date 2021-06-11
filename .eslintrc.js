@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   extends: [
     '@tms/eslint-config-site/tsx',
   ],
