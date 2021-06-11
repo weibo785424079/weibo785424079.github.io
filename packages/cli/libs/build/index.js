@@ -76,8 +76,8 @@ var build = function (options) { return __awaiter(void 0, void 0, void 0, functi
                 });
                 _loop_1 = function (config) {
                     var watcher_1, output, input, bundle;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
+                    return __generator(this, function (_d) {
+                        switch (_d.label) {
                             case 0:
                                 if (!watch) return [3 /*break*/, 1];
                                 watcher_1 = rollup_1.watch(__assign({}, config));
@@ -97,11 +97,11 @@ var build = function (options) { return __awaiter(void 0, void 0, void 0, functi
                                 output = config.output, input = __rest(config, ["output"]);
                                 return [4 /*yield*/, rollup_1.rollup(input)];
                             case 2:
-                                bundle = _a.sent();
+                                bundle = _d.sent();
                                 return [4 /*yield*/, bundle.write(output)];
                             case 3:
-                                _a.sent();
-                                _a.label = 4;
+                                _d.sent();
+                                _d.label = 4;
                             case 4: return [2 /*return*/];
                         }
                     });

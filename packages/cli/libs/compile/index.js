@@ -18,12 +18,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -82,7 +80,7 @@ exports.default = (function (_a) {
         "!" + path_1.default.resolve(cwd, sourceDir, '**/*.mdx'),
         "!" + path_1.default.resolve(cwd, sourceDir, '**/*.md'),
     ];
-    var patterns = __spreadArrays([
+    var patterns = __spreadArray([
         path_1.default.resolve(cwd, sourceDir, '**/*.js'),
         path_1.default.resolve(cwd, sourceDir, '**/*.jsx'),
         path_1.default.resolve(cwd, sourceDir, '**/*.ts'),
@@ -106,7 +104,7 @@ exports.default = (function (_a) {
                     var relPath = fullPath.replace(sourceDir, '');
                     console.log("[" + event + "] " + path_1.default.join(sourceDir, relPath).replace(cwd + "/", ''));
                     if (fs_1.statSync(fullPath).isFile()) {
-                        createStream(__spreadArrays([fullPath], ignores), {
+                        createStream(__spreadArray([fullPath], ignores), {
                             destPath: destPath, baseDir: baseDir, runtimeHelpers: runtimeHelpers, type: type,
                         });
                     }

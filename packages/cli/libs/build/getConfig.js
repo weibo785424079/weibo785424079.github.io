@@ -10,12 +10,10 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -52,9 +50,9 @@ var getConfig = function (opts) {
         pkg = require(path_1.join(cwd, 'package.json')); // eslint-disable-line
     }
     catch (e) { /** */ }
-    var external = __spreadArrays(Object.keys(pkg.dependencies || {}), Object.keys(pkg.peerDependencies || {}));
+    var external = __spreadArray(__spreadArray([], Object.keys(pkg.dependencies || {})), Object.keys(pkg.peerDependencies || {}));
     // umd 只要 external peerDependencies
-    var externalPeerDeps = __spreadArrays(Object.keys(__assign({}, pkg.peerDependencies)), userExternal);
+    var externalPeerDeps = __spreadArray(__spreadArray([], Object.keys(__assign({}, pkg.peerDependencies))), userExternal);
     var terserOpts = {
         compress: {
             pure_getters: true,
@@ -158,8 +156,8 @@ var getConfig = function (opts) {
                         format: format,
                         file: path_1.join(cwd, "dist/" + name + ".esm.js"),
                     },
-                    plugins: __spreadArrays(getPlugins(), [rollup_plugin_terser_1.terser(terserOpts)]),
-                    external: __spreadArrays(external),
+                    plugins: __spreadArray(__spreadArray([], getPlugins()), [rollup_plugin_terser_1.terser(terserOpts)]),
+                    external: __spreadArray([], external),
                 },
             ];
         case 'cjs':
@@ -170,8 +168,8 @@ var getConfig = function (opts) {
                         format: format,
                         file: path_1.join(cwd, "dist/" + name + ".js"),
                     },
-                    plugins: __spreadArrays(getPlugins(), [rollup_plugin_terser_1.terser(terserOpts)]),
-                    external: __spreadArrays(external),
+                    plugins: __spreadArray(__spreadArray([], getPlugins()), [rollup_plugin_terser_1.terser(terserOpts)]),
+                    external: __spreadArray([], external),
                 },
             ];
         case 'umd':
@@ -184,10 +182,10 @@ var getConfig = function (opts) {
                         file: path_1.join(cwd, "dist/" + name + ".umd.js"),
                         name: pkg.name && lodash_camelCase_1.default(path_1.basename(pkg.name)),
                     },
-                    plugins: __spreadArrays(getPlugins(), extraUmdPlugins, [
+                    plugins: __spreadArray(__spreadArray(__spreadArray([], getPlugins()), extraUmdPlugins), [
                         Object.keys(replaceOpts).length > 0 ? rollup_plugin_replace_1.default(replaceOpts) : null,
                     ]).filter(Boolean),
-                    external: __spreadArrays(externalPeerDeps),
+                    external: __spreadArray([], externalPeerDeps),
                 },
             ];
         default:

@@ -73,25 +73,34 @@ var checkDirExist = function (dirName) {
     }
 };
 exports.default = (function (name) { return __awaiter(void 0, void 0, void 0, function () {
-    var questions, _a, type, originDirName, dirName;
+    var typeList, questions, _a, type, originDirName, dirName, userSelectedType;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 if (name) {
                     checkDirExist(name);
                 }
+                typeList = [
+                    { type: 'git-repo', desc: 'react-typescript-single-app-template（react 单页面应用）' },
+                    { type: 'js-sdk', desc: 'js-sdk（纯 js 库）' },
+                    { type: 'react-component', desc: 'react-component（React UI 组件）' }
+                ];
                 questions = [
                     name ? null : {
                         type: 'input',
                         name: 'dirName',
-                        message: 'Please input a dir name',
-                        default: '',
+                        message: '请输入项目名称：',
+                        validate: function (val) {
+                            var validate = val.trim().length > 0;
+                            return validate || '项目名称不能为空，请重新输入';
+                        },
+                        default: null,
                     },
                     {
                         type: 'list',
                         name: 'type',
-                        message: 'Please choose which project template to use',
-                        choices: ['js-sdk', 'react-component', 'git-repo'],
+                        message: '请选择要使用的模板类型：',
+                        choices: typeList.map(function (item) { return item.desc; }),
                         default: 'react-component',
                     },
                 ].filter(Boolean);
@@ -99,10 +108,11 @@ exports.default = (function (name) { return __awaiter(void 0, void 0, void 0, fu
             case 1:
                 _a = _b.sent(), type = _a.type, originDirName = _a.dirName;
                 dirName = name || originDirName;
-                checkDirExist(dirName);
-                if (type === 'git-repo') {
+                checkDirExist(dirName); // 检查当前项目目录是否已经存在
+                userSelectedType = typeList.filter(function (item) { return item.desc === type; })[0].type;
+                if (userSelectedType === 'git-repo') {
                     download_git_repo_1.default('direct:http://git.taimei.com/hospital/site-manager-front.git#template', dirName, { clone: true }, function (err) {
-                        console.log(err ? 'download fail!' : chalk_1.default.green('template download successfully， let`s code！'));
+                        console.log(err ? chalk_1.default.red('download fail!') : chalk_1.default.green('template download successfully， let`s code！'));
                     });
                 }
                 else {
