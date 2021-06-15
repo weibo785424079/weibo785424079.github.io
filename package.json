@@ -7,7 +7,8 @@
     "predeploy": "yarn docs:build",
     "deploy": "gh-pages -d docs_dist",
     "test": "jest --collectCoverage",
-    "lint": "eslint packages"
+    "lint": "eslint packages",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
