@@ -1,6 +1,6 @@
 {
   "name": "@tms/site-cli",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "site组件库，js库打包脚手架",
   "main": "index.js",
   "author": "bo.wei",

@@ -1,6 +1,6 @@
 {
   "name": "@tms/platform-utils",
-  "version": "0.0.2-alpha",
+  "version": "0.0.2",
   "description": "utils 封装",
   "author": "刘紫阳 <ziyang.liu@mobilemd.cn>",
   "homepage": "https://github.com/zeayal/platform#readme",

@@ -1,6 +1,6 @@
 {
   "name": "@tms/router-query",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "通用路由参数获取",
   "main": "index.js",
   "repository": "git@git.taimei.com:fe/tms-router-query.git",
