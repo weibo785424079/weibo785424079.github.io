@@ -23,5 +23,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@tms/site-cli": "^0.0.4"
+  }
 }
