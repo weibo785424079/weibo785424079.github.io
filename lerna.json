@@ -5,6 +5,9 @@
   "command": {
     "version": {
       "conventionalCommits": true
+    },
+    "publish": {
+      "message": "chore(release): publish"
     }
   },
   "version": "independent",
