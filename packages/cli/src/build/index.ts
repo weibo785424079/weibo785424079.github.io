@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax,no-await-in-loop */
 import { rollup, watch as watchFn } from 'rollup';
 import { green } from 'chalk';
 import { EntryOptions } from '../types';

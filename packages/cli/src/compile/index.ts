@@ -43,7 +43,7 @@ const createStream = (files: string[], {
           runtimeHelpers,
         }),
       );
-      file.contents = str;
+      file.contents = str; // eslint-disable-line
       cb(null, file);
     } catch (error) {
       console.log(error);

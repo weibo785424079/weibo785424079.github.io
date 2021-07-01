@@ -4,13 +4,12 @@ import path from 'path';
 import fs from 'fs';
 import download from 'download-git-repo';
 import chalk from 'chalk';
-import runCommand, { spinner } from '../utils';
+import { runCommand } from '../utils';
 
 export interface Create {
     type: 'js-sdk' | 'react-component' | 'git-repo';
     dirName: string;
 }
-
 interface CopyTemplateFiles {
     templateDirectory: string;
     targetDirectory: string;
@@ -42,15 +41,14 @@ const checkDirExist = (dirName:string) => {
 };
 
 export default async (name:string) => {
-
   if (name) {
     checkDirExist(name);
   }
   // 支持创建的项目类型列表
   const typeList = [
-    { type: 'git-repo', desc: 'react-typescript-single-app-template（react 单页面应用）' }, 
-    { type: 'js-sdk', desc: 'js-sdk（纯 js 库）' }, 
-    { type: 'react-component', desc: 'react-component（React UI 组件）' }
+    { type: 'git-repo', desc: 'react-typescript-single-app-template（react 单页面应用）' },
+    { type: 'js-sdk', desc: 'js-sdk（纯 js 库）' },
+    { type: 'react-component', desc: 'react-component（React UI 组件）' },
   ];
   // 创建项目，询问用户问题
   const questions = [
@@ -68,7 +66,7 @@ export default async (name:string) => {
       type: 'list',
       name: 'type',
       message: '请选择要使用的模板类型：',
-      choices: typeList.map(item => item.desc),
+      choices: typeList.map((item) => item.type),
       default: 'react-component',
     },
   ].filter(Boolean);
@@ -76,8 +74,7 @@ export default async (name:string) => {
   const { type, dirName: originDirName } = await inquirer.prompt(questions);
   const dirName = name || originDirName;
   checkDirExist(dirName); // 检查当前项目目录是否已经存在
-  const userSelectedType = typeList.filter(item => item.desc === type)[0].type; // 用户选择的项目类型
-  if (userSelectedType === 'git-repo') {
+  if (type === 'git-repo') {
     download('direct:http://git.taimei.com/hospital/site-manager-front.git#template', dirName, { clone: true }, (err: Error | null) => {
       console.log(err ? chalk.red('download fail!') : chalk.green('template download successfully， let`s code！'));
     });

@@ -4,8 +4,8 @@ import ora from 'ora';
 const spinner = ora();
 
 const runCommand = (command: string, args?: string[]) => new Promise<void>((resolve, reject) => {
-  args = args || [];
-  const executedCommand = spawn(command, args, {
+  const args2 = args || [];
+  const executedCommand = spawn(command, args2, {
     stdio: 'inherit',
     shell: true,
   });
@@ -23,18 +23,16 @@ const runCommand = (command: string, args?: string[]) => new Promise<void>((reso
   });
 });
 
-const executedFnWaitLoading = async (fn: any, text: string = "资源加载中...") => {
-  if(fn) {
-    spinner.start(text)
+const executedFnWaitLoading = async (fn: any, text: string = '资源加载中...') => {
+  if (fn) {
+    spinner.start(text);
     await fn();
-    spinner.stop()
+    spinner.stop();
   }
-}
+};
 
 export {
-  runCommand,
   executedFnWaitLoading,
   spinner,
-}
-
-export default runCommand;
+  runCommand,
+};

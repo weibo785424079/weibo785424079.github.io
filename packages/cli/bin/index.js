@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/* eslint-disable */
 const path = require('path');
 const chalk = require('chalk');
 const { Command } = require('commander');
