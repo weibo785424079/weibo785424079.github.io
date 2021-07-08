@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react';
 import './index.css';
 
 interface Operation {
-    text: string;
-    action?: (...args: any[]) => void;
-    visible?: boolean;
-    disable?: boolean;
-    style?: React.CSSProperties;
-    render?: (children: ReactElement, item: Operation) => ReactElement;
+  text: string;
+  action?: (...args: any[]) => void;
+  visible?: boolean;
+  disable?: boolean;
+  style?: React.CSSProperties;
+  render?: (children: ReactElement, item: Operation) => ReactElement;
 }
 
 const Operations = ({ meta, className, layout }: { className?: string; layout?: 'horizontal' | 'vertical'; meta: Array<Operation> }) => (

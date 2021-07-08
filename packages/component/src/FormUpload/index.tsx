@@ -1,24 +1,24 @@
 import React, { useState, forwardRef } from 'react';
-import { Upload, Button, Icon } from 'antd';
+import { Upload, Button } from 'antd';
 import { UploadProps, UploadChangeParam } from 'antd/es/upload/interface';
 
 interface FormUploadProps extends UploadProps {
-    appId?: string;
-    getProcessor:(name: string) => string;
-    [key: string]: any
+  appId?: string;
+  getProcessor: (name: string) => string;
+  [key: string]: any
 }
 
 interface FileObj {
-    name: string;
-    status: string;
-    uid: string;
-    url: string;
-    fileId: string;
-    fileName: string;
-    fsId: string;
-    fileSuffix: string;
-    fileSize: string;
-    filePath: string;
+  name: string;
+  status: string;
+  uid: string;
+  url: string;
+  fileId: string;
+  fileName: string;
+  fsId: string;
+  fileSuffix: string;
+  fileSize: string;
+  filePath: string;
 }
 
 export const FormUpload = forwardRef((props: FormUploadProps, _ref) => { // eslint-disable-line
@@ -54,7 +54,6 @@ export const FormUpload = forwardRef((props: FormUploadProps, _ref) => { // esli
       }}
     >
       <Button>
-        <Icon type="upload" />
         {text}
       </Button>
     </Upload>
