@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
 
 export interface Config {
-    immediate: boolean;
+  immediate: boolean;
 }
 
 const useWatch = <T = any>(
   dep: T,
   callback: (prevDep: T | undefined) => void,
-  config: Config = { immediate: false }) => {
+  config: Config = { immediate: false }
+) => {
   const initied = useRef(false);
   const stoped = useRef(false);
   const prevDep = useRef<T>(dep);

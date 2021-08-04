@@ -5,22 +5,20 @@ import { EntryOptions } from '../types';
 import getConfig from './getConfig';
 
 const build = async (options: EntryOptions) => {
-  const {
-    entry,
-    watch,
-    external = [],
-    replaceOpts = {},
-    type,
-  } = options;
+  const { entry, watch, external = [], replaceOpts = {}, type } = options;
   const cwd = process.cwd();
   const rollupConfig = getConfig({
-    entry, cwd, type, replaceOpts, external,
+    entry,
+    cwd,
+    type,
+    replaceOpts,
+    external
   });
 
   for (const config of rollupConfig) {
     if (watch) {
       const watcher = watchFn({
-        ...config,
+        ...config
       });
       watcher.on('event', (event: any) => {
         if (event.errror) {

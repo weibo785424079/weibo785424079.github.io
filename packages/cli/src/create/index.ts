@@ -7,15 +7,19 @@ import chalk from 'chalk';
 import { runCommand } from '../utils';
 
 export interface Create {
-    type: 'js-sdk' | 'react-component' | 'git-repo';
-    dirName: string;
+  type: 'js-sdk' | 'react-component' | 'git-repo';
+  dirName: string;
 }
 interface CopyTemplateFiles {
-    templateDirectory: string;
-    targetDirectory: string;
+  templateDirectory: string;
+  targetDirectory: string;
 }
 export function copyTemplateFiles(options: CopyTemplateFiles) {
-  shelljs.cp('-R', [`${options.templateDirectory}/*`, `${options.templateDirectory}/.*`], `${options.targetDirectory}/`);
+  shelljs.cp(
+    '-R',
+    [`${options.templateDirectory}/*`, `${options.templateDirectory}/.*`],
+    `${options.targetDirectory}/`
+  );
 }
 
 export function createProject(options: Create) {
@@ -25,13 +29,13 @@ export function createProject(options: Create) {
   shelljs.mkdir([targetDirectory]);
   copyTemplateFiles({
     templateDirectory,
-    targetDirectory,
+    targetDirectory
   });
   process.chdir(targetDirectory);
   runCommand('yarn');
 }
 
-const checkDirExist = (dirName:string) => {
+const checkDirExist = (dirName: string) => {
   const cwd = process.cwd();
   const targetDirectory = path.resolve(cwd, dirName);
   if (fs.existsSync(targetDirectory)) {
@@ -40,7 +44,7 @@ const checkDirExist = (dirName:string) => {
   }
 };
 
-export default async (name:string) => {
+export default async (name: string) => {
   if (name) {
     checkDirExist(name);
   }
@@ -48,36 +52,43 @@ export default async (name:string) => {
   const typeList = [
     { type: 'git-repo', desc: 'react-typescript-single-app-template（react 单页面应用）' },
     { type: 'js-sdk', desc: 'js-sdk（纯 js 库）' },
-    { type: 'react-component', desc: 'react-component（React UI 组件）' },
+    { type: 'react-component', desc: 'react-component（React UI 组件）' }
   ];
   // 创建项目，询问用户问题
   const questions = [
-    name ? null : {
-      type: 'input',
-      name: 'dirName',
-      message: '请输入项目名称：',
-      validate(val: string) {
-        const validate = val.trim().length > 0;
-        return validate || '项目名称不能为空，请重新输入';
-      },
-      default: null,
-    },
+    name
+      ? null
+      : {
+          type: 'input',
+          name: 'dirName',
+          message: '请输入项目名称：',
+          validate(val: string) {
+            const validate = val.trim().length > 0;
+            return validate || '项目名称不能为空，请重新输入';
+          },
+          default: null
+        },
     {
       type: 'list',
       name: 'type',
       message: '请选择要使用的模板类型：',
       choices: typeList.map((item) => item.type),
-      default: 'react-component',
-    },
+      default: 'react-component'
+    }
   ].filter(Boolean);
 
   const { type, dirName: originDirName } = await inquirer.prompt(questions);
   const dirName = name || originDirName;
   checkDirExist(dirName); // 检查当前项目目录是否已经存在
   if (type === 'git-repo') {
-    download('direct:http://git.taimei.com/hospital/site-manager-front.git#template', dirName, { clone: true }, (err: Error | null) => {
-      console.log(err ? chalk.red('download fail!') : chalk.green('template download successfully， let`s code！'));
-    });
+    download(
+      'direct:http://git.taimei.com/hospital/site-manager-front.git#template',
+      dirName,
+      { clone: true },
+      (err: Error | null) => {
+        console.log(err ? chalk.red('download fail!') : chalk.green('template download successfully， let`s code！'));
+      }
+    );
   } else {
     createProject({ type, dirName });
   }

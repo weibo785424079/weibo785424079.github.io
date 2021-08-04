@@ -1,6 +1,4 @@
-import {
-  useEffect, useRef, useCallback, useState,
-} from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 
 const useDebounceFn = <T>(fn: (...args: any[]) => any, deps: T, ms = 300) => {
   const timer = useRef<number | null>();
@@ -25,9 +23,13 @@ const useDebounceFn = <T>(fn: (...args: any[]) => any, deps: T, ms = 300) => {
 const useDebounce = <T>(value: T, t = 300) => {
   const [val, setVal] = useState<T>(value);
 
-  useDebounceFn(() => {
-    setVal(value);
-  }, value, t);
+  useDebounceFn(
+    () => {
+      setVal(value);
+    },
+    value,
+    t
+  );
 
   return val;
 };

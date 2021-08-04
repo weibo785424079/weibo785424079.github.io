@@ -1,11 +1,11 @@
 import { fork } from 'child_process';
 
-export default async ({ command }: {command: string}) => {
+export default async ({ command }: { command: string }) => {
   try {
     if (command === 'dev' || command === 'build') {
       process.env.UMI_PRESETS = require.resolve('@umijs/preset-dumi'); // start umi use child process
       const child = fork(require.resolve('umi/bin/umi'), [command], {
-        stdio: 'inherit',
+        stdio: 'inherit'
       }); // handle exit signals
 
       child.on('exit', (code, signal) => {

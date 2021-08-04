@@ -16,12 +16,15 @@ export const useDocumentVisibility = () => {
 
 export const useDocumentShow = (cb: (...arrgs: any[]) => any, immediate = false) => {
   const visible = useDocumentVisibility();
-  useWatch(visible, () => {
-    if (visible === 'visible') {
-      cb();
+  useWatch(
+    visible,
+    () => {
+      if (visible === 'visible') {
+        cb();
+      }
+    },
+    {
+      immediate
     }
-  },
-  {
-    immediate,
-  });
+  );
 };

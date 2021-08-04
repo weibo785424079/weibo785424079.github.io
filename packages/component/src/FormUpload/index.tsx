@@ -5,9 +5,8 @@ import { UploadProps, UploadChangeParam } from 'antd/es/upload/interface';
 interface FormUploadProps extends UploadProps {
   appId?: string;
   getProcessor: (name: string) => string;
-  [key: string]: any
+  [key: string]: any;
 }
-
 interface FileObj {
   name: string;
   status: string;
@@ -50,12 +49,12 @@ export const FormUpload = forwardRef((props: FormUploadProps, _ref) => { // esli
       }}
       beforeUpload={(file, list) => {
         setProcessor(getProcessor(file.name));
-        return typeof beforeUpload === 'function' ? beforeUpload(file, list) : true;
+        return typeof beforeUpload === 'function'
+          ? beforeUpload(file, list)
+          : true;
       }}
     >
-      <Button>
-        {text}
-      </Button>
+      <Button>{text}</Button>
     </Upload>
   );
 });

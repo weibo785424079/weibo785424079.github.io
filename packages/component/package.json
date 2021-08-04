@@ -23,15 +23,8 @@
         "antd": "^3.26.20"
     },
     "devDependencies": {
-        "@testing-library/react-hooks": "^5.1.1",
-        "@tms/eslint-config-site": "^0.0.4",
-        "@types/jest": "^26.0.22",
         "@types/react": ">=16.8.6",
         "@types/react-dom": ">=16.8.6",
-        "@typescript-eslint/eslint-plugin": "4.0.1",
-        "@typescript-eslint/parser": "^4.25.0",
-        "gh-pages": "^3.1.0",
-        "react": ">=16.8.6",
-        "react-test-renderer": "^17.0.2"
+        "react": ">=16.8.6"
     }
 }

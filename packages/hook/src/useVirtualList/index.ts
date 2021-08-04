@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from 'react';
 import useSize from '../useSize';
 
 interface Options {
-    itemHeight: number | ((index: number) => number);
-    overscan?: number;
+  itemHeight: number | ((index: number) => number);
+  overscan?: number;
 }
 
 const useVirtualList = <T>(list: T[], options: Options) => {
@@ -86,9 +86,7 @@ const useVirtualList = <T>(list: T[], options: Options) => {
   }, [size.width, size.height]);
 
   return {
-    list: list.slice(state.start, state.end).map(
-      (ele, index) => ({ data: ele, index: index + state.start }),
-    ),
+    list: list.slice(state.start, state.end).map((ele, index) => ({ data: ele, index: index + state.start })),
     scrollTo,
     containerProps: {
       ref,
@@ -96,16 +94,16 @@ const useVirtualList = <T>(list: T[], options: Options) => {
         e.preventDefault();
         calculateRange();
       },
-      style: { overflowY: 'auto' } as const,
+      style: { overflowY: 'auto' } as const
     },
     wrapperProps: {
       style: {
         width: '100%',
         height: totalHeight,
         paddingTop: getDistanceTop(state.start),
-        boxSizing: 'border-box' as const,
-      },
-    },
+        boxSizing: 'border-box' as const
+      }
+    }
   };
 };
 

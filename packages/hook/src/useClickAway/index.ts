@@ -8,7 +8,7 @@ type EventType = MouseEvent | TouchEvent;
 const useClickAway = (
   onClickAway: (event: EventType) => void,
   target: BasicTarget | BasicTarget[],
-  eventName: string = defaultEvent,
+  eventName: string = defaultEvent
 ) => {
   const onClickAwatRef = useRef(onClickAway);
   onClickAwatRef.current = onClickAway;

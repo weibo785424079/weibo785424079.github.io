@@ -3,13 +3,10 @@
   "private": true,
   "scripts": {
     "docs:dev": "site docs dev",
-    "docs:build": "site docs build",
-    "predeploy": "yarn docs:build",
     "test": "jest --collectCoverage",
     "commit": "git-cz",
     "commitlint": "commitlint",
-    "prepare": "husky install",
-    "do:publish": "cross-env HUSKY_BYPASS=true lerna publish"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.(ts|tsx)": [

@@ -23,45 +23,45 @@ const useModal = (options: UseMdoal = {}) => {
       onOk: hide,
       visible: visibleRef.current,
       ...rest,
-      ...propsRef.current,
+      ...propsRef.current
     };
-    return (
-      <Modal {...props}>
-        {children}
-      </Modal>
-    );
+    return <Modal {...props}>{children}</Modal>;
   });
 
   return {
-    hide, show, visible, RenderModal,
+    hide,
+    show,
+    visible,
+    RenderModal
   };
 };
 
 export function createUseComponent<T = any, P = any>(
   WrappedComponent: React.ComponentType<
-        T & {
-            customRef: React.MutableRefObject<P | undefined>;
-        }
-    >,
+    T & {
+      customRef: React.MutableRefObject<P | undefined>;
+    }
+  >
 ) {
-  return (modalOptions: ModalProps = {}) => (options: ModalProps = {}) => {
-    const { RenderModal, ...rest } = useModal(options);
-    const ref = useRef<P>();
+  return (modalOptions: ModalProps = {}) =>
+    (options: ModalProps = {}) => {
+      const { RenderModal, ...rest } = useModal(options);
+      const ref = useRef<P>();
 
-    const Render = useImmutable((data: T) => {
-      const WrappedComponentProps = {
-        ...data,
-        customRef: ref,
-      };
-      return (
-        <RenderModal {...modalOptions}>
-          <WrappedComponent {...WrappedComponentProps} />
-        </RenderModal>
-      );
-    });
+      const Render = useImmutable((data: T) => {
+        const WrappedComponentProps = {
+          ...data,
+          customRef: ref
+        };
+        return (
+          <RenderModal {...modalOptions}>
+            <WrappedComponent {...WrappedComponentProps} />
+          </RenderModal>
+        );
+      });
 
-    return { ...rest, Render, ref };
-  };
+      return { ...rest, Render, ref };
+    };
 }
 
 export default useModal;

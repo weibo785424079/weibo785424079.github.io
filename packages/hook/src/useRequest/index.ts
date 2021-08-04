@@ -1,21 +1,19 @@
-import {
-  useCallback, useEffect, useReducer, useRef,
-} from 'react';
+import { useCallback, useEffect, useReducer, useRef } from 'react';
 
 interface Options {
-    immediate: boolean;
-    manul: boolean;
-    delay: number;
-    handelResult: (...args: any[]) => any;
+  immediate: boolean;
+  manul: boolean;
+  delay: number;
+  handleResult: (...args: any[]) => any;
 }
 
 export type PromiseType<T> = T extends Promise<infer P> ? P : T;
 
 interface Result<R, T extends (...args: any[]) => any> {
-    run: T;
-    loading: boolean;
-    error: Error | undefined;
-    result: R;
+  run: T;
+  loading: boolean;
+  error: Error | undefined;
+  result: R;
 }
 
 const defaultHandeResult = <T>(d: T) => d;
@@ -23,16 +21,14 @@ const defaultHandeResult = <T>(d: T) => d;
 function useRequest<R = any, T extends(...args: any[]) => any = (...args: any[]) => any>(fn: T, options: Partial<Options> = {}): Result<R, T> { // eslint-disable-line
   const optionRef = useRef(
     (() => {
-      const {
-        manul = false, immediate = true, delay = 1000, handelResult = defaultHandeResult,
-      } = options;
+      const { manul = false, immediate = true, delay = 1000, handleResult = defaultHandeResult } = options;
       return {
         manul,
         delay: delay ?? 1000,
         immediate: manul ? false : immediate,
-        handelResult,
+        handleResult
       };
-    })(),
+    })()
   );
 
   const runRef = useRef<T>(fn);
@@ -45,10 +41,7 @@ function useRequest<R = any, T extends(...args: any[]) => any = (...args: any[])
 
   const initValue = { loading: false, result: undefined, error: undefined };
 
-  const [value, dispatch] = useReducer(
-    (state: Result<R, T>, action) => ({ ...state, ...action }),
-    initValue,
-  );
+  const [value, dispatch] = useReducer((state: Result<R, T>, action) => ({ ...state, ...action }), initValue);
 
   const openLoading = useCallback(() => {
     const { delay } = optionRef.current;
@@ -83,7 +76,7 @@ function useRequest<R = any, T extends(...args: any[]) => any = (...args: any[])
           closeLoading({
             loading: false,
             error: undefined,
-            result: optionRef.current.handelResult(result),
+            result: optionRef.current.handleResult(result)
           });
         }
       } catch (error) {
@@ -93,7 +86,7 @@ function useRequest<R = any, T extends(...args: any[]) => any = (...args: any[])
         console.log(error);
       }
     },
-    [fn],
+    [fn]
   );
 
   useEffect(() => {

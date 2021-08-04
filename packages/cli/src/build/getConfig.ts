@@ -17,23 +17,21 @@ import url from '@rollup/plugin-url';
 import tempDir from 'temp-dir';
 
 interface IOpts {
-    entry: string
-    cwd: string
-    type: 'esm' | 'cjs' | 'umd',
-    replaceOpts: any,
-    external: string[],
+  entry: string;
+  cwd: string;
+  type: 'esm' | 'cjs' | 'umd';
+  replaceOpts: any;
+  external: string[];
 }
 
 interface IPkg {
-    dependencies?: Object;
-    peerDependencies?: Object;
-    name?: string;
+  dependencies?: Object;
+  peerDependencies?: Object;
+  name?: string;
 }
 
 const getConfig = (opts: IOpts) => {
-  const {
-    entry, cwd, type, replaceOpts = {}, external: userExternal,
-  } = opts;
+  const { entry, cwd, type, replaceOpts = {}, external: userExternal } = opts;
   const entryExt = extname(entry);
   const name = basename(entry, entryExt);
   const isTypeScript = entryExt === '.ts' || entryExt === '.tsx';
@@ -45,12 +43,11 @@ const getConfig = (opts: IOpts) => {
   let pkg = {} as IPkg;
   try {
     pkg = require(join(cwd, 'package.json')); // eslint-disable-line
-  } catch (e) { /** */ }
+  } catch (e) {
+    /** */
+  }
 
-  const external = [
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-  ];
+  const external = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})];
 
   // umd 只要 external peerDependencies
   const externalPeerDeps = [...Object.keys({ ...pkg.peerDependencies }), ...userExternal];
@@ -60,8 +57,8 @@ const getConfig = (opts: IOpts) => {
       pure_getters: true,
       unsafe: true,
       unsafe_comps: true,
-      warnings: false,
-    },
+      warnings: false
+    }
   };
   const injectOpts = false;
   const nodeResolveOpts = {};
@@ -79,7 +76,7 @@ const getConfig = (opts: IOpts) => {
         inject: true,
         modules: false,
         minimize: !!miniCss,
-        plugins: [autoprefixer()],
+        plugins: [autoprefixer()]
       }),
       injectOpts ? inject(injectOpts) : null,
       Object.keys(replaceOpts).length > 0 ? replace(replaceOpts) : null,
@@ -88,29 +85,29 @@ const getConfig = (opts: IOpts) => {
         extensions,
         browser: true,
         preferBuiltins: true,
-        ...nodeResolveOpts,
+        ...nodeResolveOpts
       }),
       isTypeScript
         ? typescript2({
-          cwd,
-          clean: true,
-          cacheRoot: `${tempDir}/.rollup_plugin_typescript2_cache`,
-          // 比如 lerna 的场景不需要每个 package 有个 tsconfig.json
-          tsconfig: join(cwd, 'tsconfig.json'),
-          tsconfigDefaults: {
-            compilerOptions: {
-              // Generate declaration files by default
-              // declaration: true,
+            cwd,
+            clean: true,
+            cacheRoot: `${tempDir}/.rollup_plugin_typescript2_cache`,
+            // 比如 lerna 的场景不需要每个 package 有个 tsconfig.json
+            tsconfig: join(cwd, 'tsconfig.json'),
+            tsconfigDefaults: {
+              compilerOptions: {
+                // Generate declaration files by default
+                // declaration: true,
+              }
             },
-          },
-          tsconfigOverride: {
-            compilerOptions: {
-              module: 'ESNext',
-              target: 'esnext',
+            tsconfigOverride: {
+              compilerOptions: {
+                module: 'ESNext',
+                target: 'esnext'
+              }
             },
-          },
-          check: true,
-        })
+            check: true
+          })
         : null,
       babel({
         babelrc: false,
@@ -122,38 +119,27 @@ const getConfig = (opts: IOpts) => {
             require.resolve('@babel/preset-env'),
             {
               targets: { browsers: ['last 2 versions', 'IE 10'] },
-              modules: type === 'esm' ? false : 'auto',
-            },
+              modules: type === 'esm' ? false : 'auto'
+            }
           ],
-          require.resolve('@babel/preset-react'),
+          require.resolve('@babel/preset-react')
         ],
         plugins: [
           require.resolve('@babel/plugin-syntax-dynamic-import'),
-          [
-            require.resolve('@babel/plugin-proposal-decorators'),
-            { legacy: true },
-          ],
-          [
-            require.resolve('@babel/plugin-proposal-class-properties'),
-            { loose: true },
-          ],
-          runtimeHelpers
-            ? [
-              require.resolve('@babel/plugin-transform-runtime'),
-              { useESModules: type === 'esm' },
-            ]
-            : null,
-        ].filter(Boolean),
+          [require.resolve('@babel/plugin-proposal-decorators'), { legacy: true }],
+          [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }],
+          runtimeHelpers ? [require.resolve('@babel/plugin-transform-runtime'), { useESModules: type === 'esm' }] : null
+        ].filter(Boolean)
       }),
-      json(),
+      json()
     ].filter(Boolean);
   }
   const extraUmdPlugins = [
     commonjs({
-      include: /node_modules/,
+      include: /node_modules/
     }),
     globals(),
-    buildins(),
+    buildins()
   ];
   switch (type) {
     case 'esm':
@@ -162,11 +148,11 @@ const getConfig = (opts: IOpts) => {
           input,
           output: {
             format,
-            file: join(cwd, `dist/${name}.esm.js`),
+            file: join(cwd, `dist/${name}.esm.js`)
           },
           plugins: [...getPlugins(), terser(terserOpts)],
-          external: [...external],
-        },
+          external: [...external]
+        }
       ];
     case 'cjs':
       return [
@@ -174,14 +160,13 @@ const getConfig = (opts: IOpts) => {
           input,
           output: {
             format,
-            file: join(cwd, `dist/${name}.js`),
+            file: join(cwd, `dist/${name}.js`)
           },
           plugins: [...getPlugins(), terser(terserOpts)],
-          external: [...external],
-        },
+          external: [...external]
+        }
       ];
     case 'umd':
-
       return [
         {
           input,
@@ -189,15 +174,15 @@ const getConfig = (opts: IOpts) => {
             format,
             sourcemap: true,
             file: join(cwd, `dist/${name}.umd.js`),
-            name: pkg.name && camelCase(basename(pkg.name)),
+            name: pkg.name && camelCase(basename(pkg.name))
           },
           plugins: [
             ...getPlugins(),
             ...extraUmdPlugins,
-            Object.keys(replaceOpts).length > 0 ? replace(replaceOpts) : null,
+            Object.keys(replaceOpts).length > 0 ? replace(replaceOpts) : null
           ].filter(Boolean),
-          external: [...externalPeerDeps],
-        },
+          external: [...externalPeerDeps]
+        }
       ];
     default:
       return [];

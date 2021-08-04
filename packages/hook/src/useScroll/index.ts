@@ -3,8 +3,8 @@ import usePersistFn from '../usePersistFn';
 import { BasicTarget, getTargetElement } from '../utils';
 
 interface Position {
-    left: number;
-    top: number;
+  left: number;
+  top: number;
 }
 
 export type Target = BasicTarget<HTMLElement | Document>;
@@ -13,7 +13,7 @@ export type ScrolllistenController = (val: Position) => boolean;
 function uesScroll(target: Target, shouldUpdate: ScrolllistenController = () => true) {
   const [position, setPosition] = useState<Position>({
     left: NaN,
-    top: NaN,
+    top: NaN
   });
 
   const shouldUpdatePersist = usePersistFn(shouldUpdate);
@@ -28,12 +28,12 @@ function uesScroll(target: Target, shouldUpdate: ScrolllistenController = () => 
         if (!document.scrollingElement) return;
         newPosition = {
           left: document.scrollingElement.scrollLeft,
-          top: document.scrollingElement.scrollTop,
+          top: document.scrollingElement.scrollTop
         };
       } else {
         newPosition = {
           left: (currentTarget as HTMLElement).scrollLeft,
-          top: (currentTarget as HTMLElement).scrollTop,
+          top: (currentTarget as HTMLElement).scrollTop
         };
       }
       if (shouldUpdatePersist(newPosition)) {

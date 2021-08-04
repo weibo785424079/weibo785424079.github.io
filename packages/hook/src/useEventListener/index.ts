@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { getTargetElement } from '../utils';
 
-type Target = Element | (() => Element) | Window | Document
+type Target = Element | (() => Element) | Window | Document;
 type Options<T extends Target = Target> = {
-    target?: T;
-    capture?: boolean;
-    once?: boolean;
-    passive?: boolean;
+  target?: T;
+  capture?: boolean;
+  once?: boolean;
+  passive?: boolean;
 };
 
 function useEventListener(eventName: string, handler: Function, options: Options = {}) {
@@ -19,19 +19,17 @@ function useEventListener(eventName: string, handler: Function, options: Options
       return;
     }
 
-    const eventListener = (
-      event: Event,
-    ): EventListenerOrEventListenerObject | AddEventListenerOptions => handlerRef.current && handlerRef.current(event); // eslint-disable-line
+    const eventListener = (event: Event) => handlerRef.current && handlerRef.current(event); // eslint-disable-line
 
     targetElement.addEventListener(eventName, eventListener, {
       capture: options.capture,
       once: options.once,
-      passive: options.passive,
+      passive: options.passive
     });
 
     return () => {
       targetElement.removeEventListener(eventName, eventListener, {
-        capture: options.capture,
+        capture: options.capture
       });
     };
   }, [eventName, options.target, options.capture, options.once, options.passive]);
