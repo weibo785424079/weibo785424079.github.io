@@ -1,11 +1,11 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 
 const useDebounceFn = <T>(fn: (...args: any[]) => any, deps: T, ms = 300) => {
-  const timer = useRef<number | null>();
+  const timer = useRef<number | null | any>();
 
   useEffect(() => {
     if (timer.current) clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => {
+    timer.current = setTimeout(() => {
       fn();
       timer.current = null;
     }, ms);

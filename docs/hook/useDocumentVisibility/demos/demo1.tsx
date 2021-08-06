@@ -8,16 +8,14 @@ export default () => {
 
   useEffect(() => {
     if (list[list.length - 1] !== visible) {
-      setList((l) => ([...l, visible]));
+      setList((l) => [...l, visible]);
     }
   }, [visible]);
 
   return (
     <div style={{ maxHeight: 110, overflowY: 'auto' }}>
       {list.map((v, i) => (
-        <div key={i}>
-          {`页面当前状态: ${v}`}
-        </div>
+        <div key={i}>{`页面当前状态: ${v}`}</div>
       ))}
     </div>
   );

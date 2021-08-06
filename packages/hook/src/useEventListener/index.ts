@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { getTargetElement } from '../utils';
 
 type Target = Element | (() => Element) | Window | Document;
+
 type Options<T extends Target = Target> = {
   target?: T;
   capture?: boolean;
@@ -34,4 +35,5 @@ function useEventListener(eventName: string, handler: Function, options: Options
     };
   }, [eventName, options.target, options.capture, options.once, options.passive]);
 }
+
 export default useEventListener;

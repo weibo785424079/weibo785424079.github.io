@@ -6,7 +6,7 @@ group:
   order: 2
 ---
 
-# useUnMount
+# useUpdate
 
 ```tsx
 

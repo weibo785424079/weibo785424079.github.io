@@ -7,19 +7,21 @@ export default () => {
   console.log('render', state);
   return (
     <>
-      <Button onClick={() => {
-        setState({
-          name: 456,
-        });
-      }}
+      <Button
+        onClick={() => {
+          setState({
+            name: 456
+          });
+        }}
       >
         设置
       </Button>
-      <Button onClick={() => {
-        setState({
-          name: undefined,
-        });
-      }}
+      <Button
+        onClick={() => {
+          setState({
+            name: undefined
+          });
+        }}
       >
         清除
       </Button>

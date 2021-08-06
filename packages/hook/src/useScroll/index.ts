@@ -8,6 +8,7 @@ interface Position {
 }
 
 export type Target = BasicTarget<HTMLElement | Document>;
+
 export type ScrolllistenController = (val: Position) => boolean;
 
 function uesScroll(target: Target, shouldUpdate: ScrolllistenController = () => true) {
@@ -40,12 +41,16 @@ function uesScroll(target: Target, shouldUpdate: ScrolllistenController = () => 
         setPosition(newPosition);
       }
     }
+
     updatePosition(el as Target);
+
     function listener(event: Event) {
       if (!event.target) return;
       updatePosition(event.target as Target);
     }
+
     el.addEventListener('scroll', listener);
+
     return () => {
       el.removeEventListener('scroll', listener);
     };
