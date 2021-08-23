@@ -17,6 +17,7 @@ import useUpdate from './useUpdate';
 import useUrlState from './useUrlState';
 import useVirtualList from './useVirtualList';
 import useWatch from './useWatch';
+import useEditor from './useWangeEditor';
 
 export {
   useClickAway,
@@ -41,4 +42,5 @@ export {
   useUrlState,
   useVirtualList,
   useWatch,
+  useEditor
 };

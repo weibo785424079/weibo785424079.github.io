@@ -8,7 +8,7 @@ const Profile = () => <p>Profile</p>;
 const useProfile = createUseComponent(Profile)({
   title: 'useProfile',
   okText: '确定',
-  cancelText: '取消',
+  cancelText: '取消'
 });
 
 export default () => {

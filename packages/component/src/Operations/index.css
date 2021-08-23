@@ -1,7 +1,7 @@
 .site-hook-operation-list .item {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  color: #368bd2;
+  color: #1890ff;
   line-height: 22px;
   cursor: pointer;
 }

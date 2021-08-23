@@ -1,0 +1,27 @@
+.site-hook-my-edit-wrapper {
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #e1e1e6;
+    
+}
+
+.site-hook-my-edit-wrapper .toolbar {
+    border-bottom: 1px solid #e1e1e6;
+}
+.site-hook-my-edit-wrapper .my-text-area {
+    padding-top: 10px;
+    height: 100%;
+    min-height: 200px;
+    word-break: break-all;
+    white-space: break-spaces;
+    
+}
+.site-hook-my-edit-wrapper .w-e-text {
+    overflow: visible;
+}
+.site-hook-my-edit-wrapper ul li {
+    list-style: disc;
+}
+.site-hook-my-edit-wrapper ol li {
+    list-style: decimal;
+}

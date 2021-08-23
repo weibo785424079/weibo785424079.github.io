@@ -12,6 +12,9 @@ group:
 <code src="./demos/demo1.tsx"/>
 
 
+### 封装一层
+<code src="./demos/demo3.tsx"/>
+
 #### API
 
 ```typescript

@@ -4,6 +4,7 @@ module.exports = {
     '@tms/eslint-config-site/tsx',
   ],
   rules: {
+    'no-console': 0,
     'consistent-return': 0,
     'object-curly-newline': 0,
     'no-use-before-define': 0,

@@ -1,89 +1,104 @@
-import React, { useState, forwardRef } from 'react';
+/* eslint-disable react/require-default-props */
+import React, { useRef, useImperativeHandle, ReactElement } from 'react';
 import { Upload, Button } from 'antd';
-import { UploadProps, UploadChangeParam } from 'antd/es/upload/interface';
+import { UploadProps } from 'antd/es/upload';
+import { UploadChangeParam } from 'antd/lib/upload';
+import { UploadFile } from 'antd/lib/upload/interface';
+import { defaultDownload, fsUpload } from './helper';
 
-interface FormUploadProps extends UploadProps {
-  appId?: string;
-  getProcessor: (name: string) => string;
-  [key: string]: any;
-}
-interface FileObj {
-  name: string;
-  status: string;
-  uid: string;
-  url: string;
-  fileId: string;
-  fileName: string;
-  fsId: string;
-  fileSuffix: string;
-  fileSize: string;
-  filePath: string;
+export { getValueFromEvent } from './helper';
+
+interface Props extends UploadProps {
+  isDownload?: boolean;
+  uploadBtn?: ReactElement;
 }
 
-export const FormUpload = forwardRef((props: FormUploadProps, _ref) => { // eslint-disable-line
+const FormUpload = React.forwardRef((props: Props, ref) => {
   const {
-    appId,
     accept = '*',
-    action = '/file/defaultUpload',
-    text = '上传附件',
     fileList = [],
-    beforeUpload,
-    getProcessor,
+    onPreview,
+    onChange,
+    uploadBtn = <Button>上传附件</Button>,
+    isDownload = true, // 点击文件是下载还是预览，默认下载
     ...rest
   } = props;
-  const [processor, setProcessor] = useState('');
 
-  const options = {
-    accept,
-    action,
-  };
+  const currList = useRef(fileList);
+  currList.current = fileList;
+
+  useImperativeHandle(ref, () => ({}));
 
   return (
     <Upload
       {...rest}
-      {...options}
+      accept={accept}
+      withCredentials
       fileList={fileList}
-      data={{
-        appId,
-        processor,
+      customRequest={async ({ file }) => {
+        try {
+          // @ts-ignore
+          const { uid } = file;
+          const { data } = await fsUpload(file, ({ loaded, total, status }) => {
+            if (status === 1) {
+              const item = {
+                uid,
+                status: 'uploading' as const,
+                name: file.name,
+                url: '',
+                percent: (loaded / total) * 100,
+                size: 0,
+                type: '',
+                file
+              };
+              const index = currList.current.findIndex((one) => one.uid === uid);
+              if (index > -1) {
+                currList.current.splice(index, 1, item);
+              } else {
+                currList.current.push(item);
+              }
+              onChange({ fileList: [...currList.current] } as UploadChangeParam<UploadFile<any>>);
+            }
+          });
+          const list = data.map((item) => {
+            // 只会有一项数据
+            return {
+              name: item.originFileName,
+              status: 'done',
+              uid,
+              url: item.fileUrl,
+              fileId: item.fileId,
+              fileName: item.originFileName,
+              fsId: item.fileId,
+              fileSuffix: item.fileSuffix,
+              fileSize: item.fileSize,
+              filePath: item.filePath
+            };
+          });
+          const index = currList.current.findIndex((item) => item.uid === uid);
+          if (index > -1) {
+            currList.current.splice(index, 1);
+          }
+          onChange({ fileList: [...currList.current, ...list] } as UploadChangeParam<UploadFile<any>>);
+        } catch (error) {
+          console.log(error);
+        }
       }}
-      beforeUpload={(file, list) => {
-        setProcessor(getProcessor(file.name));
-        return typeof beforeUpload === 'function'
-          ? beforeUpload(file, list)
-          : true;
+      onRemove={({ uid }) => {
+        onChange({ fileList: fileList.filter((file) => file.uid !== uid) } as UploadChangeParam<UploadFile<any>>);
       }}
+      onPreview={(file) => {
+        if (isDownload) {
+          defaultDownload(file as any);
+        } else {
+          onPreview?.(file);
+        }
+      }}
+      onDownload={defaultDownload as any}
     >
-      <Button>{text}</Button>
+      {uploadBtn}
     </Upload>
   );
 });
 
-FormUpload.defaultProps = {
-  appId: 'site',
-};
-
-export const getValueFromEvent = (e: UploadChangeParam) => {
-  const list: Array<FileObj> = [];
-  if (Array.isArray(e.fileList)) {
-    e.fileList.forEach((item: any) => {
-      if (item.response && item.response.success) {
-        list.push({
-          name: item.name,
-          status: item.status || 'done',
-          uid: item.uid,
-          url: item.response.data.fileUrl,
-          fileId: item.response.data.fileId,
-          fileName: item.name,
-          fsId: item.response.data.id || item.fileId,
-          fileSuffix: item.response.data.fileSuffix,
-          fileSize: item.response.data.fileSize,
-          filePath: item.response.data.filePath,
-        });
-      } else {
-        list.push(item);
-      }
-    });
-  }
-  return list;
-};
+export default FormUpload;

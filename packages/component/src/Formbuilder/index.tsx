@@ -19,7 +19,7 @@ function pickProps<T = any>(source: T, props: string[]) {
 
 export interface Element extends GetFieldDecoratorOptions {
   key: string;
-  widget: React.ComponentType;
+  widget: React.ComponentType<any>;
   label?: string;
   tooltip?: string;
   formItemProps?: { [key: string]: any };

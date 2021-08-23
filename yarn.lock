@@ -979,6 +979,14 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime-corejs3@^7.11.2":
+  version "7.15.3"
+  resolved "http://npm.taimei.com:80/@babel%2fruntime-corejs3/-/runtime-corejs3-7.15.3.tgz#28754263988198f2a928c09733ade2fb4d28089d"
+  integrity sha1-KHVCY5iBmPKpKMCXM63i+00oCJ0=
+  dependencies:
+    core-js-pure "^3.16.0"
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@7.12.5":
   version "7.12.5"
   resolved "http://npm.taimei.com:80/@babel%2fruntime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
@@ -2546,6 +2554,19 @@
     filter-console "^0.1.1"
     react-error-boundary "^3.1.0"
 
+"@tms/fs.js@^2.4.8":
+  version "2.4.8"
+  resolved "http://npm.taimei.com:80/@tms%2ffs.js/-/fs.js-2.4.8.tgz#b1055b33bdbcdbd0e941b183486d3a80d7965b76"
+  integrity sha512-n92xwVZBj0GVMvBXOT0Stlz4QCh/H0GKGe7AVKxRFNcTw8XTZtXX85PnOB++vR3ivqXAubd2zC928zfQPdp3xw==
+  dependencies:
+    "@tms/upload-js-sdk" "0.1.7-beta2"
+    color "^3.1.3"
+    crypto-js "^4.0.0"
+    lodash "^4.17.21"
+    qs "^6.9.4"
+    rxjs "^6.6.7"
+    tslib "2.0.1"
+
 "@tms/site-cli@^0.0.4":
   version "0.0.4"
   resolved "http://npm.taimei.com:80/@tms%2fsite-cli/-/site-cli-0.0.4.tgz#881f094a4c6f2c6c29d1346c7033b6115ccf1727"
@@ -2595,6 +2616,15 @@
     through2 "^4.0.2"
     typescript "4.2.4"
     vinyl-fs "^3.0.3"
+
+"@tms/upload-js-sdk@0.1.7-beta2":
+  version "0.1.7-beta2"
+  resolved "http://npm.taimei.com:80/@tms%2fupload-js-sdk/-/upload-js-sdk-0.1.7-beta2.tgz#8c0e98e14678452f1d9a03d0e589ec04bf7e0358"
+  integrity sha512-OloA/4wGfxk8QjZ8XkmINlA+9yCICkkn3vP8LehpAuIeoqQYqX0gi8DJ/oBnxWt96i+mCmahIfuNO7dcyIOhmg==
+  dependencies:
+    invariant "^2.2.4"
+    js-md5 "^0.7.3"
+    js-sha256 "^0.9.0"
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -3997,6 +4027,13 @@ axe-core@^4.0.2:
   resolved "http://npm.taimei.com:80/axe-core/-/axe-core-4.2.2.tgz#0c987d82c8b82b4b9b7a945f1b5ef0d8fed586ed"
   integrity sha1-DJh9gsi4K0ubepRfG17w2P7Vhu0=
 
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "http://npm.taimei.com:80/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=
+  dependencies:
+    follow-redirects "^1.10.0"
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "http://npm.taimei.com:80/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
@@ -4903,7 +4940,7 @@ collection-visit@^1.0.0:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
 
-color-convert@^1.9.0, color-convert@^1.9.1:
+color-convert@^1.9.0, color-convert@^1.9.1, color-convert@^1.9.3:
   version "1.9.3"
   resolved "http://npm.taimei.com:80/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
   integrity sha1-u3GFBpDh8TZWfeYp0tVHHe2kweg=
@@ -4935,6 +4972,14 @@ color-string@^1.5.4:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
+color-string@^1.6.0:
+  version "1.6.0"
+  resolved "http://npm.taimei.com:80/color-string/-/color-string-1.6.0.tgz#c3915f61fe267672cb7e1e064c9d692219f6c312"
+  integrity sha1-w5FfYf4mdnLLfh4GTJ1pIhn2wxI=
+  dependencies:
+    color-name "^1.0.0"
+    simple-swizzle "^0.2.2"
+
 color@^3.0.0:
   version "3.1.3"
   resolved "http://npm.taimei.com:80/color/-/color-3.1.3.tgz#ca67fb4e7b97d611dcde39eceed422067d91596e"
@@ -4942,6 +4987,14 @@ color@^3.0.0:
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.4"
+
+color@^3.1.3:
+  version "3.2.1"
+  resolved "http://npm.taimei.com:80/color/-/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
+  integrity sha1-NUTcGYyvRJDD7MmnkLVP6f9F4WQ=
+  dependencies:
+    color-convert "^1.9.3"
+    color-string "^1.6.0"
 
 colorette@^1.2.1, colorette@^1.2.2:
   version "1.2.2"
@@ -5250,6 +5303,11 @@ core-js-pure@^3.0.0:
   version "3.14.0"
   resolved "http://npm.taimei.com:80/core-js-pure/-/core-js-pure-3.14.0.tgz#72bcfacba74a65ffce04bf94ae91d966e80ee553"
   integrity sha1-crz6y6dKZf/OBL+UrpHZZugO5VM=
+
+core-js-pure@^3.16.0:
+  version "3.16.1"
+  resolved "http://npm.taimei.com:80/core-js-pure/-/core-js-pure-3.16.1.tgz#b997df2669c957a5b29f06e95813a171f993592e"
+  integrity sha1-uZffJmnJV6WynwbpWBOhcfmTWS4=
 
 core-js@3.6.5:
   version "3.6.5"
@@ -7039,6 +7097,11 @@ flush-write-stream@^1.0.0, flush-write-stream@^1.0.2:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+follow-redirects@^1.10.0:
+  version "1.14.1"
+  resolved "http://npm.taimei.com:80/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
+  integrity sha1-2RFN7Qoc/dM04WTmZirQK/2R/0M=
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -9294,6 +9357,16 @@ js-base64@^2.1.8:
   version "2.6.4"
   resolved "http://npm.taimei.com:80/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
   integrity sha1-9OaGxd4eofhn28rT1G2WlCjfmMQ=
+
+js-md5@^0.7.3:
+  version "0.7.3"
+  resolved "http://npm.taimei.com:80/js-md5/-/js-md5-0.7.3.tgz#b4f2fbb0b327455f598d6727e38ec272cd09c3f2"
+  integrity sha1-tPL7sLMnRV9ZjWcn447Ccs0Jw/I=
+
+js-sha256@^0.9.0:
+  version "0.9.0"
+  resolved "http://npm.taimei.com:80/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha1-C4msFmWD6R75EjZEvTxTNM6dCWY=
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -15452,6 +15525,11 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
+tslib@2.0.1:
+  version "2.0.1"
+  resolved "http://npm.taimei.com:80/tslib/-/tslib-2.0.1.tgz#410eb0d113e5b6356490eec749603725b021b43e"
+  integrity sha1-QQ6w0RPltjVkkO7HSWA3JbAhtD4=
+
 tslib@2.1.0:
   version "2.1.0"
   resolved "http://npm.taimei.com:80/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
@@ -15461,6 +15539,11 @@ tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "http://npm.taimei.com:80/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
+
+tslib@^2.1.0:
+  version "2.3.1"
+  resolved "http://npm.taimei.com:80/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=
 
 tslib@^2.2.0:
   version "2.2.0"
@@ -16063,6 +16146,15 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+wangeditor@^4.7.6:
+  version "4.7.6"
+  resolved "http://npm.taimei.com:80/wangeditor/-/wangeditor-4.7.6.tgz#d2e6ddecf2474ec26c42773be2fac433d1e0baaf"
+  integrity sha1-0ubd7PJHTsJsQnc74vrEM9Hguq8=
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "@babel/runtime-corejs3" "^7.11.2"
+    tslib "^2.1.0"
 
 warning@4.x, warning@^4.0.1, warning@^4.0.2, warning@^4.0.3, warning@~4.0.3:
   version "4.0.3"

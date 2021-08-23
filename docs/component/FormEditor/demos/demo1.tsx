@@ -1,17 +1,17 @@
 import React from 'react';
-import { FormBuilder, FormUpload, getValueFromEvent } from '@tms/site-component';
+import { FormBuilder, FormEditor } from '@tms/site-component';
 import { Form, Input, Button } from 'antd/es/index';
 import { FormComponentProps } from 'antd/es/form';
 
 export default Form.create<FormComponentProps>()(({ form }: FormComponentProps) => (
-  <Form layout="inline">
+  <Form layout="horizontal">
     <FormBuilder
       formItemLayout={{
         wrapperCol: {
-          span: 16
+          span: 20
         },
         labelCol: {
-          span: 8
+          span: 2
         }
       }}
       meta={[
@@ -26,16 +26,15 @@ export default Form.create<FormComponentProps>()(({ form }: FormComponentProps) 
           widget: Input
         },
         {
-          key: 'file',
-          label: '附件',
-          widget: FormUpload,
-          valuePropName: 'fileList',
-          getValueFromEvent
+          key: 'richText',
+          label: '富文本',
+          initialValue: '波哥',
+          widget: FormEditor
         }
       ]}
       form={form}
     />
-    <Button style={{ marginTop: 4 }} type="primary" onClick={() => console.log(form.getFieldsValue())}>
+    <Button type="primary" onClick={() => alert(JSON.stringify(form.getFieldsValue()))}>
       提交
     </Button>
   </Form>

@@ -9,23 +9,23 @@ export default Form.create()(({ form }) => (
     <FormBuilder
       formItemLayout={{
         wrapperCol: {
-          span: 16,
+          span: 16
         },
         labelCol: {
-          span: 8,
-        },
+          span: 8
+        }
       }}
       meta={[
         {
           key: 'name',
           label: '用戶名',
-          widget: Input,
+          widget: Input
         },
         {
           key: 'pass',
           label: '密码',
-          widget: Input,
-        },
+          widget: Input
+        }
       ]}
       form={form}
     />
