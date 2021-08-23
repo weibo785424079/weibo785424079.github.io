@@ -12,7 +12,7 @@ const Demo = () => {
       <h3>基于WangEditor</h3>
       <Editor />
       <Button.Group>
-        <Button onClick={() => alert(getValue())}>获取当前值</Button>
+        <Button onClick={() => alert(`值,${getValue()}`)}>获取当前值</Button>
         <Button onClick={() => setValue('波哥')}>设置值</Button>
       </Button.Group>
     </div>
