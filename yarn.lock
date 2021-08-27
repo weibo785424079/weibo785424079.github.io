@@ -1473,6 +1473,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@juggle/resize-observer@^3.3.1":
+  version "3.3.1"
+  resolved "http://npm.taimei.com:80/@juggle%2fresize-observer/-/resize-observer-3.3.1.tgz#b50a781709c81e10701004214340f25475a171a0"
+  integrity sha1-tQp4FwnIHhBwEAQhQ0DyVHWhcaA=
+
 "@lerna/add@3.21.0":
   version "3.21.0"
   resolved "http://npm.taimei.com:80/@lerna%2fadd/-/add-3.21.0.tgz#27007bde71cc7b0a2969ab3c2f0ae41578b4577b"
@@ -7709,6 +7714,11 @@ hard-rejection@^2.1.0:
   resolved "http://npm.taimei.com:80/hard-rejection/-/hard-rejection-2.1.0.tgz#1c6eda5c1685c63942766d79bb40ae773cecd883"
   integrity sha1-HG7aXBaFxjlCdm15u0Cudzzs2IM=
 
+harmony-reflect@^1.4.6:
+  version "1.6.2"
+  resolved "http://npm.taimei.com:80/harmony-reflect/-/harmony-reflect-1.6.2.tgz#31ecbd32e648a34d030d86adb67d4d47547fe710"
+  integrity sha1-Mey9MuZIo00DDYattn1NR1R/5xA=
+
 has-ansi@^2.0.0:
   version "2.0.0"
   resolved "http://npm.taimei.com:80/has-ansi/-/has-ansi-2.0.0.tgz#34f5049ce1ecdf2b0649af3ef24e45ed35416d91"
@@ -8141,6 +8151,13 @@ idb-wrapper@^1.5.0:
   version "1.7.2"
   resolved "http://npm.taimei.com:80/idb-wrapper/-/idb-wrapper-1.7.2.tgz#8251afd5e77fe95568b1c16152eb44b396767ea2"
   integrity sha1-glGv1ed/6VVoscFhUutEs5Z2fqI=
+
+identity-obj-proxy@^3.0.0:
+  version "3.0.0"
+  resolved "http://npm.taimei.com:80/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
+  integrity sha1-lNK9qWCERT7zb7xarsN+D3nx/BQ=
+  dependencies:
+    harmony-reflect "^1.4.6"
 
 ieee754@^1.1.13, ieee754@^1.1.4:
   version "1.2.1"

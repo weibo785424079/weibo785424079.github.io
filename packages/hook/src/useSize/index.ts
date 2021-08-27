@@ -1,4 +1,5 @@
 import { RefObject, useLayoutEffect, useRef, useState } from 'react';
+import { ResizeObserver } from '@juggle/resize-observer';
 
 type Arg = HTMLElement | (() => HTMLElement) | null;
 type Size = { width?: number; height?: number };

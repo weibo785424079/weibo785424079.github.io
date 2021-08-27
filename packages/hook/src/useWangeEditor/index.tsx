@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import WangEditor from 'wangeditor';
 import { commonUpload } from '@tms/fs.js';
-import { usePersistFn } from '@tms/site-hook';
+import usePersistFn from '../usePersistFn';
 import './index.css';
 
 const repositoryName = 'hospital/site-front-repo';
@@ -37,9 +37,9 @@ const useEditor = (
     'qgs'
   ]
 ) => {
-  const toolbarRef = useRef();
-  const editorRef = useRef();
-  const editorToolRef = useRef(null);
+  const toolbarRef = useRef<any>(null);
+  const editorRef = useRef<any>(null);
+  const editorToolRef = useRef<any>(null);
   const update = usePersistFn(onChange);
 
   const init = (val: string = '') => {

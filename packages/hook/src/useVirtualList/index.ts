@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import useSize from '../useSize';
 
-interface Options {
+export interface Options {
   itemHeight: number | ((index: number) => number);
   overscan?: number;
 }

@@ -4,31 +4,32 @@ import { createUseStore } from '@tms/site-hook';
 import Button from 'antd/es/button';
 
 const initState = {
-  ID: '-',
+  ID: '-'
 };
 
 const setIdAction = createAction('设置ID');
 
-const setId = ({ dispatch }) => (ID: string) => dispatch(setIdAction({ ID }));
+const setId =
+  ({ dispatch }) =>
+  (ID: string) =>
+    dispatch(setIdAction({ ID }));
 
-const reducer = handleActions({
-  [setIdAction.toString()]:
-    (state, action) => ({
+const reducer = handleActions(
+  {
+    [setIdAction.toString()]: (state, action) => ({
       ...state,
-      ...action.payload,
-    }),
-}, initState);
+      ...action.payload
+    })
+  },
+  initState
+);
 
-const {
-  useContextState,
-  useActions,
-  withProvider,
-} = createUseStore(reducer, initState);
+const { useContextState, useActions, withProvider } = createUseStore(reducer, initState);
 
-const Parent = withProvider(({ children }: {children: React.ReactChild}) => children);
+const Parent = withProvider(({ children }: { children: React.ReactElement }) => children);
 
 const Child = () => {
-  const fns = useActions({ setId });
+  const fns = useActions({ setId }) as any;
   const [state] = useContextState();
   return (
     <div>

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Modal } from 'antd';
-import { useImmutable } from '@tms/site-hook';
 import { ModalProps } from 'antd/es/modal';
+import useImmutable from '../useImmutable';
 import 'antd/lib/modal/style/css';
 
 interface UseMdoal extends ModalProps {}
@@ -16,6 +16,7 @@ function useModal<T = any>(options: UseMdoal = {}) {
   visibleRef.current = visible;
 
   const show = useCallback((data?: T) => {
+    // @ts-ignore
     dataRef.current = data;
     setVisible(true);
   }, []);
