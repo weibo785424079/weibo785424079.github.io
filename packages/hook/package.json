@@ -14,12 +14,14 @@
     "test": "jest --collectCoverage"
   },
   "author": "bo.wei",
-  "sideEffects": false,
   "types": "dist/esm/index.d.ts",
   "files": [
     "dist",
     "package.json",
     "README.md"
+  ],
+  "sideEffects": [ 
+    "*.css"
   ],
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",

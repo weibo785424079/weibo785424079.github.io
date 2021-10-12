@@ -11,5 +11,5 @@ group:
 ## API
 
 ```typescript
-     const [{isCountDowning, remaning},{ start }] = useCountDown()
+     const [{isCountDowning, remaining},{ start }] = useCountDown()
 ```

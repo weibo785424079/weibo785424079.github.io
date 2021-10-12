@@ -4,7 +4,7 @@ import usePersistFn from '../usePersistFn';
 
 const useCountDown = (time = 60) => {
   const [isCountDowning, setCountDowning] = useState(false);
-  const [remaning, setRemaining] = useState(time);
+  const [remaining, setRemaining] = useState(time);
   const timer = useRef<number>();
 
   const start = usePersistFn(() => {
@@ -32,7 +32,7 @@ const useCountDown = (time = 60) => {
     }
   });
 
-  return [{ isCountDowning, remaning }, { start }] as const;
+  return [{ isCountDowning, remaining }, { start }] as const;
 };
 
 export default useCountDown;
