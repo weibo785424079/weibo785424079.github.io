@@ -10,6 +10,9 @@
         "package.json",
         "README.md"
     ],
+    "sideEffects": [
+        "*.css"
+    ],
     "scripts": {
         "compile": "site compile src",
         "compile:watch": "site compile src -w",
@@ -25,6 +28,10 @@
     "devDependencies": {
         "@types/react": ">=16.8.6",
         "@types/react-dom": ">=16.8.6",
-        "react": ">=16.8.6"
+        "react": ">=16.8.6",
+        "react-resizable": "^3.0.4"
+    },
+    "dependencies": {
+        "react-sortable-hoc": "^2.0.0"
     }
 }
