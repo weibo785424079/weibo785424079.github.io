@@ -1,24 +1,14 @@
 import React from 'react';
 import { Table } from 'antd';
 import { TableProps } from 'antd/es/table';
-import { useSortHideColumn } from './SortAndHide';
 import ResizeableTitle from './ResizeableTitle';
+import { SortTableContainer } from './SortAndHide';
 import { useTableContext } from './context';
 import 'antd/es/table/style/index';
 
 const MIN_WIDTH = 100;
 
-const $Table = ({ columns = [], ...rest }: TableProps<any>) => {
-  /**
-   * 根据id初始化列数据
-   * 1，获取缓存数据，
-   *    *如果有跟当前列宽度匹配重写宽度，
-   *    *列显示隐藏
-   *    *冻结列位置
-   *    *列排序
-   * 2、在onResize阶段重新设置宽度
-   * 3、设置列显示、排序、冻结、更新数据
-   */
+const InnerTable = ({ columns = [], ...rest }: TableProps<any>) => {
   const {
     id,
     columns: contextCacheColumns,
@@ -34,8 +24,6 @@ const $Table = ({ columns = [], ...rest }: TableProps<any>) => {
       cell: ResizeableTitle
     }
   };
-
-  const { RenderSortHideColumn, show } = useSortHideColumn();
 
   const columnsWidth = columns.reduce((prev, next) => {
     if (next.key) {
@@ -59,7 +47,7 @@ const $Table = ({ columns = [], ...rest }: TableProps<any>) => {
         width: cacheWidth.get(String(col.key!)),
         onHeaderCell: () => ({
           width,
-          onResize(e, { size }) {
+          onResize(_e, { size }) {
             const newCacheColumns = [...contextCacheColumns];
             const currWith = Math.max(MIN_WIDTH, size.width);
             const one = newCacheColumns.find((item) => item.key === col.key);
@@ -67,7 +55,7 @@ const $Table = ({ columns = [], ...rest }: TableProps<any>) => {
               one.width = currWith;
             } else {
               newCacheColumns.push({
-                key: col.key as any,
+                key: col.key as string,
                 show: 1,
                 order: NaN,
                 width: currWith
@@ -82,16 +70,16 @@ const $Table = ({ columns = [], ...rest }: TableProps<any>) => {
       };
     });
 
-  console.log(newColumns, 'columns');
-  return (
-    <>
-      <Table scroll={{ x: 500 }} components={components} columns={newColumns} {...rest} />;
-      <button type="button" onClick={() => show(columns)}>
-        打开弹窗
-      </button>
-      <RenderSortHideColumn />
-    </>
-  );
+  return <Table components={components} columns={newColumns} {...rest} />;
 };
 
-export default $Table;
+function SortTableContainerWrap<T = any>(props: TableProps<T>) {
+  const { columns = [] } = props;
+  return (
+    <SortTableContainer columns={columns}>
+      <InnerTable {...props} />
+    </SortTableContainer>
+  );
+}
+
+export default SortTableContainerWrap;

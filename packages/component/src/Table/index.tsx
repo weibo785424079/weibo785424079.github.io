@@ -1,19 +1,23 @@
 import React from 'react';
-import { TableProps } from 'antd/es/table';
 import Table from './Table';
-import CacheComponent from './Cache';
+import CacheTableContainer from './Cache';
 import './index.css';
 
-interface Props<U> extends TableProps<U> {
+export { SortTableTrigger } from './SortAndHide';
+export { useTableContext, useModalContext } from './context';
+
+interface Props {
   id: string;
+  children: React.ReactElement;
 }
 
-function CacheTable<U = any>({ id, ...rest }: Props<U>) {
-  return (
-    <CacheComponent id={id}>
-      <Table {...rest} />
-    </CacheComponent>
-  );
+function CacheTable({ id, children }: Props) {
+  if (!id) {
+    throw new Error('id 为必传字段!!!');
+  }
+  return <CacheTableContainer id={id}>{children}</CacheTableContainer>;
 }
+
+export { Table, CacheTable };
 
 export default CacheTable;

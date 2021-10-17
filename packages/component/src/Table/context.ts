@@ -9,6 +9,7 @@ const Context = createContext<{
   hideColumns: Set<String>;
   cacheWidth: Map<string, number>;
   frozenNumber: number;
+  clearCache: () => void;
 }>({
   id: '',
   setCacheState: () => {},
@@ -16,9 +17,16 @@ const Context = createContext<{
   hideColumns: new Set(),
   cacheWidth: new Map(),
   columns: [],
-  frozenNumber: -1
+  frozenNumber: -1,
+  clearCache: () => undefined
 });
 
 export const useTableContext = () => useContext(Context);
+
+export const ModalContext = createContext({
+  show: () => {}
+});
+
+export const useModalContext = () => useContext(ModalContext);
 
 export default Context;

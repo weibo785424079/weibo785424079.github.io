@@ -4,11 +4,13 @@ const useDebounceFn = <T>(fn: (...args: any[]) => any, deps: T, ms = 300) => {
   const timer = useRef<number | null | any>();
 
   useEffect(() => {
-    if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       fn();
       timer.current = null;
     }, ms);
+    return () => {
+      if (timer.current) clearTimeout(timer.current);
+    };
   }, [deps, ms]);
 
   const cancel = useCallback(() => {

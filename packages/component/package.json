@@ -28,10 +28,12 @@
     "devDependencies": {
         "@types/react": ">=16.8.6",
         "@types/react-dom": ">=16.8.6",
-        "react": ">=16.8.6",
-        "react-resizable": "^3.0.4"
+        "react": ">=16.8.6"
     },
     "dependencies": {
-        "react-sortable-hoc": "^2.0.0"
+        "@tms/site-hook": "^0.0.5",
+        "@tms/storage": "^0.0.55",
+        "react-sortable-hoc": "^2.0.0",
+        "react-resizable": "^3.0.4"
     }
 }

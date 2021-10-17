@@ -1,8 +1,9 @@
 import React, { ReactElement, useMemo, useState } from 'react';
 import { get, set } from '@tms/storage';
+import { useDebounceFn } from '@tms/site-hook';
 import Context from './context';
 
-type Column = {
+export type Column = {
   key: string;
   show: 0 | 1;
   order: number;
@@ -16,16 +17,18 @@ export type Cache = {
 };
 const prefix = 'site-cache-table-';
 
+const getDefaultData = (id: string) => ({
+  id,
+  columns: [],
+  frozenNumber: -1
+});
+
 export const getCahce = (id: string) => {
   return get(prefix + id) as Cache | undefined;
 };
 
 export const create = (id: string): Cache => {
-  const defaultData: Cache = {
-    id,
-    columns: [],
-    frozenNumber: -1
-  };
+  const defaultData = getDefaultData(id);
   set(prefix + id, defaultData);
   return defaultData;
 };
@@ -40,7 +43,7 @@ interface Props {
   id: string;
 }
 
-const CacheComponent = ({ children, id }: Props) => {
+const CacheTableContainer = ({ children, id }: Props) => {
   const [cache, setCacheState] = useState(() => getCahce(id) || create(id));
 
   const { orderMap, hideColumns, cacheWidth } = useMemo(() => {
@@ -54,7 +57,7 @@ const CacheComponent = ({ children, id }: Props) => {
         $hideColumns.add(col.key);
       }
       if (col.key) {
-        $orderMap.set(col.key, col.order ?? -1);
+        $orderMap.set(col.key, col.order ?? NaN);
         $cacheWidth.set(col.key, col.width);
       }
     });
@@ -67,20 +70,28 @@ const CacheComponent = ({ children, id }: Props) => {
     };
   }, [cache]);
 
+  useDebounceFn(() => {
+    setCahce(cache);
+  }, cache);
+
   const value = useMemo(() => {
     const currSetCache = (data: { id: string } & Partial<Cache>) => {
-      setCahce(data);
       setCacheState((c) => ({ ...c, ...data }));
+    };
+    const clearCache = () => {
+      const defaultData = getDefaultData(id);
+      setCacheState(defaultData);
     };
     return {
       ...cache,
       setCacheState: currSetCache,
       orderMap,
       hideColumns,
-      cacheWidth
+      cacheWidth,
+      clearCache
     };
   }, [id, cache, setCacheState, orderMap, hideColumns, cacheWidth]);
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
-export default CacheComponent;
+export default CacheTableContainer;

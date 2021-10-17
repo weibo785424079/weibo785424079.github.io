@@ -1,21 +1,24 @@
-import React, { useMemo, useState, useRef, forwardRef, useImperativeHandle } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useMemo, useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { useModal, useImmutable } from '@tms/site-hook';
 import { Tabs, Checkbox, Icon } from 'antd';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { useTableContext } from './context';
+import { useTableContext, ModalContext, useModalContext } from './context';
+import type { Column } from './Cache';
 import 'antd/es/tabs/style';
-
-// type Column = TableProps<any>['columns'];
-
-type Props = {
-  columns: any;
-};
 
 const id2map = (ids: string[]) =>
   ids.reduce((prev, next) => {
     Object.assign(prev, { [next]: true });
     return prev;
   }, {});
+
+const key2orderMap = (arr: Column[]) => {
+  return arr.reduce((prev, next, index) => {
+    prev[next.key] = index;
+    return prev;
+  }, {});
+};
 
 const SortableItem = SortableElement(({ value, num }) => (
   <li
@@ -37,103 +40,72 @@ const SortableItem = SortableElement(({ value, num }) => (
 const SortableList = SortableContainer(({ items }) => {
   return (
     <ul style={{ margin: 0, padding: 0, maxHeight: 300, overflowY: 'auto' }}>
-      {items.map((item, index) => (
+      {items.map((item, index: number) => (
         <SortableItem key={item.key} index={index} num={index} value={item.title} />
       ))}
     </ul>
   );
 });
 
-const SortAndHideColumn = forwardRef((props: Props, ref) => {
+/**
+ * 获取context数据，把隐藏的数据当做初始化数据，还有排序拖动列
+ */
+const SortAndHideColumn = forwardRef((props: any, ref) => {
   const { columns } = props;
-  /**
-   * 获取context数据，把隐藏的数据当做初始化数据，还有排序拖动列
-   */
-  const { id, hideColumns, orderMap, columns: contextCacheColumns, setCacheState } = useTableContext();
-  const [hideIds, setHidesId] = useState(() => [...hideColumns.values()] as string[]);
-  const storeHides = useRef(hideIds);
 
-  const [orderedColumns, setOrderedColumns] = useState(() => {
-    const sortColumns = [...columns];
+  const { id, hideColumns, orderMap, columns: cacheColumns, setCacheState } = useTableContext();
+  const [hideIds, setHidesId] = useState(() => [...hideColumns.values()] as string[]);
+
+  const [orderedColumns] = useState(() => {
+    const sortColumns = [...columns]; // 将现传入的column order格式化
     sortColumns.sort((a, b) => {
       const aSort = orderMap.get(a.key) ?? Infinity;
       const bSort = orderMap.get(b.key) ?? Infinity;
       return aSort - bSort;
     });
-    let index = 0;
-    sortColumns.forEach((col) => {
-      if (Number.isNaN(col.order) && col.order !== undefined) {
-        index = col;
-      } else {
-        index += 1;
-        Object.assign(col, {
-          order: index// eslint-disable-line
-        });
-      }
+    const list = sortColumns.map((item, index) => {
+      return {
+        ...item,
+        order: index
+      };
     });
-    return sortColumns;
+    return list;
   });
-
-  console.log(orderedColumns);
 
   const hides = useMemo(() => {
     return id2map(hideIds);
   }, [hideIds]);
 
+  const [renderColumns, setRenderColumns] = useState(orderedColumns);
+
+  useEffect(() => {
+    setRenderColumns((arr) => arr.filter((item: any) => !hides[String(item?.key)]));
+  }, [hides]);
+
   useImperativeHandle(ref, () => {
     return {
       onOk() {
-        // 找出不同
-        const storeIdMap = id2map(storeHides.current);
+        const currOrderMap = key2orderMap(renderColumns);
 
-        const added: string[] = [];
-        const deled: string[] = [];
+        const curr: Column[] = [];
+        columns.forEach((item) => {
+          const col = {
+            ...(cacheColumns.find((i) => i.key === item.key) || {}),
+            key: item.key,
+            show: (hideIds.includes(item.key) ? 0 : 1) as Column['show'],
+            order: currOrderMap[item.key] ?? NaN
+          };
+          curr.push(col);
+        });
 
-        storeHides.current.forEach((key) => {
-          if (!hides[key]) {
-            deled.push(key);
-          }
-        });
-        hideIds.forEach((key) => {
-          if (!storeIdMap[key]) {
-            added.push(key);
-          }
-        });
-        // 将新增的项目隐藏， 将减少的项目显示
-        const newCacheColumns = [...contextCacheColumns];
-
-        added.forEach((key) => {
-          const one = newCacheColumns.find((item) => item.key === key);
-          if (one) {
-            one.show = 0;
-          } else {
-            newCacheColumns.push({
-              key,
-              show: 0,
-              order: NaN
-            });
-          }
-        });
-        deled.forEach((key) => {
-          const one = newCacheColumns.find((item) => item.key === key);
-          if (one) {
-            one.show = 1;
-          } else {
-            newCacheColumns.push({
-              key,
-              show: 1,
-              order: NaN
-            });
-          }
-        });
         setCacheState({
           id,
-          columns: newCacheColumns
+          columns: curr
         });
       }
     };
   });
-  const renderOrderColumns = orderedColumns.filter((item: any) => !hides[String(item?.key)]);
+
   return (
     <Tabs defaultActiveKey="all">
       <Tabs.TabPane key="all" tab="全部列">
@@ -152,10 +124,12 @@ const SortAndHideColumn = forwardRef((props: Props, ref) => {
       </Tabs.TabPane>
       <Tabs.TabPane key="sort" tab="排序">
         <SortableList
-          items={renderOrderColumns}
+          items={renderColumns}
           onSortEnd={({ newIndex, oldIndex }) => {
-            // const arr = oldIndex < newIndex ? [] : [];
-            console.log(oldIndex, newIndex);
+            const currColumns = [...renderColumns];
+            const one = currColumns.splice(oldIndex, 1)[0];
+            currColumns.splice(newIndex, 0, one);
+            setRenderColumns(currColumns);
           }}
         />
       </Tabs.TabPane>
@@ -179,6 +153,27 @@ export const useSortHideColumn = () => {
     return <RenderModal>{(columns) => <SortAndHideColumn ref={ref} columns={columns} />}</RenderModal>;
   });
   return { RenderSortHideColumn, hide, ...rest };
+};
+
+export const SortTableContainer = ({ children, columns = [] }: { children: React.ReactElement; columns: any[] }) => {
+  const { RenderSortHideColumn, show } = useSortHideColumn();
+  const ref = useRef(columns);
+  ref.current = columns;
+  // @ts-ignore
+  const value = useMemo(() => ({ show: () => show(ref.current) }), [show]);
+  return (
+    <ModalContext.Provider value={value as any}>
+      <>
+        {children}
+        <RenderSortHideColumn />
+      </>
+    </ModalContext.Provider>
+  );
+};
+
+export const SortTableTrigger = ({ children }: { children: React.ReactElement }) => {
+  const { show } = useModalContext();
+  return React.cloneElement(children, { onClick: () => show() });
 };
 
 export default SortAndHideColumn;
