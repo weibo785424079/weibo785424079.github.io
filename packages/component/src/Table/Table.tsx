@@ -2,13 +2,11 @@ import React from 'react';
 import { Table } from 'antd';
 import { TableProps } from 'antd/es/table';
 import ResizeableTitle from './ResizeableTitle';
-import { SortTableContainer } from './SortAndHide';
+import { SortTableContainer } from './SortModal';
 import { useTableContext } from './context';
 import 'antd/es/table/style/index';
 
-const MIN_WIDTH = 100;
-
-const InnerTable = ({ columns = [], ...rest }: TableProps<any>) => {
+const InnerTable = ({ className, columns = [], ...rest }: TableProps<any>) => {
   const {
     id,
     columns: contextCacheColumns,
@@ -16,7 +14,8 @@ const InnerTable = ({ columns = [], ...rest }: TableProps<any>) => {
     setCacheState,
     orderMap,
     hideColumns,
-    cacheWidth
+    cacheWidth,
+    minWidth
   } = useTableContext();
 
   const components = {
@@ -39,7 +38,7 @@ const InnerTable = ({ columns = [], ...rest }: TableProps<any>) => {
       const width = cacheWidth.get(String(col.key!)) || columnsWidth[col.key!];
       const fixed = (() => {
         if (col.fixed === 'right') return 'right' as const;
-        return frozenNumber === -1 ? false : index < frozenNumber;
+        return frozenNumber === -1 ? false : index <= frozenNumber;
       })();
       return {
         ...col,
@@ -47,9 +46,11 @@ const InnerTable = ({ columns = [], ...rest }: TableProps<any>) => {
         width: cacheWidth.get(String(col.key!)),
         onHeaderCell: () => ({
           width,
+          // @ts-ignore
+          hide: col.hide,
           onResize(_e, { size }) {
             const newCacheColumns = [...contextCacheColumns];
-            const currWith = Math.max(MIN_WIDTH, size.width);
+            const currWith = Math.max(minWidth || -Infinity, size.width);
             const one = newCacheColumns.find((item) => item.key === col.key);
             if (one) {
               one.width = currWith;
@@ -69,8 +70,14 @@ const InnerTable = ({ columns = [], ...rest }: TableProps<any>) => {
         })
       };
     });
-
-  return <Table components={components} columns={newColumns} {...rest} />;
+  return (
+    <Table
+      components={components}
+      columns={newColumns}
+      {...rest}
+      className={`${className || ''} site-component-table`}
+    />
+  );
 };
 
 function SortTableContainerWrap<T = any>(props: TableProps<T>) {

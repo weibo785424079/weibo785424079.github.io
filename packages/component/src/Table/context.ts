@@ -3,13 +3,14 @@ import type { Cache } from './Cache';
 
 const Context = createContext<{
   id: string;
+  minWidth?: number;
   columns: Cache['columns'];
   setCacheState: any;
   orderMap: Map<string, number>;
   hideColumns: Set<String>;
   cacheWidth: Map<string, number>;
   frozenNumber: number;
-  clearCache: () => void;
+  cleanCache: () => void;
 }>({
   id: '',
   setCacheState: () => {},
@@ -18,7 +19,7 @@ const Context = createContext<{
   cacheWidth: new Map(),
   columns: [],
   frozenNumber: -1,
-  clearCache: () => undefined
+  cleanCache: () => undefined
 });
 
 export const useTableContext = () => useContext(Context);

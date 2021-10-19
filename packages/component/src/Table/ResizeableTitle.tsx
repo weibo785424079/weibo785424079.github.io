@@ -2,9 +2,9 @@ import React from 'react';
 import { Resizable } from 'react-resizable';
 
 const ResizeableTitle = (props: any) => {
-  const { onResize, width, ...restProps } = props;
+  const { onResize, width, hide, ...restProps } = props;
 
-  if (!width) {
+  if (!width || hide) {
     return <th {...restProps} />;
   }
 

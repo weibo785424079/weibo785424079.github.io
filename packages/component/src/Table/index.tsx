@@ -1,23 +1,32 @@
 import React from 'react';
 import Table from './Table';
-import CacheTableContainer from './Cache';
+import CacheTableContainer, { CacheCleaner } from './Cache';
 import './index.css';
 
-export { SortTableTrigger } from './SortAndHide';
+export { SortTableTrigger } from './SortModal';
 export { useTableContext, useModalContext } from './context';
 
 interface Props {
   id: string;
+  minWidth?: number;
   children: React.ReactElement;
 }
 
-function CacheTable({ id, children }: Props) {
+function CacheTable({ id, minWidth, children }: Props) {
   if (!id) {
     throw new Error('id 为必传字段!!!');
   }
-  return <CacheTableContainer id={id}>{children}</CacheTableContainer>;
+  return (
+    <CacheTableContainer id={id} minWidth={minWidth}>
+      {children}
+    </CacheTableContainer>
+  );
 }
 
-export { Table, CacheTable };
+CacheTable.defaultProps = {
+  minWidth: undefined
+};
+
+export { Table, CacheTable, CacheCleaner };
 
 export default CacheTable;

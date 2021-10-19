@@ -4,7 +4,7 @@ import { Button } from 'antd';
 
 const Demo = () => {
   return (
-    <CacheTable id="default">
+    <CacheTable minWidth={100} id="default">
       <Table
         rowKey="id"
         columns={[
