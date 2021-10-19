@@ -46,8 +46,7 @@ const InnerTable = ({ className, columns = [], ...rest }: TableProps<any>) => {
         width: cacheWidth.get(String(col.key!)),
         onHeaderCell: () => ({
           width,
-          // @ts-ignore
-          hide: col.hide,
+          hide: col.fixed === 'right',
           onResize(_e, { size }) {
             const newCacheColumns = [...contextCacheColumns];
             const currWith = Math.max(minWidth || -Infinity, size.width);

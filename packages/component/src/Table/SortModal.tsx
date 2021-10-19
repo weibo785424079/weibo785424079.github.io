@@ -57,7 +57,7 @@ const SortableList = SortableContainer(({ items }) => {
  */
 const SortAndHideColumn = forwardRef((props: any, ref) => {
   const { columns: propsColumns } = props;
-  const columns = propsColumns.filter((item) => !item.hide);
+  const columns = propsColumns.filter((item) => item.fixed !== 'right');
   const { id, hideColumns, orderMap, columns: cacheColumns, setCacheState, frozenNumber } = useTableContext();
   const [hideIds, setHidesId] = useState(() => [...hideColumns.values()] as string[]);
   const [currFrozenNumber, setCurrFrozenNumber] = useState(frozenNumber);
