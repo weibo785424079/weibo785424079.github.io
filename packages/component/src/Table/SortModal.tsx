@@ -4,7 +4,7 @@ import { Tabs, Checkbox, Icon, Radio, Button } from 'antd';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useModal, useImmutable } from '@tms/site-hook';
 import { useTableContext, ModalContext, useModalContext } from './context';
-import type { Column } from './Cache';
+import type { Column } from './CacheContainer';
 import 'antd/es/tabs/style';
 
 const id2map = (ids: string[]) =>

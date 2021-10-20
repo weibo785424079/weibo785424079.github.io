@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from './Table';
-import CacheTableContainer, { CacheCleaner } from './Cache';
+import CacheTableContainer, { CacheCleaner } from './CacheContainer';
 import './index.css';
 
 export { SortTableTrigger } from './SortModal';
