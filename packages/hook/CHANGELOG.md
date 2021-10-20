@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.1.0...@tms/site-hook@0.2.0) (2021-10-20)
+
+
+### Features
+
+* **add CacheTable:** add CacheTable ([2435f81](https://git.taimei.com/hospital/site-front-repo/commits/2435f81ef987d76f2542265129ec5a1012542862))
+
+
+
+
+
 # [0.1.0](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.0.5...@tms/site-hook@0.1.0) (2021-08-23)
 
 
