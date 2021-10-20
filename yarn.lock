@@ -2629,13 +2629,6 @@
     typescript "4.2.4"
     vinyl-fs "^3.0.3"
 
-"@tms/site-hook@^0.0.5":
-  version "0.0.5"
-  resolved "http://npm.taimei.com:80/@tms%2fsite-hook/-/site-hook-0.0.5.tgz#2bc1da134ed44c60f1141c5a6e7ab0af702a5d97"
-  integrity sha512-bvEggU3k/7eWh6V6rAFZ8crVuouvW3bm374fmoqqF+ZgrXx/ZoLv2pVDYn0wOOuuQ8PeRlaMB8VvogSDlrdeoA==
-  dependencies:
-    query-string "^7.0.0"
-
 "@tms/upload-js-sdk@0.1.7-beta2":
   version "0.1.7-beta2"
   resolved "http://npm.taimei.com:80/@tms%2fupload-js-sdk/-/upload-js-sdk-0.1.7-beta2.tgz#8c0e98e14678452f1d9a03d0e589ec04bf7e0358"
