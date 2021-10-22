@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import { Table } from 'antd';
 import { TableProps } from 'antd/es/table';
@@ -6,7 +7,7 @@ import { SortTableContainer } from './SortModal';
 import { useTableContext } from './context';
 import 'antd/es/table/style/index';
 
-const InnerTable = ({ className, columns = [], ...rest }: TableProps<any>) => {
+function InnerTable<T>({ className, columns = [], ...rest }: TableProps<T>) {
   const {
     id,
     columns: contextCacheColumns,
@@ -26,7 +27,7 @@ const InnerTable = ({ className, columns = [], ...rest }: TableProps<any>) => {
 
   const columnsWidth = columns.reduce((prev, next) => {
     if (next.key) {
-      prev[next.key] = next.width; // eslint-disable-line
+      prev[next.key] = next.width;
     }
     return prev;
   }, {});
@@ -36,10 +37,7 @@ const InnerTable = ({ className, columns = [], ...rest }: TableProps<any>) => {
     .sort((a, b) => orderMap.get(String(a.key))! - orderMap.get(String(b.key))!)
     .map((col, index) => {
       const width = cacheWidth.get(String(col.key!)) || columnsWidth[col.key!];
-      const fixed = (() => {
-        if (col.fixed === 'right') return 'right' as const;
-        return frozenNumber === -1 ? false : index <= frozenNumber;
-      })();
+      const fixed = col.fixed === 'right' ? ('right' as const) : index <= frozenNumber;
       return {
         ...col,
         fixed,
@@ -77,13 +75,13 @@ const InnerTable = ({ className, columns = [], ...rest }: TableProps<any>) => {
       className={`${className || ''} site-component-table`}
     />
   );
-};
+}
 
 function SortTableContainerWrap<T = any>(props: TableProps<T>) {
   const { columns = [] } = props;
   return (
     <SortTableContainer columns={columns}>
-      <InnerTable {...props} />
+      <InnerTable<T> {...props} />
     </SortTableContainer>
   );
 }

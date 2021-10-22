@@ -3,9 +3,14 @@ import React, { useMemo, useState, useRef, forwardRef, useImperativeHandle, useE
 import { Tabs, Checkbox, Icon, Radio, Button } from 'antd';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useModal, useImmutable } from '@tms/site-hook';
+import { ColumnProps } from 'antd/es/table';
 import { useTableContext, ModalContext, useModalContext } from './context';
 import type { Column } from './CacheContainer';
 import 'antd/es/tabs/style';
+import 'antd/es/checkbox/style';
+import 'antd/es/icon/style';
+import 'antd/es/radio/style';
+import 'antd/es/button/style';
 
 const id2map = (ids: string[]) =>
   ids.reduce((prev, next) => {
@@ -13,15 +18,14 @@ const id2map = (ids: string[]) =>
     return prev;
   }, {});
 
-const key2orderMap = (arr: Column[]) => {
-  return arr.reduce((prev, next, index) => {
-    prev[next.key] = index;
+const key2order = (arr: Array<{ key?: React.Key | string }>) =>
+  arr.reduce((prev, next, index) => {
+    prev[next.key!] = index;
     return prev;
   }, {});
-};
 
 const SortableItem = SortableElement(({ value, num }) => (
-  <li
+  <div
     style={{
       height: '44px',
       cursor: 'pointer',
@@ -39,33 +43,36 @@ const SortableItem = SortableElement(({ value, num }) => (
       <span style={{ marginLeft: 20 }}>{value}</span>
     </span>
     <Radio value={num}>冻结本列及以前</Radio>
-  </li>
+  </div>
 ));
 
 const SortableList = SortableContainer(({ items }) => {
   return (
-    <ul style={{ margin: 0, padding: 0 }}>
+    <div>
       {items.map((item, index: number) => (
         <SortableItem key={item.key} index={index} num={index} value={item.title} />
       ))}
-    </ul>
+    </div>
   );
 });
 
 /**
  * 获取context数据，把隐藏的数据当做初始化数据，还有排序拖动列
  */
-const SortAndHideColumn = forwardRef((props: any, ref) => {
+const SortAndHideColumn = forwardRef((props: { columns: Array<ColumnProps<any>> }, ref) => {
   const { columns: propsColumns } = props;
   const columns = propsColumns.filter((item) => item.fixed !== 'right');
+
   const { id, hideColumns, orderMap, columns: cacheColumns, setCacheState, frozenNumber } = useTableContext();
   const [hideIds, setHidesId] = useState(() => [...hideColumns.values()] as string[]);
   const [currFrozenNumber, setCurrFrozenNumber] = useState(frozenNumber);
+
+  // 将现传入的column order格式化
   const [orderedColumns] = useState(() => {
-    const sortColumns = [...columns]; // 将现传入的column order格式化
+    const sortColumns = [...columns];
     sortColumns.sort((a, b) => {
-      const aSort = orderMap.get(a.key) ?? Infinity;
-      const bSort = orderMap.get(b.key) ?? Infinity;
+      const aSort = orderMap.get(String(a.key)) ?? Infinity;
+      const bSort = orderMap.get(String(b.key)) ?? Infinity;
       return aSort - bSort;
     });
     const list = sortColumns.map((item, index) => {
@@ -77,9 +84,7 @@ const SortAndHideColumn = forwardRef((props: any, ref) => {
     return list;
   });
 
-  const hides = useMemo(() => {
-    return id2map(hideIds);
-  }, [hideIds]);
+  const hides = useMemo(() => id2map(hideIds), [hideIds]);
 
   const [renderColumns, setRenderColumns] = useState(orderedColumns);
 
@@ -90,15 +95,16 @@ const SortAndHideColumn = forwardRef((props: any, ref) => {
   useImperativeHandle(ref, () => {
     return {
       onOk() {
-        const currOrderMap = key2orderMap(renderColumns);
+        const currOrderMap = key2order(renderColumns);
 
         const curr: Column[] = [];
         columns.forEach((item) => {
+          const key = String(item.key);
           const col = {
-            ...(cacheColumns.find((i) => i.key === item.key) || {}),
-            key: item.key,
-            show: (hideIds.includes(item.key) ? 0 : 1) as Column['show'],
-            order: currOrderMap[item.key] ?? NaN
+            ...(cacheColumns.find((i) => i.key === key) || {}),
+            key,
+            show: (hideIds.includes(key) ? 0 : 1) as Column['show'],
+            order: currOrderMap[key] ?? NaN
           };
           curr.push(col);
         });
