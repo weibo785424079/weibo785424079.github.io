@@ -1,7 +1,10 @@
-import React, { ReactElement, useMemo, useRef } from 'react';
+import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
 import { get, set } from '@tms/storage';
 import { useDebounceFn, usePersistFn, useUpdate } from '@tms/site-hook';
+import EventEmitter3 from 'eventemitter3';
 import Context, { useTableContext } from './context';
+
+const event = new EventEmitter3();
 
 export type Column = {
   key: string;
@@ -47,6 +50,9 @@ interface Props {
 const CacheTableContainer = ({ children, id, minWidth }: Props) => {
   const cacheRef = useRef<Cache>();
   const refreshRef = useRef(true);
+  const isPassiveFreshing = useRef(false);
+  const inited = useRef(false);
+
   const state = useMemo(() => {
     refreshRef.current = true;
     return getCahce(id) || create(id);
@@ -56,8 +62,41 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
     cacheRef.current = state;
     refreshRef.current = false;
   }
+
   const cache = cacheRef.current!;
   const update = useUpdate();
+
+  const refresh = usePersistFn((flag = true) => {
+    isPassiveFreshing.current = flag;
+    cacheRef.current = getCahce(id) || create(id);
+    update();
+  });
+
+  useDebounceFn(() => {
+    try {
+      setCahce(cache);
+      if (!isPassiveFreshing.current && inited.current) {
+        // 被动同步更新以及初始化不需要，发布同步更新命令
+        event.emit(id, refresh);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      inited.current = true;
+      isPassiveFreshing.current = false;
+    }
+  }, cache);
+
+  useEffect(() => {
+    event.on(id, (fn) => {
+      if (fn !== refresh) {
+        refresh();
+      }
+    });
+    return () => {
+      event.off(id, refresh);
+    };
+  }, [id]);
 
   const setCacheState = usePersistFn((data) => {
     const res = typeof data === 'function' ? data(cache) : data;
@@ -89,10 +128,6 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
       cacheWidth: $cacheWidth
     };
   }, [cache]);
-
-  useDebounceFn(() => {
-    setCahce(cache);
-  }, cache);
 
   const value = useMemo(() => {
     const currSetCache = (data: { id: string } & Partial<Cache>) => {
