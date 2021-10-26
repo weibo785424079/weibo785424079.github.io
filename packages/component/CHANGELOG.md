@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.2.2...@tms/site-component@0.3.0) (2021-10-26)
+
+
+### Features
+
+* **component:** triger update when change ([cdb4c61](http://git.taimei.com/hospital/site-front-repo/commits/cdb4c61d73d3140c0d2260a61f8f32bea3fee326))
+
+
+
+
+
 ## [0.2.2](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.2.1...@tms/site-component@0.2.2) (2021-10-20)
 
 **Note:** Version bump only for package @tms/site-component
