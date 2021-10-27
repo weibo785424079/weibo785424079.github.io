@@ -50,7 +50,7 @@ interface Props {
 const CacheTableContainer = ({ children, id, minWidth }: Props) => {
   const cacheRef = useRef<Cache>();
   const refreshRef = useRef(true);
-  const isPassiveFreshing = useRef(false);
+  const passiveRefreshing = useRef(false);
   const inited = useRef(false);
 
   const state = useMemo(() => {
@@ -67,23 +67,26 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
   const update = useUpdate();
 
   const refresh = usePersistFn((flag = true) => {
-    isPassiveFreshing.current = flag;
+    passiveRefreshing.current = flag;
     cacheRef.current = getCahce(id) || create(id);
     update();
   });
 
   useDebounceFn(() => {
     try {
-      setCahce(cache);
-      if (!isPassiveFreshing.current && inited.current) {
-        // 被动同步更新以及初始化不需要，发布同步更新命令
+      // 被动更新不需要重新设置storage
+      if (!passiveRefreshing.current) {
+        setCahce(cache);
+      }
+      // 被动更新以及初始化不需要发布同步更新命令
+      if (!passiveRefreshing.current && inited.current) {
         event.emit(id, refresh);
       }
     } catch (error) {
       console.log(error);
     } finally {
       inited.current = true;
-      isPassiveFreshing.current = false;
+      passiveRefreshing.current = false;
     }
   }, cache);
 
