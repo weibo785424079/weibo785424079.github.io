@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.3.0...@tms/site-component@0.3.1) (2021-10-27)
+
+
+### Performance Improvements
+
+* **component:** not need to storage when passive update ([d66d959](http://git.taimei.com/hospital/site-front-repo/commits/d66d9597004a1eccade6781e4bdd8957aa947afe))
+
+
+
+
+
 # [0.3.0](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.2.2...@tms/site-component@0.3.0) (2021-10-26)
 
 
