@@ -28,12 +28,14 @@
     "devDependencies": {
         "@types/react": ">=16.8.6",
         "@types/react-dom": ">=16.8.6",
+        "moment": "^2.29.1",
         "react": ">=16.8.6"
     },
     "dependencies": {
         "@tms/site-hook": "^0.2.0",
         "@tms/storage": "^0.0.55",
         "eventemitter3": "^4.0.7",
+        "rc-color-picker": "^1.2.6",
         "react-resizable": "^3.0.4",
         "react-sortable-hoc": "^2.0.0"
     }

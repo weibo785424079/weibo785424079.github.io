@@ -1293,6 +1293,11 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@icons/material@^0.2.4":
+  version "0.2.4"
+  resolved "http://npm.taimei.com:80/@icons%2fmaterial/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
+  integrity sha1-6QyfcXaLNzbnbX3WeD/Gwq+oi8g=
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "http://npm.taimei.com:80/@istanbuljs%2fload-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -2579,56 +2584,6 @@
     rxjs "^6.6.7"
     tslib "2.0.1"
 
-"@tms/site-cli@^0.0.4":
-  version "0.0.4"
-  resolved "http://npm.taimei.com:80/@tms%2fsite-cli/-/site-cli-0.0.4.tgz#881f094a4c6f2c6c29d1346c7033b6115ccf1727"
-  integrity sha512-e7lFBN7YOpbsJGG9ZkQcmsMHFnnSWsw7Eq3zfb3gpAng8/g/9SXhygIkOkwO981mWT3v+X8dcNC24APEB4FSng==
-  dependencies:
-    "@babel/core" "^7.12.10"
-    "@babel/plugin-proposal-class-properties" "^7.12.1"
-    "@babel/plugin-proposal-decorators" "^7.12.12"
-    "@babel/plugin-proposal-private-methods" "^7.13.0"
-    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
-    "@babel/plugin-transform-runtime" "^7.12.10"
-    "@babel/preset-env" "^7.12.11"
-    "@babel/preset-react" "^7.12.10"
-    "@rollup/plugin-babel" "^5.2.2"
-    "@rollup/plugin-commonjs" "^17.0.0"
-    "@rollup/plugin-inject" "^4.0.2"
-    "@rollup/plugin-json" "^4.1.0"
-    "@rollup/plugin-node-resolve" "^11.0.1"
-    "@rollup/plugin-replace" "^2.3.4"
-    "@rollup/plugin-url" "^6.0.0"
-    "@svgr/rollup" "^5.5.0"
-    autoprefixer "9.0.0"
-    chalk "^4.1.0"
-    chokidar "^3.4.3"
-    commander "^6.2.1"
-    download-git-repo "^3.0.2"
-    dumi "^1.1.4"
-    gulp-if "^3.0.0"
-    gulp-sass "^4.1.0"
-    gulp-typescript "5.0.1"
-    inquirer "^8.0.0"
-    lodash "^4.17.20"
-    ora "^5.4.1"
-    rollup "^2.35.1"
-    rollup-plugin-babel "^4.4.0"
-    rollup-plugin-commonjs "^10.1.0"
-    rollup-plugin-inject "^3.0.2"
-    rollup-plugin-json "^4.0.0"
-    rollup-plugin-node-builtins "^2.1.2"
-    rollup-plugin-node-globals "^1.4.0"
-    rollup-plugin-postcss "^4.0.0"
-    rollup-plugin-replace "^2.2.0"
-    rollup-plugin-terser "^7.0.2"
-    rollup-plugin-typescript2 "0.30.0"
-    shelljs "^0.8.4"
-    temp-dir "^2.0.0"
-    through2 "^4.0.2"
-    typescript "4.2.4"
-    vinyl-fs "^3.0.3"
-
 "@tms/upload-js-sdk@0.1.7-beta2":
   version "0.1.7-beta2"
   resolved "http://npm.taimei.com:80/@tms%2fupload-js-sdk/-/upload-js-sdk-0.1.7-beta2.tgz#8c0e98e14678452f1d9a03d0e589ec04bf7e0358"
@@ -2938,10 +2893,19 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@17.0.9", "@types/react@>=16.8.6", "@types/react@>=16.9.0", "@types/react@^16", "@types/react@^16.9.43", "@types/react@^17.0.0":
+"@types/react@*", "@types/react@>=16.8.6", "@types/react@>=16.9.0", "@types/react@^17.0.0":
   version "17.0.9"
   resolved "http://npm.taimei.com:80/@types%2freact/-/react-17.0.9.tgz#1147fb520024a62c9b3841f5cb4db89b73ddb87f"
   integrity sha1-EUf7UgAkpiybOEH1y024m3PduH8=
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16", "@types/react@^16.9.43":
+  version "16.14.21"
+  resolved "http://npm.taimei.com:80/@types%2freact/-/react-16.14.21.tgz#35199b21a278355ec7a3c40003bd6a334bd4ae4a"
+  integrity sha1-NRmbIaJ4NV7Ho8QAA71qM0vUrko=
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -5398,7 +5362,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.3:
+create-react-class@15.x, create-react-class@^15.5.3:
   version "15.7.0"
   resolved "http://npm.taimei.com:80/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
   integrity sha1-dJnXyi5pu1HRP69ZvQTwxlodbB4=
@@ -9877,6 +9841,11 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
+lodash-es@^4.17.15:
+  version "4.17.21"
+  resolved "http://npm.taimei.com:80/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha1-Q+YmxG5lkbd1C+srUBFzkMYJ4+4=
+
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "http://npm.taimei.com:80/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
@@ -9962,7 +9931,7 @@ lodash.uniq@^4.5.0:
   resolved "http://npm.taimei.com:80/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.x, lodash@^4.0.0, lodash@^4.16.5, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.10:
+lodash@4.x, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.16.5, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.10:
   version "4.17.21"
   resolved "http://npm.taimei.com:80/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
@@ -10155,6 +10124,11 @@ markdown-table@^2.0.0:
   integrity sha1-GUqQztJtMf51PYuUNEMCFMARhls=
   dependencies:
     repeat-string "^1.0.0"
+
+material-colors@^1.2.1:
+  version "1.2.6"
+  resolved "http://npm.taimei.com:80/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
+  integrity sha1-bRlYhxEmmSzuzHL0vMTY8BCGX0Y=
 
 mathjax-full@^3.0.0:
   version "3.1.4"
@@ -10641,7 +10615,7 @@ modify-values@^1.0.0:
   resolved "http://npm.taimei.com:80/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   integrity sha1-s5OfpgVUZHTj4+PGPWS9Q7TuYCI=
 
-moment@2.x, moment@^2.24.0:
+moment@2.x, moment@^2.24.0, moment@^2.29.1:
   version "2.29.1"
   resolved "http://npm.taimei.com:80/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha1-sr52n6MZQL6e7qZGnAdeNQBvo9M=
@@ -12754,7 +12728,7 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
-rc-align@^2.4.0, rc-align@^2.4.1:
+rc-align@2.x, rc-align@^2.4.0, rc-align@^2.4.1:
   version "2.4.5"
   resolved "http://npm.taimei.com:80/rc-align/-/rc-align-2.4.5.tgz#c941a586f59d1017f23a428f0b468663fb7102ab"
   integrity sha1-yUGlhvWdEBfyOkKPC0aGY/txAqs=
@@ -12846,6 +12820,17 @@ rc-collapse@~1.11.3:
     react-is "^16.7.0"
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
+
+rc-color-picker@^1.2.6:
+  version "1.2.6"
+  resolved "http://npm.taimei.com:80/rc-color-picker/-/rc-color-picker-1.2.6.tgz#6cd516e46c6dd6f60a192590e1dc6080032b246d"
+  integrity sha1-bNUW5Gxt1vYKGSWQ4dxggAMrJG0=
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.5.8"
+    rc-trigger "1.x"
+    rc-util "^4.0.2"
+    tinycolor2 "^1.4.1"
 
 rc-dialog@~7.6.0:
   version "7.6.1"
@@ -13209,6 +13194,18 @@ rc-tree@~2.1.0:
     react-lifecycles-compat "^3.0.4"
     warning "^4.0.3"
 
+rc-trigger@1.x:
+  version "1.11.5"
+  resolved "http://npm.taimei.com:80/rc-trigger/-/rc-trigger-1.11.5.tgz#f88f9f84e0e79f8e0ef1c8d1bf8ac2208b715620"
+  integrity sha1-+I+fhODnn44O8cjRv4rCIItxViA=
+  dependencies:
+    babel-runtime "6.x"
+    create-react-class "15.x"
+    prop-types "15.x"
+    rc-align "2.x"
+    rc-animate "2.x"
+    rc-util "4.x"
+
 rc-trigger@^2.2.0, rc-trigger@^2.2.2, rc-trigger@^2.3.0, rc-trigger@^2.5.1, rc-trigger@^2.5.4, rc-trigger@^2.6.2:
   version "2.6.5"
   resolved "http://npm.taimei.com:80/rc-trigger/-/rc-trigger-2.6.5.tgz#140a857cf28bd0fa01b9aecb1e26a50a700e9885"
@@ -13256,7 +13253,7 @@ rc-upload@~2.9.1:
     prop-types "^15.5.7"
     warning "4.x"
 
-rc-util@^4.0.4, rc-util@^4.1.1, rc-util@^4.13.0, rc-util@^4.15.3, rc-util@^4.15.7, rc-util@^4.16.1, rc-util@^4.3.0, rc-util@^4.4.0, rc-util@^4.5.0, rc-util@^4.5.1, rc-util@^4.6.0:
+rc-util@4.x, rc-util@^4.0.2, rc-util@^4.0.4, rc-util@^4.1.1, rc-util@^4.13.0, rc-util@^4.15.3, rc-util@^4.15.7, rc-util@^4.16.1, rc-util@^4.3.0, rc-util@^4.4.0, rc-util@^4.5.0, rc-util@^4.5.1, rc-util@^4.6.0:
   version "4.21.1"
   resolved "http://npm.taimei.com:80/rc-util/-/rc-util-4.21.1.tgz#88602d0c3185020aa1053d9a1e70eac161becb05"
   integrity sha1-iGAtDDGFAgqhBT2aHnDqwWG+ywU=
@@ -13280,6 +13277,19 @@ react-attr-converter@^0.3.1:
   version "0.3.1"
   resolved "http://npm.taimei.com:80/react-attr-converter/-/react-attr-converter-0.3.1.tgz#4a2abf6d907b7ddae4d862dfec80e489ce41ad6e"
   integrity sha1-Siq/bZB7fdrk2GLf7IDkic5BrW4=
+
+react-color@^2.19.3:
+  version "2.19.3"
+  resolved "http://npm.taimei.com:80/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
+  integrity sha1-7GxrRWgxKjxqGEIKsEcuFGqlaD0=
+  dependencies:
+    "@icons/material" "^0.2.4"
+    lodash "^4.17.15"
+    lodash-es "^4.17.15"
+    material-colors "^1.2.1"
+    prop-types "^15.5.10"
+    reactcss "^1.2.0"
+    tinycolor2 "^1.4.1"
 
 react-docgen-typescript@^1.20.5:
   version "1.22.0"
@@ -13439,6 +13449,13 @@ react@>=16.8.6:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+reactcss@^1.2.0:
+  version "1.2.3"
+  resolved "http://npm.taimei.com:80/reactcss/-/reactcss-1.2.3.tgz#c00013875e557b1cf0dfd9a368a1c3dab3b548dd"
+  integrity sha1-wAATh15Vexzw39mjaKHD2rO1SN0=
+  dependencies:
+    lodash "^4.0.1"
 
 read-cmd-shim@^1.0.1:
   version "1.0.5"
