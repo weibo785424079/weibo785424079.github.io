@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { Modal } from 'antd';
 import { ModalProps } from 'antd/es/modal';
 import useImmutable from '../useImmutable';
+import usePersistFn from '../usePersistFn';
 import 'antd/lib/modal/style/css';
 
 export interface IUseModal extends ModalProps {}
@@ -9,26 +10,49 @@ export interface IUseModal extends ModalProps {}
 export interface IuseModalReturn<T, K> {
   show: (modalData?: K, childData?: T) => () => void;
   hide: () => void;
+  contextState: Record<string, any>;
+  setContextState: (...args: any[]) => any;
   visible: boolean;
   RenderModal: any;
-  customref: {
+  contextRef: {
     current: any;
   };
 }
 
-function useModal<T = any, K = IUseModal>(options: IUseModal = {}, debug?: boolean): IuseModalReturn<T, K> {
+function useRefModal<T = any, K = IUseModal>(options: IUseModal = {}): IuseModalReturn<T, K> {
   const [visible, setVisible] = useState(false);
-  const childRef = useRef<T>(null);
+  const [contextState, setData] = useState({});
 
+  // 模态框子组件参数传递
+  const childRef = useRef<any>(null);
+
+  // 模态框配置参数
   const optionsRef = useRef(options);
   optionsRef.current = options;
 
+  // 上下文状态管理
+  const contextStateRef = useRef(contextState);
+  contextStateRef.current = contextState;
+
+  // 模态框配置数据
   const modalDataRef = useRef({});
 
+  // 模态框是否可见
   const visibleRef = useRef(visible);
   visibleRef.current = visible;
 
-  const customref = useRef();
+  const contextRef = useRef();
+
+  const setContextState = usePersistFn((obj, isClear?: boolean) => {
+    if (isClear) {
+      setData({});
+      return;
+    }
+    setData({
+      ...contextState,
+      ...(obj || {})
+    });
+  });
 
   const hide = useCallback(() => setVisible(false), []);
 
@@ -40,9 +64,12 @@ function useModal<T = any, K = IUseModal>(options: IUseModal = {}, debug?: boole
   }, []);
 
   const RenderModal = useImmutable(({ children, ...rest }) => {
-    if (!visibleRef.current) {
-      return null;
-    }
+    const afterClose = usePersistFn(() => {
+      setContextState({}, true);
+      if (typeof rest.afterClose === 'function') {
+        rest.afterClose();
+      }
+    });
     const props = {
       destroyOnClose: true,
       onCancel: hide,
@@ -53,27 +80,40 @@ function useModal<T = any, K = IUseModal>(options: IUseModal = {}, debug?: boole
       maskClosable: false,
       visible: visibleRef.current,
       ...rest,
+      afterClose,
       ...optionsRef.current,
       ...modalDataRef.current
     };
-    // 自定注入customRef
+    const ctx = {
+      ...(childRef.current || {}),
+      contextState: contextStateRef.current,
+      setContextState,
+      contextRef
+    };
+    // // 自动注入contextRef
     if (props.footer && typeof props.footer !== 'string') {
-      props.footer = React.cloneElement(props.footer as any, {
-        customref
-      });
+      // @ts-ignore
+      if (typeof props.footer.type !== 'string') {
+        props.footer = React.cloneElement(props.footer as any, {
+          ...ctx
+        });
+      }
     }
-    // 自定注入customRef
+    // 自动注入contextRef
     if (props.title && typeof props.title !== 'string') {
-      props.title = React.cloneElement(props.title as any, {
-        customref
-      });
+      // @ts-ignore
+      if (typeof props.title.type !== 'string') {
+        props.title = React.cloneElement(props.title as any, {
+          ...ctx
+        });
+      }
     }
-    if (debug) {
-      console.log('RenderModal props => ', props);
-    }
+
     const childProps = {
       ...(childRef.current || {}),
-      customref
+      contextState: contextStateRef.current,
+      setContextState,
+      contextRef
     };
     let node: any;
     if (typeof children === 'string') {
@@ -81,7 +121,15 @@ function useModal<T = any, K = IUseModal>(options: IUseModal = {}, debug?: boole
     } else if (typeof children === 'function') {
       node = children(childProps);
     } else {
-      node = React.cloneElement(children, childProps);
+      // eslint-disable-next-line no-lonely-if
+      if (typeof children.type !== 'string') {
+        node = React.cloneElement(children, childProps);
+      } else {
+        node = React.cloneElement(children, {
+          ...(childRef.current || {}),
+          contextRef
+        });
+      }
     }
     return <Modal {...props}>{node}</Modal>;
   });
@@ -91,8 +139,10 @@ function useModal<T = any, K = IUseModal>(options: IUseModal = {}, debug?: boole
     show,
     visible,
     RenderModal,
-    customref
+    contextState,
+    setContextState,
+    contextRef
   };
 }
 
-export default useModal;
+export default useRefModal;

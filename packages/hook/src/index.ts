@@ -5,6 +5,7 @@ import { useDocumentVisibility, useDocumentShow } from './useDocumentVisibility'
 import useEventListener from './useEventListener';
 import useImmutable from './useImmutable';
 import useModal, { createUseComponent } from './useModal';
+import useRefModal from './useRefModal';
 import useMount from './useMount';
 import usePersistFn from './usePersistFn';
 import useQueryString from './useQueryString';
@@ -28,6 +29,7 @@ export {
   useDocumentVisibility,
   useDocumentShow,
   useImmutable,
+  useRefModal,
   useModal,
   createUseComponent,
   useMount,
