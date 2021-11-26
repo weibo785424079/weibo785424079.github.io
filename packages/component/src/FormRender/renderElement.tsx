@@ -48,6 +48,7 @@ const renderElement: React.FC<IRenderElementProps> = memo(({ form, element, sche
   const pickRules: { rules: ValidationRule[] } = rulesRequired(element.rules, element);
   const formItemProps = {
     // ...(schema.marginBottom ? { style: { marginBottom: schema.marginBottom } } : {}),
+    ...(schema.formItemProps || {}),
     ...(schema.marginBottom
       ? { style: { marginBottom: schema.marginBottom, ...(element.style || {}) } }
       : element.style || {}),
@@ -61,9 +62,6 @@ const renderElement: React.FC<IRenderElementProps> = memo(({ form, element, sche
     Comp = element.widget;
   } else {
     Comp = (schema.widgets || {})[element.type as string] || widgets[element.type as string];
-    // if (element.childType) {
-    //     Comp = Comp ? Comp[element.childType] : null;
-    // }
   }
 
   const handleChange = usePersistFn((val) => {

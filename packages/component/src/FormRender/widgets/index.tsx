@@ -15,15 +15,12 @@ import Color from './antd/Color';
 import UrlInput from './antd/UrlInput';
 import Editor from '../../FormEditor';
 import Upload from '../../FormUpload';
-import { asyncComponent } from './asyncComponent';
 
 import 'antd/es/input/style/index';
 import 'antd/es/rate/style/index';
 import 'antd/es/input-number/style/index';
 import 'antd/es/slider/style/index';
 import 'antd/es/tree-select/style/index';
-
-// const Color = asyncComponent(() => import('./antd/Color'));
 
 // 组件列表
 const widgets = {

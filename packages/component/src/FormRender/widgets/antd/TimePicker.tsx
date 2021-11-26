@@ -3,7 +3,6 @@
 import React from 'react';
 import moment from 'moment';
 import { TimePicker } from 'antd';
-import { usePersistFn } from '@tms/site-hook';
 import { getFormat } from '../../utils';
 
 const Component = ({ onChange, format, value, style, element, ...rest }, ref) => {

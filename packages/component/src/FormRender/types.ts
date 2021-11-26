@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react';
-import { Form } from 'antd';
+import React from 'react';
 import { FormProps, FormItemProps } from 'antd/es/form';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { WrappedFormUtils } from 'antd/es/form/Form';
@@ -40,7 +39,6 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   widget?: React.ReactNode;
   type?: string;
   rules?: string;
-  // childType?: string,
   initialValue?: any;
   valuePropName?: string;
   name: string; // 显示的字段名

@@ -109,21 +109,6 @@ const FormRender = React.memo(
 
 type OmitFormRender = Omit<IFormRender, 'form'>;
 
-// const useFormRender =
-//   ({ name }: { name?: string }) =>
-//   (obj: OmitFormRender) => {
-//     const Comp = React.useRef(
-//       Form.create<IFormRender>({
-//         name: name || `${new Date().getTime()}_${Math.random()}`,
-//         onValuesChange(props: IFormRender, changedValues, allValues) {
-//           if (typeof props?.onValuesChange === 'function') {
-//             props.onValuesChange(changedValues, allValues);
-//           }
-//         }
-//       })(FCForm)
-//     );
-//     return <Comp.current {...obj} />;
-//   };
 const useFormRender = ({ name }: { name?: string }) =>
   useImmutable((obj: OmitFormRender) => {
     const Comp = useImmutable(

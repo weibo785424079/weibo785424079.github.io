@@ -5,6 +5,8 @@ import FormEditor from './FormEditor';
 
 export * from './FormRender';
 
+export * from './ButtonList';
+
 export * from './Table';
 
 export { FormBuilder, Operations, FormUpload, getValueFromEvent, FormEditor };

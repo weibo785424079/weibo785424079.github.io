@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { Input } from 'antd';
-import { usePersistFn } from '@tms/site-hook';
 import { isUrl } from '../../utils';
 
 const TestNode = ({ value }) => {
