@@ -5,8 +5,6 @@ import useImmutable from '../useImmutable';
 import usePersistFn from '../usePersistFn';
 import 'antd/lib/modal/style/css';
 
-interface IUseModal extends ModalProps {}
-
 // export interface IUseRefModal<CS = Record<string, any>, CR = any> {
 //   contextState: CS;
 //   setContextState: (...args: any) => void;
@@ -17,7 +15,7 @@ interface IUseModal extends ModalProps {}
 
 export interface IUseRefModal<T = any, CS = Record<string, any>, CR = any> {
   hide: () => void;
-  show: (childData?: T, modalData?: IUseModal) => () => void;
+  show: (childData?: T, modalData?: ModalProps) => () => void;
   visible: boolean;
   RenderModal: any;
   contextState: CS;
@@ -27,7 +25,7 @@ export interface IUseRefModal<T = any, CS = Record<string, any>, CR = any> {
   };
 }
 
-function useRefModal<T = any, CS = Record<string, any>, CR = any, M = IUseModal>(options: IUseModal = {}) {
+function useRefModal<T = any, CS = Record<string, any>, CR = any, M = ModalProps>(options: ModalProps = {}) {
   const [visible, setVisible] = useState(false);
   // @ts-ignore
   const [contextState, setContextStateData] = useState<CS>({});

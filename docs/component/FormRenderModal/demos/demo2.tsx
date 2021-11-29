@@ -19,17 +19,17 @@ export default () => {
   );
   const onClickComp = useCallback(() => {
     console.log(modalRef.current);
-    // modalRef.current.show(
-    //   {},
-    //   {
-    //     title: '标题',
-    //     onOk() {
-    //       console.log(modalRef);
-    //       const values = modalRef.current.form.getFieldsValue();
-    //       console.log('values22', values);
-    //     }
-    //   }
-    // );
+    modalRef.current.show(
+      {},
+      {
+        title: '标题',
+        onOk() {
+          console.log(modalRef);
+          const values = modalRef.current.form.getFieldsValue();
+          console.log('values22', values);
+        }
+      }
+    );
   }, []);
 
   return (
