@@ -17,6 +17,7 @@ group:
 | meta | 渲染按钮列表数据 | 必须 | `Array<IButtonListItem>` |
 | style | 样式 | 可选 | `React.CSSProperties` |
 | className | 类名 | 可选 | `string` |
+| metaItem | 渲染按钮列表公共参数 | 可选 | `Record<string, any>` |
 
 
 ### IButtonListItem

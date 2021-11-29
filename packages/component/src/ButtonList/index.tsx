@@ -16,10 +16,21 @@ export interface IButtonListItem extends ButtonProps {
   style?: React.CSSProperties;
   render?: (children: ReactElement, item: IButtonListItem) => ReactElement;
 }
+
+export interface IButtonListProps {
+  className?: string;
+  meta: IButtonListItem[];
+  style?: React.CSSProperties;
+  metaItem?: {
+    style?: React.CSSProperties;
+    [key: string]: any;
+  };
+}
+
 const hasOwnProperty = (obj: Record<string, any>, key: string) => Object.prototype.hasOwnProperty.call(obj, key);
 
-const ButtonList = (props: { className?: string; meta: IButtonListItem[]; style?: React.CSSProperties }) => {
-  const { meta, className } = props;
+const ButtonList = (props: IButtonListProps) => {
+  const { meta, className, metaItem } = props;
 
   return (
     // eslint-disable-next-line react/destructuring-assignment
@@ -36,7 +47,7 @@ const ButtonList = (props: { className?: string; meta: IButtonListItem[]; style?
         })
         .map((item, index) => {
           const { text, onClick, render, visible, onVisible, disabled = false, style, ...rest } = item;
-
+          const { style: metaItemStyle, ...metaItemRest } = metaItem || {};
           const children = (
             <Button
               disabled={disabled}
@@ -44,8 +55,10 @@ const ButtonList = (props: { className?: string; meta: IButtonListItem[]; style?
               style={{
                 marginRight: 5,
                 marginLeft: 5,
+                ...(metaItemStyle || {}),
                 ...(style || {})
               }}
+              {...metaItemRest}
               {...rest}
               onClick={() => {
                 if (disabled) {
