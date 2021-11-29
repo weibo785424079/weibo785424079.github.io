@@ -27,7 +27,7 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
     ...pickProps(schema, FormPropsPickArray),
     ...(schema.formProps || {})
   };
-  console.log('formProps', formProps);
+  // console.log('formProps', formProps);
   if (schema.debug) {
     console.log('schema => ', schema, '\n', ' form => ', form);
   }
@@ -129,7 +129,7 @@ const FormRenderSetGlobalWidgets = (widget: TNoopObject) => {
   // eslint-disable-next-line no-restricted-syntax
   for (const key in widget) {
     if (Object.prototype.hasOwnProperty.call(widget, key)) {
-      console.warn(`存已覆盖默认${key}组件`);
+      console.warn(`已覆盖默认${key}组件`);
     }
     setWidgets(key, widget[key]);
   }

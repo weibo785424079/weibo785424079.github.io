@@ -1,6 +1,6 @@
 {
   "name": "@tms/site-hook",
-  "version": "0.2.0",
+  "version": "0.2.0-alpha1",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "license": "MIT",

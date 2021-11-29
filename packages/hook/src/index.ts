@@ -20,6 +20,8 @@ import useVirtualList from './useVirtualList';
 import useWatch from './useWatch';
 import useEditor from './useWangeEditor';
 
+export * from './useRefModal';
+
 export {
   useClickAway,
   useCountDown,

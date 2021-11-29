@@ -13,8 +13,10 @@ import Cascader from './antd/Cascader';
 import Switch from './antd/Switch';
 import Color from './antd/Color';
 import UrlInput from './antd/UrlInput';
-import Editor from '../../FormEditor';
-import Upload from '../../FormUpload';
+// import Editor from '../../FormEditor';
+import Editor from './antd/Editor';
+// import Upload from '../../FormUpload';
+import Upload from './antd/Upload';
 
 import 'antd/es/input/style/index';
 import 'antd/es/rate/style/index';

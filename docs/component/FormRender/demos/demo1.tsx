@@ -28,13 +28,45 @@ export default () => {
         type: 'Upload',
         name: 'fileList',
         label: '文件上传',
-        required: true
+        required: true,
+        // eslint-disable-next-line max-len
+        initialValue: [
+          {
+            name: '004.docx',
+            status: 'done',
+            uid: 'rc-upload-1638166255221-2',
+            url: 'http://file.test.com/file/getFile?fileId=2c9489627cfd7891017d6a50ebaa509b',
+            fileId: '2c9489627cfd7891017d6a50ebaa509b',
+            fileName: '004.docx',
+            fsId: '2c9489627cfd7891017d6a50ebaa509b',
+            fileSuffix: '.docx',
+            fileSize: 14015,
+            filePath:
+              '/taimei/558f236ef19a4f559126a78c00255250/hospital/site-front-repo/2c9489627cfd7891017d6a50ebaa509b.docx'
+          }
+        ],
+        widgetProps: {
+          isDownload: false,
+          onPreview: (val) => {
+            console.log('预览', JSON.stringify(val));
+          },
+          onFilter: (val) => {
+            console.log('过滤', val);
+            return val;
+          }
+        }
       },
       {
         type: 'Editor',
         name: 'use',
         label: '显示编辑器',
-        required: true
+        required: true,
+        widgetProps: {
+          onFilter: (val) => {
+            console.log('过滤', val);
+            return val;
+          }
+        }
       },
       {
         type: 'Button',

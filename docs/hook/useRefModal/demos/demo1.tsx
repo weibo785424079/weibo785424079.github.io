@@ -6,6 +6,7 @@ export default () => {
   const { RenderModal, show, hide } = useRefModal({});
   const clickOpen = usePersistFn(() => {
     show(
+      { a: 123 },
       {
         title: (
           <div>
@@ -19,8 +20,7 @@ export default () => {
           console.log('点击确定');
           hide();
         }
-      },
-      { a: 123 }
+      }
     );
   });
 

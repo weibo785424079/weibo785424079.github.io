@@ -7,6 +7,10 @@ import { Button, Spin } from 'antd';
 import { usePersistFn, useRefModal } from '@tms/site-hook';
 // import useModal from '../index';
 
+type TContextState = {
+  loading: boolean;
+};
+
 const Child = (props) => {
   console.log('子组件', props);
   const [random, setRandom] = useState(Math.random());
@@ -15,10 +19,10 @@ const Child = (props) => {
       return random;
     }
   }));
-  const contextState = props.contextState || {};
+  const contextState: TContextState = props.contextState || {};
   return (
     <Spin spinning={contextState.loading || false}>
-      <div>child 组件 - {contextState.global}</div>
+      <div>child 组件</div>
       <div
         onClick={() => {
           setRandom(Math.random());
@@ -33,7 +37,6 @@ const Child = (props) => {
 const Footer = (props) => {
   console.log('footer', props);
   const { contextState, setContextState } = props;
-
   return (
     <Button
       type="primary"
@@ -58,11 +61,12 @@ const Footer = (props) => {
 };
 
 export default () => {
-  const { RenderModal, show, hide, setContextState } = useRefModal({});
+  const { RenderModal, show, hide, setContextState } = useRefModal<any, TContextState>({});
   const clickOpen = usePersistFn(() => {
     // 设置默认状态值
     setContextState({ loading: false });
     let close = show(
+      { a: 123 },
       {
         title: '标题',
         footer: <Footer />,
@@ -72,10 +76,10 @@ export default () => {
         onOk() {
           console.log('点击确定');
           close();
+          // @ts-ignore
           close = null;
         }
-      },
-      { a: 123 }
+      }
     );
   });
 

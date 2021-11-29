@@ -41,7 +41,7 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   rules?: string;
   initialValue?: any;
   valuePropName?: string;
-  name: string; // 显示的字段名
+  name?: string; // 显示的字段名
   enumLabels?: any[];
   enumValues?: string[]; // 枚举值需要与source进行合并进行显示,value值会进行去重
   format?: string; // 日期格式化，使用moment

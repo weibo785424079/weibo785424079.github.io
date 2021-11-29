@@ -43,7 +43,7 @@ export interface IRenderElementProps {
   onSearch?: (obj: ISchemaEventObj) => any;
   onFinish?: (obj: ISchemaEventObj) => any;
 }
-const renderElement: React.FC<IRenderElementProps> = memo(({ form, element, schema, onFinish, onSearch }) => {
+const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderElementProps): any => {
   const { getFieldDecorator } = form;
   const pickRules: { rules: ValidationRule[] } = rulesRequired(element.rules, element);
   const formItemProps = {
@@ -95,7 +95,7 @@ const renderElement: React.FC<IRenderElementProps> = memo(({ form, element, sche
   const renderJsx = usePersistFn(() => {
     if (!Comp) {
       console.warn('组件未渲染成功', element);
-      return null;
+      return <></>;
     }
     let compProps: any = {
       element,
@@ -155,7 +155,7 @@ const renderElement: React.FC<IRenderElementProps> = memo(({ form, element, sche
     ) {
       return renderJsx();
     }
-    return null;
+    return <></>;
   }
   if (typeof element.render === 'function') {
     return renderFunction();
@@ -232,6 +232,6 @@ const renderElement: React.FC<IRenderElementProps> = memo(({ form, element, sche
     );
   }
   return renderJsx();
-});
+};
 
 export default renderElement;

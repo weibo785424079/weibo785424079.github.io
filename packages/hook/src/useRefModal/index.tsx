@@ -5,50 +5,59 @@ import useImmutable from '../useImmutable';
 import usePersistFn from '../usePersistFn';
 import 'antd/lib/modal/style/css';
 
-export interface IUseModal extends ModalProps {}
+interface IUseModal extends ModalProps {}
 
-export interface IuseModalReturn<T, K> {
-  show: (modalData?: K, childData?: T) => () => void;
+// export interface IUseRefModal<CS = Record<string, any>, CR = any> {
+//   contextState: CS;
+//   setContextState: (...args: any) => void;
+//   contextRef: {
+//     current: CR;
+//   };
+// }
+
+export interface IUseRefModal<T = any, CS = Record<string, any>, CR = any> {
   hide: () => void;
-  contextState: Record<string, any>;
-  setContextState: (...args: any[]) => any;
+  show: (childData?: T, modalData?: IUseModal) => () => void;
   visible: boolean;
   RenderModal: any;
+  contextState: CS;
+  setContextState: (...args: any) => void;
   contextRef: {
-    current: any;
+    current: CR;
   };
 }
 
-function useRefModal<T = any, K = IUseModal>(options: IUseModal = {}): IuseModalReturn<T, K> {
+function useRefModal<T = any, CS = Record<string, any>, CR = any, M = IUseModal>(options: IUseModal = {}) {
   const [visible, setVisible] = useState(false);
-  const [contextState, setData] = useState({});
+  // @ts-ignore
+  const [contextState, setContextStateData] = useState<CS>({});
 
   // 模态框子组件参数传递
-  const childRef = useRef<any>(null);
+  const childRef = useRef<T>(null);
 
   // 模态框配置参数
   const optionsRef = useRef(options);
   optionsRef.current = options;
+  const modalDataRef = useRef<M>();
 
   // 上下文状态管理
-  const contextStateRef = useRef(contextState);
+  const contextStateRef = useRef<CS>(contextState);
   contextStateRef.current = contextState;
-
-  // 模态框配置数据
-  const modalDataRef = useRef({});
 
   // 模态框是否可见
   const visibleRef = useRef(visible);
   visibleRef.current = visible;
 
-  const contextRef = useRef();
+  // 在footer、title、content组件注入ref，方便组件通讯
+  const contextRef = useRef<CR>();
 
   const setContextState = usePersistFn((obj, isClear?: boolean) => {
     if (isClear) {
-      setData({});
+      // @ts-ignore
+      setContextStateData({});
       return;
     }
-    setData({
+    setContextStateData({
       ...contextState,
       ...(obj || {})
     });
@@ -56,8 +65,10 @@ function useRefModal<T = any, K = IUseModal>(options: IUseModal = {}): IuseModal
 
   const hide = useCallback(() => setVisible(false), []);
 
-  const show = useCallback((modalData?: K, childData?: T) => {
-    childRef.current = childData || ({} as T);
+  const show = useCallback((childData?: T, modalData?: M): ((...args: any[]) => void) => {
+    // @ts-ignore
+    childRef.current = childData || {};
+    // @ts-ignore
     modalDataRef.current = modalData || {};
     setVisible(true);
     return hide;
@@ -73,16 +84,16 @@ function useRefModal<T = any, K = IUseModal>(options: IUseModal = {}): IuseModal
     const props = {
       destroyOnClose: true,
       onCancel: hide,
-      onOk: hide,
+      // onOk: hide,
       cancelText: '取消',
       onText: '确定',
       keyboard: false,
       maskClosable: false,
       visible: visibleRef.current,
       ...rest,
-      afterClose,
       ...optionsRef.current,
-      ...modalDataRef.current
+      ...modalDataRef.current,
+      afterClose
     };
     const ctx = {
       ...(childRef.current || {}),
@@ -90,7 +101,7 @@ function useRefModal<T = any, K = IUseModal>(options: IUseModal = {}): IuseModal
       setContextState,
       contextRef
     };
-    // // 自动注入contextRef
+    // // footer自动注入contextRef
     if (props.footer && typeof props.footer !== 'string') {
       // @ts-ignore
       if (typeof props.footer.type !== 'string') {
@@ -99,7 +110,7 @@ function useRefModal<T = any, K = IUseModal>(options: IUseModal = {}): IuseModal
         });
       }
     }
-    // 自动注入contextRef
+    // title自动注入contextRef
     if (props.title && typeof props.title !== 'string') {
       // @ts-ignore
       if (typeof props.title.type !== 'string') {
