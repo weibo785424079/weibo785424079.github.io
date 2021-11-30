@@ -11,6 +11,10 @@ import { FormPropsPickArray, pickProps } from './helper';
 import RenderElement from './renderElement';
 import { createBaseWidget } from './widgets/createBaseWidget';
 
+import 'antd/es/col/style/index';
+import 'antd/es/row/style/index';
+import 'antd/es/form/style/index';
+
 export * from './types';
 
 const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {

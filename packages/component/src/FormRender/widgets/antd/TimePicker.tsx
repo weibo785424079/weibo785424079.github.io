@@ -5,6 +5,8 @@ import moment from 'moment';
 import { TimePicker } from 'antd';
 import { getFormat } from '../../utils';
 
+import 'antd/es/time-picker/style/index';
+
 const Component = ({ onChange, format, value, style, element, ...rest }, ref) => {
   const timeFormat = getFormat(format);
   const timeValue = value ? moment(value, timeFormat) : undefined;

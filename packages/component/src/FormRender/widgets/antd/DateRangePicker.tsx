@@ -5,6 +5,8 @@ import { DatePicker } from 'antd';
 import moment from 'moment';
 import { getFormat } from '../../utils';
 
+import 'antd/es/date-picker/style/index';
+
 const { RangePicker } = DatePicker;
 
 const Component = ({ onChange, format, value, style, element, ...rest }, ref) => {

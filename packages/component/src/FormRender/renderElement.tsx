@@ -7,6 +7,8 @@ import widgets from './widgets';
 import { pickProps, FormItemPropsPickArray, isFunction, hasOwnProperty, defaultGetValueFromEvent } from './helper';
 import { IFormSchemaMetaItem, IFormSchema, IFormSourceItem, ISchemaEventObj } from './types';
 
+import 'antd/es/button/style/index';
+
 const rulesRequired = (rules, element) => {
   if (!Array.isArray(rules) || rules.length <= 0) {
     if (element.required) {
@@ -94,7 +96,7 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
   });
   const renderJsx = usePersistFn(() => {
     if (!Comp) {
-      console.warn('组件未渲染成功', element);
+      // console.warn('组件未渲染成功', element);
       return <></>;
     }
     let compProps: any = {
@@ -130,15 +132,15 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
         compProps = result;
       }
     }
-
-    if (!element.name) {
+    const elementName = element.name || '';
+    if (!elementName) {
       console.log(`name字段未传`, element);
     }
 
     return (
       <Form.Item {...formItemProps}>
-        {getFieldDecorator(element.name, {
-          initialValue: element.initialValue || undefined,
+        {getFieldDecorator(elementName, {
+          initialValue: hasOwnProperty(element, 'initialValue') ? element.initialValue : undefined,
           rules: pickRules.rules
         })(<Comp {...compProps}>{element.children}</Comp>)}
       </Form.Item>

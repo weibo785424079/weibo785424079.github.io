@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-danger */
 import React from 'react';
 import { Checkbox } from 'antd';
-/* eslint-disable react/no-danger */
-// import { usePersistFn } from '@tms/site-hook';
+
+import 'antd/es/checkbox/style/index';
 
 const Component = ({ onChange, value, element, widgetChildProps, style, source, ...rest }, ref) => {
   const checkboxProps = {
