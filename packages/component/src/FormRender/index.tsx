@@ -43,20 +43,39 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
     elements = elements.filter(Boolean); // 过滤不渲染的元素
     const rows: ReactElement[] = [];
     const colspan = 24 / column;
-    for (let i = 0; i < elements.length; i += column) {
+    for (let i = 0; i < elements.length; ) {
       const cols: ReactElement[] = [];
-      for (let j = 0; j < column; j += 1) {
-        cols.push(
-          <Col key={j} span={colspan} {...(schema.ColProps || {})}>
-            {elements[i + j] as any}
-          </Col>
+      const element = elements[i];
+      if (Array.isArray(element.children) && element.children) {
+        const { children, ColProps, RowProps } = element;
+        children.forEach((item, index) => {
+          cols.push(
+            <Col key={(i + index) as string} {...(ColProps || {})}>
+              {elementFun(item, index, element)}
+            </Col>
+          );
+        });
+        rows.push(
+          <Row key={i} {...(RowProps || {})}>
+            {cols}
+          </Row>
         );
+        i += 1;
+      } else {
+        for (let j = 0; j < column; j += 1) {
+          cols.push(
+            <Col key={j} span={colspan} {...(schema.ColProps || {})}>
+              {elements[i + j] as any}
+            </Col>
+          );
+        }
+        rows.push(
+          <Row key={i} gutter={gutter} {...(schema.RowProps || {})}>
+            {cols}
+          </Row>
+        );
+        i += column;
       }
-      rows.push(
-        <Row key={i} gutter={gutter} {...(schema.RowProps || {})}>
-          {cols}
-        </Row>
-      );
     }
     return rows;
   });
@@ -70,30 +89,38 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
       form.resetFields();
     };
   }, []);
+
+  const elementFun = (element, index, schemaObj) => {
+    if (Array.isArray(element.children)) {
+      return element;
+    }
+    const key = element.key || element.name || index;
+    const ElementEl = (
+      <RenderElement onFinish={onFinish} onSearch={onSearch} form={form} element={element} schema={schemaObj} />
+    );
+    // 一行展示多列数据，display: 显示隐藏占空间
+    if (element.display) {
+      return (
+        <div key={key} style={{ display: element.display }}>
+          {ElementEl}
+        </div>
+      );
+    }
+    if (Object.prototype.hasOwnProperty.call(element, 'visible')) {
+      if (element.visible) {
+        return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
+      }
+      return null;
+    }
+
+    return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
+  };
+
   return (
     <Form {...formProps}>
       {renderRowLayout(
-        meta.map((element, index) => {
-          const key = element.key || element.name || index;
-          const ElementEl = (
-            <RenderElement onFinish={onFinish} onSearch={onSearch} form={form} element={element} schema={schema} />
-          );
-          // 一行展示多列数据，display: 显示隐藏占空间
-          if (element.display) {
-            return (
-              <div key={key} style={{ display: element.display }}>
-                {ElementEl}
-              </div>
-            );
-          }
-          if (Object.prototype.hasOwnProperty.call(element, 'visible')) {
-            if (element.visible) {
-              return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
-            }
-            return null;
-          }
-
-          return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
+        meta.map((item, index) => {
+          return elementFun(item, index, schema);
         })
       )}
     </Form>

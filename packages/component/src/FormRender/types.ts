@@ -57,7 +57,9 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
   visible?: boolean;
-  children?: React.ReactNode;
+  children?: React.ReactNode | IFormSchemaMetaItem[];
+  RowProps?: RowProps;
+  ColProps?: ColProps;
   onChange?: (
     a: any,
     obj: {
@@ -93,7 +95,7 @@ export interface IFormSchema extends FormProps {
   marginBottom?: string | number;
   column?: number;
   gutter?: Gutter | [Gutter, Gutter]; // 表单数据间距
-  formItemProps?: Record<string, any>;
+  formItemProps?: FormItemProps;
   RowProps?: RowProps; // column > 1
   ColProps?: ColProps; // column > 1
   widgets?: TNoopObject;

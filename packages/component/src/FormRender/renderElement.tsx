@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Button } from 'antd';
@@ -168,70 +169,71 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
   if (element.type === 'Button') {
     return (
       <Form.Item {...formItemProps}>
-        {(element.buttonMeta || []).map((item, index: number) => {
-          const { children, btnType, render, onClick, ...rest } = item;
-          if (typeof render === 'function') {
-            return render.call(item, {
-              form,
-              buttonItem: item,
-              element
-            });
-          }
-          return (
-            // eslint-disable-next-line react/no-array-index-key
-            <React.Fragment key={index}>
-              <Button
-                onClick={async (e) => {
-                  e.preventDefault();
-                  const obj = { form, buttonItem: item, element, values: {} };
-                  if (btnType === 'reset') {
-                    form.resetFields();
-                    if (schema.onReset && isFunction(schema.onReset)) {
-                      schema.onReset(obj);
-                    }
-                    return;
-                  }
-                  if (btnType === 'search') {
-                    const values = form.getFieldsValue();
-                    if (onSearch) {
-                      onSearch({ ...obj, values });
+        <span {...(element.widgetProps || {})}>
+          {(element.buttonMeta || []).map((item, index: number) => {
+            const { children, btnType, render, onClick, ...rest } = item;
+            if (typeof render === 'function') {
+              return render.call(item, {
+                form,
+                buttonItem: item,
+                element
+              });
+            }
+            return (
+              <React.Fragment key={index}>
+                <Button
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    const obj = { form, buttonItem: item, element, values: {} };
+                    if (btnType === 'reset') {
+                      form.resetFields();
+                      if (schema.onReset && isFunction(schema.onReset)) {
+                        schema.onReset(obj);
+                      }
                       return;
                     }
-                    if (schema.onSearch) {
-                      schema.onSearch({ ...obj, values });
-                    }
-                    return;
-                  }
-                  if (btnType === 'submit') {
-                    try {
-                      const values = await form.validateFieldsAndScroll();
-                      if (onFinish) {
-                        onFinish({ ...obj, values });
+                    if (btnType === 'search') {
+                      const values = form.getFieldsValue();
+                      if (onSearch) {
+                        onSearch({ ...obj, values });
                         return;
                       }
-                      if (schema.onFinish) {
-                        schema.onFinish({ ...obj, values });
-                        return;
+                      if (schema.onSearch) {
+                        schema.onSearch({ ...obj, values });
                       }
-                      if (onClick) {
-                        onClick(obj);
-                      }
-                    } catch (error) {
-                      console.log(error);
+                      return;
                     }
-                    return;
-                  }
-                  if (onClick) {
-                    onClick(obj);
-                  }
-                }}
-                {...rest}
-              >
-                {children}
-              </Button>
-            </React.Fragment>
-          );
-        })}
+                    if (btnType === 'submit') {
+                      try {
+                        const values = await form.validateFieldsAndScroll();
+                        if (onFinish) {
+                          onFinish({ ...obj, values });
+                          return;
+                        }
+                        if (schema.onFinish) {
+                          schema.onFinish({ ...obj, values });
+                          return;
+                        }
+                        if (onClick) {
+                          onClick(obj);
+                        }
+                      } catch (error) {
+                        console.log(error);
+                      }
+                      return;
+                    }
+                    if (onClick) {
+                      onClick(obj);
+                    }
+                  }}
+                  {...rest}
+                >
+                  {children}
+                </Button>
+              </React.Fragment>
+            );
+          })}
+        </span>
       </Form.Item>
     );
   }
