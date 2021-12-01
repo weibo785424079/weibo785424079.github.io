@@ -21,7 +21,7 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
   const { form, formRef, onFinish, onSearch, schema } = props;
   const { column = 1, meta, gutter = 0 } = schema;
   if (!meta) {
-    console.warn('未配置schema meta');
+    console.warn('未配置schema meta参数');
     return null;
   }
   useImperativeHandle(formRef || ref, () => ({

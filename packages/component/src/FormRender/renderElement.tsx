@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { memo } from 'react';
+import React from 'react';
 import { Form, Button } from 'antd';
 import { ValidationRule, WrappedFormUtils } from 'antd/es/form/Form';
 import { usePersistFn } from '@tms/site-hook';
@@ -49,13 +49,15 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
   const { getFieldDecorator } = form;
   const pickRules: { rules: ValidationRule[] } = rulesRequired(element.rules, element);
   const formItemProps = {
-    // ...(schema.marginBottom ? { style: { marginBottom: schema.marginBottom } } : {}),
     ...(schema.formItemProps || {}),
-    ...(schema.marginBottom
-      ? { style: { marginBottom: schema.marginBottom, ...(element.style || {}) } }
-      : element.style || {}),
-    ...pickProps(element, FormItemPropsPickArray),
-    ...(element.formItemProps || {})
+    ...(element.formItemProps || {}),
+    style: {
+      ...(hasOwnProperty(schema, 'marginBottom') ? { marginBottom: schema.marginBottom } : {}),
+      ...((schema.formItemProps || {}).style || {}),
+      ...(element.style || {}),
+      ...((element.formItemProps || {}).style || {})
+    },
+    ...pickProps(element, FormItemPropsPickArray)
   };
   // 优先使用本地传递的组件进行覆盖, 没有再查找系统自带功能
   let Comp: any;
