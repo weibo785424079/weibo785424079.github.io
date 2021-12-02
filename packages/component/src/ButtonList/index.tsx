@@ -11,7 +11,7 @@ export interface IButtonListItem extends ButtonProps {
   key?: string;
   onClick?: (...args: any[]) => void;
   visible?: boolean;
-  onVisible?: (...args: any[]) => void;
+  onVisible?: (obj: IButtonListItem) => boolean;
   disabled?: boolean;
   style?: React.CSSProperties;
   render?: (children: ReactElement, item: IButtonListItem) => ReactElement;

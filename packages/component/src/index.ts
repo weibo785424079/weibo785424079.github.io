@@ -7,6 +7,7 @@ export * from './FormRender';
 export * from './FormRenderModal';
 
 export * from './ButtonList';
+export * from './TabsList';
 
 export * from './Table';
 
