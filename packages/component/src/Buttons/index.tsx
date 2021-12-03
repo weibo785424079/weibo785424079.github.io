@@ -6,20 +6,20 @@ import { ButtonProps } from 'antd/es/button';
 
 // 按钮列表
 
-export interface IButtonListItem extends ButtonProps {
+export interface IButtonsItem extends ButtonProps {
   text: string | ReactElement | React.ReactNode;
   key?: string;
   onClick?: (...args: any[]) => void;
   visible?: boolean;
-  onVisible?: (obj: IButtonListItem) => boolean;
+  onVisible?: (obj: IButtonsItem) => boolean;
   disabled?: boolean;
   style?: React.CSSProperties;
-  render?: (children: ReactElement, item: IButtonListItem) => ReactElement;
+  render?: (buttonsItem: IButtonsItem) => any;
 }
 
-export interface IButtonListProps {
+export interface IButtonsProps {
   className?: string;
-  meta: IButtonListItem[];
+  meta: IButtonsItem[];
   style?: React.CSSProperties;
   metaItem?: {
     style?: React.CSSProperties;
@@ -29,7 +29,7 @@ export interface IButtonListProps {
 
 const hasOwnProperty = (obj: Record<string, any>, key: string) => Object.prototype.hasOwnProperty.call(obj, key);
 
-const ButtonList = (props: IButtonListProps) => {
+const Buttons = (props: IButtonsProps) => {
   const { meta, className, metaItem } = props;
 
   return (
@@ -48,31 +48,32 @@ const ButtonList = (props: IButtonListProps) => {
         .map((item, index) => {
           const { text, onClick, render, visible, onVisible, disabled = false, style, ...rest } = item;
           const { style: metaItemStyle, ...metaItemRest } = metaItem || {};
+          const buttonProps = {
+            disabled,
+            style: {
+              marginRight: 5,
+              marginLeft: 5,
+              ...(metaItemStyle || {}),
+              ...(style || {})
+            },
+            ...metaItemRest,
+            ...rest,
+            onClick: () => {
+              if (disabled) {
+                return;
+              }
+              onClick?.();
+            }
+          };
           const children = (
-            <Button
-              disabled={disabled}
-              key={item.key || index}
-              style={{
-                marginRight: 5,
-                marginLeft: 5,
-                ...(metaItemStyle || {}),
-                ...(style || {})
-              }}
-              {...metaItemRest}
-              {...rest}
-              onClick={() => {
-                if (disabled) {
-                  return;
-                }
-                onClick?.();
-              }}
-            >
-              {text}
-            </Button>
+            <React.Fragment key={item.key || index}>
+              <Button {...buttonProps}>{text}</Button>
+            </React.Fragment>
           );
 
           if (typeof render === 'function') {
-            return render(children, item);
+            // @ts-ignore
+            return <React.Fragment key={item.key || index}>{render(buttonProps)}</React.Fragment>;
           }
           return children;
         })}
@@ -80,9 +81,9 @@ const ButtonList = (props: IButtonListProps) => {
   );
 };
 
-ButtonList.defaultProps = {
+Buttons.defaultProps = {
   className: '',
   style: {}
 };
 
-export { ButtonList };
+export { Buttons };

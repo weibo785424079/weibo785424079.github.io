@@ -6,7 +6,7 @@ import FormEditor from './FormEditor';
 export * from './FormRender';
 export * from './FormRenderModal';
 
-export * from './ButtonList';
+export * from './Buttons';
 export * from './TabsList';
 
 export * from './Table';
