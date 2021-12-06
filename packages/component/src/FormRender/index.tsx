@@ -5,6 +5,7 @@ import { FormComponentProps } from 'antd/lib/form/Form';
 import { FormProps } from 'antd/es/form';
 import { Form, Row, Col } from 'antd';
 import { usePersistFn, useImmutable } from '@tms/site-hook';
+import { WrappedFormUtils } from 'antd/es/form/Form';
 import { IFormRender, TNoopObject } from './types';
 import { setWidgets } from './widgets';
 import { FormPropsPickArray, pickProps } from './helper';
@@ -16,6 +17,10 @@ import 'antd/es/row/style/index';
 import 'antd/es/form/style/index';
 
 export * from './types';
+
+export interface IFormRenderFormRef {
+  form: WrappedFormUtils;
+}
 
 const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
   const { form, formRef, onFinish, onSearch, schema } = props;
@@ -31,13 +36,31 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
     ...pickProps(schema, FormPropsPickArray),
     ...(schema.formProps || {})
   };
-  // console.log('formProps', formProps);
   if (schema.debug) {
     console.log('schema => ', schema, '\n', ' form => ', form);
   }
   const renderRowLayout = usePersistFn((elements) => {
     if (column === 1) {
-      return elements;
+      return elements.map((element, i) => {
+        if (element && Array.isArray(element.meta)) {
+          const { ColProps, RowProps } = element;
+          const cols: ReactElement[] = [];
+          element.meta.forEach((item, index) => {
+            cols.push(
+              <Col key={(i + index) as string} {...(ColProps || {})}>
+                {elementFun(item, index, element)}
+              </Col>
+            );
+          });
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <Row key={i} {...(RowProps || {})}>
+              {cols}
+            </Row>
+          );
+        }
+        return element;
+      });
     }
     // eslint-disable-next-line no-param-reassign
     elements = elements.filter(Boolean); // 过滤不渲染的元素
@@ -46,9 +69,9 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
     for (let i = 0; i < elements.length; ) {
       const cols: ReactElement[] = [];
       const element = elements[i];
-      if (Array.isArray(element.children) && element.children) {
-        const { children, ColProps, RowProps } = element;
-        children.forEach((item, index) => {
+      if (Array.isArray(element.meta) && element.meta) {
+        const { ColProps, RowProps } = element;
+        element.meta.forEach((item, index) => {
           cols.push(
             <Col key={(i + index) as string} {...(ColProps || {})}>
               {elementFun(item, index, element)}
@@ -62,7 +85,12 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
         );
         i += 1;
       } else {
+        let tempIndex = column;
         for (let j = 0; j < column; j += 1) {
+          if (Array.isArray(elements[i + j]?.meta)) {
+            tempIndex = j;
+            break;
+          }
           cols.push(
             <Col key={j} span={colspan} {...(schema.ColProps || {})}>
               {elements[i + j] as any}
@@ -74,7 +102,7 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
             {cols}
           </Row>
         );
-        i += column;
+        i += tempIndex;
       }
     }
     return rows;
@@ -91,7 +119,7 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
   }, []);
 
   const elementFun = (element, index, schemaObj) => {
-    if (Array.isArray(element.children)) {
+    if (Array.isArray(element.meta)) {
       return element;
     }
     const key = element.key || element.name || index;

@@ -48,6 +48,9 @@ const widgets = {
   Editor,
   Upload
 };
+
+export type widgetsType = keyof typeof widgets;
+
 export const setWidgets = (key: string, val: any) => {
   widgets[key] = val;
 };

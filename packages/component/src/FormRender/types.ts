@@ -6,6 +6,7 @@ import { RowProps } from 'antd/es/row';
 import { ColProps } from 'antd/es/col';
 import { ButtonProps } from 'antd/es/button';
 import { Gutter } from 'antd/lib/grid/row';
+import { widgetsType } from './widgets';
 
 export type TNoopObject = Record<string, any>;
 export type TNoopFunction = (...args: any) => any;
@@ -37,7 +38,7 @@ export interface ISchemaEventObj {
 export interface IFormSchemaMetaItem extends FormItemProps {
   key?: string;
   widget?: React.ReactNode;
-  type?: string;
+  type?: widgetsType | 'Button';
   rules?: string;
   initialValue?: any;
   valuePropName?: string;
@@ -57,7 +58,8 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
   visible?: boolean;
-  children?: React.ReactNode | IFormSchemaMetaItem[];
+  children?: React.ReactNode;
+  meta?: IFormSchemaMetaItem[];
   RowProps?: RowProps;
   ColProps?: ColProps;
   onChange?: (

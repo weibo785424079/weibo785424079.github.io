@@ -5,12 +5,12 @@ import { FormRender, IFormSchema } from '@tms/site-component';
 export default () => {
   const formRef = useRef();
   const schema: IFormSchema = {
-    column: 3,
+    column: 1,
     // layout: 'horizontal',
     // layout: 'vertical',
     // labelAlign: 'left',
-    labelCol: { span: 6 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 3 },
+    wrapperCol: { span: 18 },
     onReset(obj) {
       console.log(obj);
     },
@@ -25,34 +25,18 @@ export default () => {
         required: true
       },
       {
-        type: 'Input',
-        name: 'userName333',
-        label: '用户名2',
-        required: true
-      },
-      {
-        type: 'Input',
-        name: 'userName333',
-        label: '用户名2',
-        required: true
-      },
-      {
-        type: 'Input',
-        name: 'userName333',
-        label: '用户名2',
-        required: true
-      },
-      {
-        RowProps: {},
-        // ColProps: {
-        //   span: 8
-        // },
+        RowProps: {
+          gutter: 30
+        },
+        ColProps: {
+          span: 12
+        },
         formItemProps: {
           labelCol: {
-            span: 3
+            span: 6
           },
           wrapperCol: {
-            span: 21
+            span: 18
           }
         },
         meta: [
@@ -61,13 +45,13 @@ export default () => {
             name: 'userName1',
             label: '行用户名1',
             required: true
+          },
+          {
+            type: 'Input',
+            name: 'userName111',
+            label: '用户名1111',
+            required: true
           }
-          // {
-          //   type: 'Input',
-          //   name: 'userName111',
-          //   label: '用户名1111',
-          //   required: true
-          // },
           // {
           //   type: 'Input',
           //   name: 'userName122',
@@ -80,18 +64,6 @@ export default () => {
         type: 'Input',
         name: 'userName2',
         label: '用户名2',
-        required: true
-      },
-      {
-        type: 'Input',
-        name: 'userName3',
-        label: '用户名3',
-        required: true
-      },
-      {
-        type: 'Input',
-        name: 'userName4',
-        label: '用户名4',
         required: true
       },
       {
