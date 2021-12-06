@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { Button } from 'antd';
 import { FormRender, IFormSchema } from '@tms/site-component';
+import { WrappedFormUtils } from 'antd/es/form/Form';
 
 export default () => {
-  const formRef = useRef();
+  const formRef = useRef<{ form: WrappedFormUtils }>();
   const schema: IFormSchema = {
     // column: 1,
     // layout: 'horizontal',
@@ -23,6 +24,17 @@ export default () => {
         name: 'userName',
         label: '用户名',
         required: true
+      },
+      {
+        type: 'InputSearch',
+        name: 'userNameSearch',
+        label: '用户名搜索',
+        required: true,
+        widgetProps: {
+          onSearch() {
+            console.log('搜索', formRef.current?.form.getFieldsValue());
+          }
+        }
       },
       {
         type: 'Upload',

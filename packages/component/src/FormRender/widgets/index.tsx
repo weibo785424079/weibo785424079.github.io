@@ -29,6 +29,7 @@ const widgets = {
     autoSize: autoSize || { minRows: 3 }
   }))(Input.TextArea),
   InputNumber: createBaseWidget(({ style }) => ({ style: { width: '100%', ...style } }))(InputNumber),
+  InputSearch: createBaseWidget(({ style }) => ({ style: { width: '100%', ...style } }))(Input.Search),
   Checkbox: CheckSingle,
   CheckboxGroup,
   Rate: createBaseWidget()(Rate),
