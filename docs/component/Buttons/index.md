@@ -1,12 +1,12 @@
 ---
-title: ButtonList
+title: Buttons
 group:
   title: 组件
   path: /component
   order: 1
 ---
 
-# ButtonList
+# Buttons
 
 <code src="./demos/demo1.tsx"/>
 
@@ -14,13 +14,13 @@ group:
 
 | 参数 | 说明| 必须 | 类型 |
 |--|--|--| -- |
-| meta | 渲染按钮列表数据 | 必须 | `Array<IButtonListItem>` |
+| meta | 渲染按钮列表数据 | 必须 | `Array<IButtonsItem>` |
 | style | 样式 | 可选 | `React.CSSProperties` |
 | className | 类名 | 可选 | `string` |
 | metaItem | 渲染按钮列表公共参数 | 可选 | `Record<string, any>` |
 
 
-### IButtonListItem
+### IButtonsItem
 
 | 参数 | 说明| 必须 | 类型 | 默认值 |
 |--|--|--| -- | -- |

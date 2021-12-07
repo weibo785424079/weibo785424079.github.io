@@ -13,6 +13,7 @@ export default () => {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 },
     marginBottom: 10,
+    disabled: true,
     meta: [
       {
         type: 'Input',

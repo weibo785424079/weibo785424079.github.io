@@ -1,8 +1,8 @@
 import React from 'react';
-import { ButtonList, IButtonListItem } from '@tms/site-component';
+import { Buttons, IButtonsItem } from '@tms/site-component';
 
 export default () => {
-  const btnMeta: IButtonListItem[] = [
+  const btnMeta: IButtonsItem[] = [
     {
       text: '驳回',
       visible: true,
@@ -23,7 +23,7 @@ export default () => {
   ];
   return (
     <div>
-      <ButtonList meta={btnMeta} />
+      <Buttons meta={btnMeta} />
     </div>
   );
 };
