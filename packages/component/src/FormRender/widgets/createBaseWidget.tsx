@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { usePersistFn } from '@tms/site-hook';
 
 const createBaseWidget =
   (onProps?: (obj: Record<string, any>) => any) =>

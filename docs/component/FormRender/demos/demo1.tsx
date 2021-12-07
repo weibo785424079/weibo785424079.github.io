@@ -18,6 +18,7 @@ export default () => {
     onFinish(obj) {
       console.log(obj.values);
     },
+    disabled: true,
     meta: [
       {
         type: 'Input',

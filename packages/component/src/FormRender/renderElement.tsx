@@ -125,9 +125,9 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
     if (hasOwnProperty(schema, 'disabled') || hasOwnProperty(element, 'disabled')) {
       compProps.disabled = schema.disabled || element.disabled;
     }
-    if (hasOwnProperty(schema, 'readonly') || hasOwnProperty(element, 'readonly')) {
-      compProps.readonly = schema.readonly || element.readonly;
-    }
+    // if (hasOwnProperty(schema, 'readonly') || hasOwnProperty(element, 'readonly')) {
+    //   compProps.readonly = schema.readonly || element.readonly;
+    // }
     // 渲染组件前处理widgetProps
     if (isFunction(element.onWidgetProps) && element.onWidgetProps) {
       const result = element.onWidgetProps(compProps, { form, element, schema });

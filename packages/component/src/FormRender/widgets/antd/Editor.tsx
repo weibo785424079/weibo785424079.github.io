@@ -7,9 +7,9 @@ export interface Props {
   onChange: (s: string | void) => void;
 }
 
-const FormEditor = ({ onChange, value, onFilter }: any, ref) => {
+const FormEditor = ({ onChange, value, onFilter, disabled }: any, ref) => {
   const initied = useRef(true);
-  const [Editor, { getValue, setValue }] = useEditor(() => {
+  const [Editor, { getValue, setValue, editorTool }] = useEditor(() => {
     // 第一次渲染不调onChange方法
     if (initied.current) {
       initied.current = false;
@@ -21,6 +21,20 @@ const FormEditor = ({ onChange, value, onFilter }: any, ref) => {
     }
     onChange(getValue());
   }, value);
+
+  useWatch(
+    disabled,
+    () => {
+      if (disabled) {
+        editorTool?.disable();
+      } else {
+        editorTool?.enable();
+      }
+    },
+    {
+      immediate: true
+    }
+  );
   useWatch(value, () => {
     if (value !== getValue()) {
       setValue(value);

@@ -95,7 +95,7 @@ const useEditor = (
     </div>
   )).current;
 
-  return [Editor, { setValue, getValue, editor: editorRef.current }] as const;
+  return [Editor, { setValue, getValue, editor: editorRef.current, editorTool: editorToolRef.current }] as const;
 };
 
 export default useEditor;

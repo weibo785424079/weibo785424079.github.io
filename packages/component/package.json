@@ -1,6 +1,6 @@
 {
     "name": "@tms/site-component",
-    "version": "0.3.1-alpha13",
+    "version": "0.3.1-alpha14",
     "main": "dist/esm/index.js",
     "module": "dist/esm/index.js",
     "types": "dist/esm/index.d.ts",
@@ -32,7 +32,7 @@
         "react": ">=16.8.6"
     },
     "dependencies": {
-        "@tms/site-hook": "^0.2.0-alpha3",
+        "@tms/site-hook": "^0.2.0-alpha4",
         "@tms/storage": "^0.0.55",
         "eventemitter3": "^4.0.7",
         "rc-color-picker": "^1.2.6",

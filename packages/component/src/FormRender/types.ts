@@ -54,7 +54,7 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   widgetProps?: TNoopObject; // 用在组件上属性
   widgetChildProps?: TNoopObject; // 用在 Option 或者 Radio 或者 Checkbox等组件上
   disabled?: boolean;
-  readonly?: boolean;
+  // readonly?: boolean; // antd部分组件不支持
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
   visible?: boolean;
