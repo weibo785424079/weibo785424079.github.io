@@ -31,7 +31,6 @@ function InnerTable<T>({ className, columns = [], ...rest }: TableProps<T>) {
     }
     return prev;
   }, {});
-
   const newColumns = columns
     .filter(({ key }) => !hideColumns.has(String(key!)))
     .sort((a, b) => orderMap.get(String(a.key))! - orderMap.get(String(b.key))!)

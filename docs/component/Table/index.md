@@ -34,5 +34,5 @@ group:
 
 | 参数名称| 类型 | 作用 | 必须 | 默认值 |
 |--|--|--|--|--|
-|children| `ReactElement` | 出发排序弹窗 | 是 | - |
+|children| `ReactElement` | 触发排序弹窗节点 | 是 | - |
 
