@@ -142,10 +142,18 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
 
     return (
       <Form.Item {...formItemProps}>
-        {getFieldDecorator(elementName, {
-          initialValue: hasOwnProperty(element, 'initialValue') ? element.initialValue : undefined,
-          rules: pickRules.rules
-        })(<Comp {...compProps}>{element.children}</Comp>)}
+        {element.renderReadonly && element.renderReadonly() !== undefined
+          ? element.renderReadonly()
+          : getFieldDecorator(elementName, {
+              initialValue: hasOwnProperty(element, 'initialValue') ? element.initialValue : undefined,
+              rules: pickRules.rules
+            })(
+              <>
+                {element.beforeNode}
+                <Comp {...compProps}>{element.children}</Comp>
+                {element.afterNode}
+              </>
+            )}
       </Form.Item>
     );
   });
