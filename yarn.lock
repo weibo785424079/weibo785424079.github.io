@@ -1293,11 +1293,6 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@icons/material@^0.2.4":
-  version "0.2.4"
-  resolved "http://npm.taimei.com:80/@icons%2fmaterial/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
-  integrity sha1-6QyfcXaLNzbnbX3WeD/Gwq+oi8g=
-
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "http://npm.taimei.com:80/@istanbuljs%2fload-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -9841,11 +9836,6 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash-es@^4.17.15:
-  version "4.17.21"
-  resolved "http://npm.taimei.com:80/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
-  integrity sha1-Q+YmxG5lkbd1C+srUBFzkMYJ4+4=
-
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "http://npm.taimei.com:80/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
@@ -9931,7 +9921,7 @@ lodash.uniq@^4.5.0:
   resolved "http://npm.taimei.com:80/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.x, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.16.5, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.10:
+lodash@4.x, lodash@^4.0.0, lodash@^4.16.5, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.10:
   version "4.17.21"
   resolved "http://npm.taimei.com:80/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
@@ -10124,11 +10114,6 @@ markdown-table@^2.0.0:
   integrity sha1-GUqQztJtMf51PYuUNEMCFMARhls=
   dependencies:
     repeat-string "^1.0.0"
-
-material-colors@^1.2.1:
-  version "1.2.6"
-  resolved "http://npm.taimei.com:80/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
-  integrity sha1-bRlYhxEmmSzuzHL0vMTY8BCGX0Y=
 
 mathjax-full@^3.0.0:
   version "3.1.4"
@@ -13278,19 +13263,6 @@ react-attr-converter@^0.3.1:
   resolved "http://npm.taimei.com:80/react-attr-converter/-/react-attr-converter-0.3.1.tgz#4a2abf6d907b7ddae4d862dfec80e489ce41ad6e"
   integrity sha1-Siq/bZB7fdrk2GLf7IDkic5BrW4=
 
-react-color@^2.19.3:
-  version "2.19.3"
-  resolved "http://npm.taimei.com:80/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
-  integrity sha1-7GxrRWgxKjxqGEIKsEcuFGqlaD0=
-  dependencies:
-    "@icons/material" "^0.2.4"
-    lodash "^4.17.15"
-    lodash-es "^4.17.15"
-    material-colors "^1.2.1"
-    prop-types "^15.5.10"
-    reactcss "^1.2.0"
-    tinycolor2 "^1.4.1"
-
 react-docgen-typescript@^1.20.5:
   version "1.22.0"
   resolved "http://npm.taimei.com:80/react-docgen-typescript/-/react-docgen-typescript-1.22.0.tgz#00232c8e8e47f4437cac133b879b3e9437284bee"
@@ -13449,13 +13421,6 @@ react@>=16.8.6:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-
-reactcss@^1.2.0:
-  version "1.2.3"
-  resolved "http://npm.taimei.com:80/reactcss/-/reactcss-1.2.3.tgz#c00013875e557b1cf0dfd9a368a1c3dab3b548dd"
-  integrity sha1-wAATh15Vexzw39mjaKHD2rO1SN0=
-  dependencies:
-    lodash "^4.0.1"
 
 read-cmd-shim@^1.0.1:
   version "1.0.5"

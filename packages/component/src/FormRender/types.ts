@@ -58,7 +58,9 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
   visible?: boolean;
+  beforeNode?: React.ReactNode;
   children?: React.ReactNode;
+  afterNode?: React.ReactNode;
   meta?: IFormSchemaMetaItem[];
   RowProps?: RowProps;
   ColProps?: ColProps;
@@ -88,6 +90,7 @@ export interface IFormSchemaMetaItem extends FormItemProps {
         }
       | React.ReactNode;
   }) => boolean;
+  renderReadonly?: TNoopFunction; // 渲染只读函数
   render?: TNoopFunction; // 自定义函数，组件不支持的情况可使用
   buttonMeta?: IButtonMetaItem[];
 }
