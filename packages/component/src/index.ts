@@ -11,4 +11,6 @@ export * from './TabsList';
 
 export * from './Table';
 
+export * from './Container';
+
 export { FormBuilder, Operations, FormUpload, getValueFromEvent, FormEditor };

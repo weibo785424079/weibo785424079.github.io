@@ -19,6 +19,10 @@ import useUrlState from './useUrlState';
 import useVirtualList from './useVirtualList';
 import useWatch from './useWatch';
 import useEditor from './useWangeEditor';
+import useBridge from './useBridge';
+import useCtxModal, { useCtxModalContext } from './useCtxModal';
+
+export type { useBridgeProps } from './useBridge';
 
 export * from './useRefModal';
 
@@ -46,5 +50,8 @@ export {
   useUrlState,
   useVirtualList,
   useWatch,
-  useEditor
+  useEditor,
+  useBridge,
+  useCtxModalContext,
+  useCtxModal
 };
