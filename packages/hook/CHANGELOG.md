@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha4.0](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.2.0...@tms/site-hook@0.2.0-alpha4.0) (2022-01-11)
+
+
+### Features
+
+* **hook component:** useBridge useCtxModal Container ([02ae079](http://git.taimei.com/hospital/site-front-repo/commits/02ae0793a737b0ede40e5e56c5877f81924d966f))
+* 按钮列表组件 ([6eee0e6](http://git.taimei.com/hospital/site-front-repo/commits/6eee0e6b1ba4aa49d38f883188510a7afa12bbec))
+* 更新版本 ([6fa7acc](http://git.taimei.com/hospital/site-front-repo/commits/6fa7acc7220fdb8a65b9400eae938b8e67469d7b))
+* 优化useRefModal以及 FormRender，增加FormRenderModal 组件 ([7617330](http://git.taimei.com/hospital/site-front-repo/commits/7617330cdfeb2506fbbd129497665b1b12b5b610))
+* 增加editor编辑器禁用标识 ([8d638f6](http://git.taimei.com/hospital/site-front-repo/commits/8d638f67b08db6b5e87d051dbfaf1bd4360b7a70))
+* 增加useRefModal  模态框组件 ([a6f2c4c](http://git.taimei.com/hospital/site-front-repo/commits/a6f2c4ce14fe600a14f5f424264b54f3ab3798f6))
+
+
+
+
+
 # [0.2.0](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.1.0...@tms/site-hook@0.2.0) (2021-10-20)
 
 

@@ -1,0 +1,25 @@
+.site-hook-container-wrapper .header {
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.65);
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 4px 4px 0 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    word-wrap: break-word;
+}
+.site-hook-container-wrapper.border {
+    border: 1px solid #e8e8e8;
+}
+.site-hook-container-wrapper .content {
+    padding: 16px;
+}
+.site-hook-container-wrapper .footer {
+    padding: 10px 16px;
+    text-align: right;
+    background: transparent;
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+}

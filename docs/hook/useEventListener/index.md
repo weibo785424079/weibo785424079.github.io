@@ -23,8 +23,8 @@ export default () => {
         target: ref
     })
 
-    return <div>
-        <Button ref={ref}>触发事件</Button>
+    return <div ref={ref}>
+        <Button >触发事件</Button>
     </div>
 }
 

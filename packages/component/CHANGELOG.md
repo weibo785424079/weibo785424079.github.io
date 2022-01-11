@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-alpha15.0](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.3.1...@tms/site-component@0.4.0-alpha15.0) (2022-01-11)
+
+
+### Features
+
+* **hook component:** useBridge useCtxModal Container ([02ae079](http://git.taimei.com/hospital/site-front-repo/commits/02ae0793a737b0ede40e5e56c5877f81924d966f))
+* 按钮列表增加公共参数设置 ([36ac679](http://git.taimei.com/hospital/site-front-repo/commits/36ac6791ea3798aff52829ad403260783bde9198))
+* 按钮列表组件 ([6eee0e6](http://git.taimei.com/hospital/site-front-repo/commits/6eee0e6b1ba4aa49d38f883188510a7afa12bbec))
+* 更新版本 ([6fa7acc](http://git.taimei.com/hospital/site-front-repo/commits/6fa7acc7220fdb8a65b9400eae938b8e67469d7b))
+* 兼容formItemProps  style样式传值 ([63dd145](http://git.taimei.com/hospital/site-front-repo/commits/63dd145533f66d50e15e0def7883b680f10a40a2))
+* 优化formRender ([df94e73](http://git.taimei.com/hospital/site-front-repo/commits/df94e7311d8ef99248dd923e7d9211d59d7555cc))
+* 优化useRefModal以及 FormRender，增加FormRenderModal 组件 ([7617330](http://git.taimei.com/hospital/site-front-repo/commits/7617330cdfeb2506fbbd129497665b1b12b5b610))
+* 增加editor编辑器禁用标识 ([8d638f6](http://git.taimei.com/hospital/site-front-repo/commits/8d638f67b08db6b5e87d051dbfaf1bd4360b7a70))
+* 增加Input.Search组件 ([4812bd7](http://git.taimei.com/hospital/site-front-repo/commits/4812bd76b4fb3ae130a125536176edb1b85a9ec4))
+* 增加TabsList组件 ([9f0e2bf](http://git.taimei.com/hospital/site-front-repo/commits/9f0e2bfaf62311e91d5656122822913f69ddc58a))
+* buttonList组件更名为buttons ([2aa067f](http://git.taimei.com/hospital/site-front-repo/commits/2aa067fd2a7eb01b66dcde817bd4eab7a95932e5))
+* formRender新增行布局 ([70a092f](http://git.taimei.com/hospital/site-front-repo/commits/70a092f7739209759219c4fa440969fd3bb0deb6))
+
+
+
+
+
 ## [0.3.1](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.3.0...@tms/site-component@0.3.1) (2021-10-27)
 
 
