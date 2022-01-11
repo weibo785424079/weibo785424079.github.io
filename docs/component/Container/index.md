@@ -6,7 +6,7 @@ group:
   order: 1
 ---
 
-# Container
+# Container <Badge>0.4.0-alpha15.0+</Badge>
 
 <code src="./demos/demo1.tsx"/>
 

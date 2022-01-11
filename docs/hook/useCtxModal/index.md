@@ -6,7 +6,7 @@ group:
   order: 1
 ---
 
-# useCtxModal <Badge>0.3.0+</Badge>
+# useCtxModal <Badge>0.2.0-alpha4.0+</Badge>
 
 ### 常规用法
 <code src="./demos/demo1.tsx"/>

@@ -5,7 +5,7 @@ group:
   path: /hook-usually
 ---
 
-# useBridge <Badge>0.3.0+</Badge>
+# useBridge <Badge>0.2.0-alpha4.0+</Badge>
 
 ```tsx
 
