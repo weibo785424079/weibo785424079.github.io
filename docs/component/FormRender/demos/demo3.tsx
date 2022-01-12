@@ -3,6 +3,7 @@ import { FormRender, IFormSchema } from '@tms/site-component';
 
 export default () => {
   const formRef = React.useRef();
+  console.log('渲染');
   const schema: IFormSchema = {
     onFinish(obj) {
       console.log('完成', obj.values);
@@ -17,20 +18,21 @@ export default () => {
         type: 'Input',
         name: 'text',
         label: '文本',
-        required: true,
+        // required: true,
         widgetProps: {
           style: {
             display: 'inline-block',
             width: 150
           }
         },
+        initialValue: '123',
         onChange: (val) => {
           console.log('值变化', val);
         },
-        renderReadonly: () => {
-          // return '123';
-          // return undefined;
-        },
+        // renderReadonly: () => {
+        //   // return '123';
+        //   // return undefined;
+        // },
         afterNode: <span> 后部分</span>
       },
       {
@@ -51,7 +53,7 @@ export default () => {
         type: 'MultiSelect',
         name: 'multiNum',
         label: '多选',
-        initialValue: 'china',
+        initialValue: ['china'],
         widgetProps: {
           placeholder: 'select one country'
         },

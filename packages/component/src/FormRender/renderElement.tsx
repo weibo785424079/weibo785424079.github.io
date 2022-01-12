@@ -39,6 +39,18 @@ const pickSource = (element: IFormSchemaMetaItem): IFormSourceItem[] => {
   return [...options, ...(element.source || [])];
 };
 
+const WrapComp = ({ Children, element, compProps, ...rest }) => {
+  return (
+    <>
+      {element.beforeNode}
+      <Children {...compProps} {...rest}>
+        {element.children}
+      </Children>
+      {element.afterNode}
+    </>
+  );
+};
+
 export interface IRenderElementProps {
   form: WrappedFormUtils;
   element: IFormSchemaMetaItem;
@@ -139,7 +151,6 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
     if (!elementName) {
       console.log(`name字段未传`, element);
     }
-
     return (
       <Form.Item {...formItemProps}>
         {element.renderReadonly && element.renderReadonly() !== undefined
@@ -148,11 +159,8 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
               initialValue: hasOwnProperty(element, 'initialValue') ? element.initialValue : undefined,
               rules: pickRules.rules
             })(
-              <>
-                {element.beforeNode}
-                <Comp {...compProps}>{element.children}</Comp>
-                {element.afterNode}
-              </>
+              // <Comp {...compProps}>{element.children}</Comp>
+              <WrapComp element={element} compProps={compProps} Children={Comp} />
             )}
       </Form.Item>
     );
