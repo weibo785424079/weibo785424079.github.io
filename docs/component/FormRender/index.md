@@ -12,7 +12,7 @@ group:
 ### 基础用法
 
 基本用法
-<!-- <code src="./demos/demo1.tsx"/> -->
+<code src="./demos/demo1.tsx"/>
 
 <!-- <code src="./demos/demo2.tsx"/> -->
 

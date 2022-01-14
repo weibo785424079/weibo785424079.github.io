@@ -39,17 +39,18 @@ const pickSource = (element: IFormSchemaMetaItem): IFormSourceItem[] => {
   return [...options, ...(element.source || [])];
 };
 
-const WrapComp = ({ Children, element, compProps, ...rest }) => {
+// @ts-ignore
+const WrapComp = React.forwardRef(({ Children, element, compProps, ...rest }, ref) => {
   return (
     <>
       {element.beforeNode}
-      <Children {...compProps} {...rest}>
+      <Children ref={ref} {...compProps} {...rest}>
         {element.children}
       </Children>
       {element.afterNode}
     </>
   );
-};
+});
 
 export interface IRenderElementProps {
   form: WrappedFormUtils;
