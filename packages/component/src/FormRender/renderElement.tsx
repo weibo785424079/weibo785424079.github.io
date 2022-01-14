@@ -161,6 +161,7 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
               rules: pickRules.rules
             })(
               // <Comp {...compProps}>{element.children}</Comp>
+              // @ts-ignore
               <WrapComp element={element} compProps={compProps} Children={Comp} />
             )}
       </Form.Item>

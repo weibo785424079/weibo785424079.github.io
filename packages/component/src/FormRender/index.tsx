@@ -7,7 +7,7 @@ import { Form, Row, Col } from 'antd';
 import { usePersistFn, useImmutable } from '@tms/site-hook';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import { IFormRender, TNoopObject } from './types';
-import { setWidgets } from './widgets';
+import { setWidgets, getWidgets } from './widgets';
 import { FormPropsPickArray, pickProps } from './helper';
 import RenderElement from './renderElement';
 import { createBaseWidget } from './widgets/createBaseWidget';
@@ -194,4 +194,4 @@ const FormRenderSetGlobalWidgets = (widget: TNoopObject) => {
   }
 };
 
-export { createBaseWidget, FormRenderSetGlobalWidgets, FormRender, useFormRender };
+export { createBaseWidget, FormRenderSetGlobalWidgets, FormRender, useFormRender, getWidgets };
