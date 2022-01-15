@@ -40,11 +40,17 @@ const pickSource = (element: IFormSchemaMetaItem): IFormSourceItem[] => {
 };
 
 // @ts-ignore
-const WrapComp = React.forwardRef(({ Children, element, compProps, ...rest }, ref) => {
+const WrapComp = React.forwardRef(({ Children, element, compProps, onChange, ...rest }, ref) => {
+  const Change = (val) => {
+    onChange(val);
+    if (typeof compProps.onChange === 'function') {
+      compProps.onChange();
+    }
+  };
   return (
     <>
       {element.beforeNode}
-      <Children ref={ref} {...compProps} {...rest}>
+      <Children ref={ref} {...compProps} {...rest} onChange={Change}>
         {element.children}
       </Children>
       {element.afterNode}

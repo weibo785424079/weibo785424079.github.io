@@ -24,7 +24,10 @@ export default () => {
         type: 'Input',
         name: 'userName',
         label: '用户名',
-        required: true
+        required: true,
+        onChange(val) {
+          console.log('边安华', val);
+        }
       },
       {
         type: 'InputSearch',
