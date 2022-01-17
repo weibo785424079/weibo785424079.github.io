@@ -44,7 +44,7 @@ const WrapComp = React.forwardRef(({ Children, element, compProps, onChange, ...
   const Change = (val) => {
     onChange(val);
     if (typeof compProps.onChange === 'function') {
-      compProps.onChange();
+      compProps.onChange(val);
     }
   };
   return (
