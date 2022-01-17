@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable guard-for-in */
 /* eslint-disable react/prop-types */
 import React, { forwardRef, useImperativeHandle, useEffect, ReactElement } from 'react';
@@ -11,6 +12,7 @@ import { setWidgets, getWidgets } from './widgets';
 import { FormPropsPickArray, pickProps } from './helper';
 import RenderElement from './renderElement';
 import { createBaseWidget } from './widgets/createBaseWidget';
+import { parseStringExpress } from './utils';
 
 import 'antd/es/col/style/index';
 import 'antd/es/row/style/index';
@@ -135,12 +137,16 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
       );
     }
     if (Object.prototype.hasOwnProperty.call(element, 'visible')) {
-      if (element.visible) {
+      if (typeof element.visible === 'string' && element.visible.indexOf('this') > -1) {
+        console.log('form', form.getFieldsValue());
+        if (parseStringExpress(element.visible, form)) {
+          return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
+        }
+      } else if (element.visible) {
         return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
       }
       return null;
     }
-
     return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
   };
 

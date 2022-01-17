@@ -57,40 +57,44 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   // readonly?: boolean; // antd部分组件不支持
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
-  visible?: boolean;
+  visible?: boolean | string;
   beforeNode?: React.ReactNode;
   children?: React.ReactNode;
   afterNode?: React.ReactNode;
   meta?: IFormSchemaMetaItem[];
   RowProps?: RowProps;
   ColProps?: ColProps;
-  onChange?: (
-    a: any,
-    obj: {
-      e: any;
-      form: WrappedFormUtils;
-      formItemProps: FormItemProps;
-      element: IFormSchemaMetaItem;
-      Form:
-        | {
-            Item: React.ReactNode;
-            [key: string]: any;
-          }
-        | React.ReactNode;
-    }
-  ) => any;
-  onVisible?: (obj: {
-    form: WrappedFormUtils;
-    formItemProps: FormItemProps;
-    element: IFormSchemaMetaItem;
-    Form:
-      | {
-          Item: React.ReactNode;
-          [key: string]: any;
+  onChange?:
+    | string // 字符串函数this向表单值对象
+    | ((
+        value: any,
+        obj: {
+          value: any;
+          form: WrappedFormUtils;
+          formItemProps: FormItemProps;
+          element: IFormSchemaMetaItem;
+          Form:
+            | {
+                Item: React.ReactNode;
+                [key: string]: any;
+              }
+            | React.ReactNode;
         }
-      | React.ReactNode;
-  }) => boolean;
-  renderReadonly?: TNoopFunction; // 渲染只读函数
+      ) => any);
+  onVisible?:
+    | string // 字符串函数this向表单值对象
+    | ((obj: {
+        form: WrappedFormUtils;
+        formItemProps: FormItemProps;
+        element: IFormSchemaMetaItem;
+        Form:
+          | {
+              Item: React.ReactNode;
+              [key: string]: any;
+            }
+          | React.ReactNode;
+      }) => boolean);
+  renderReadonly?: string | TNoopFunction; // 渲染只读函数
   render?: TNoopFunction; // 自定义函数，组件不支持的情况可使用
   buttonMeta?: IButtonMetaItem[];
 }

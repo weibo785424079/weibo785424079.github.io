@@ -7,6 +7,7 @@ import { usePersistFn } from '@tms/site-hook';
 import widgets from './widgets';
 import { pickProps, FormItemPropsPickArray, isFunction, hasOwnProperty, defaultGetValueFromEvent } from './helper';
 import { IFormSchemaMetaItem, IFormSchema, IFormSourceItem, ISchemaEventObj } from './types';
+import { parseStringFunction } from './utils';
 
 import 'antd/es/button/style/index';
 
@@ -89,29 +90,26 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
   }
 
   const handleChange = usePersistFn((val) => {
-    if (isFunction(element.onChange) && element.onChange) {
+    if (hasOwnProperty(element, 'onChange')) {
       let valuePropName = 'value';
       if (element.valuePropName && typeof element.valuePropName === 'string') {
         valuePropName = element.valuePropName;
       }
       const newVal = defaultGetValueFromEvent(valuePropName, val);
-      element.onChange(newVal, {
-        e: val,
-        form,
-        formItemProps,
-        element,
-        Form
-      });
+      if (typeof element.onChange === 'function') {
+        element.onChange(newVal, { value: newVal, form, formItemProps, element, Form });
+      }
+      if (typeof element.onChange === 'string') {
+        const onChangeFunction = parseStringFunction(element.onChange);
+        const formValues = form.getFieldsValue();
+        formValues[element.name as string] = newVal;
+        onChangeFunction.call(formValues, { value: newVal, form, formItemProps, element, Form });
+      }
     }
   });
   const renderFunction = usePersistFn(() => {
     if (element.render && isFunction(element.render)) {
-      element.render.call(element, {
-        form,
-        formItemProps,
-        element,
-        Form
-      });
+      element.render.call(element, { form, formItemProps, element, Form });
       return;
     }
     console.warn('请传入render函数');
@@ -122,7 +120,10 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
       return <></>;
     }
     let compProps: any = {
-      element,
+      element: {
+        ...element,
+        form
+      },
       onChange: handleChange,
       // source: ,
       // format: element.format,
@@ -160,30 +161,48 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
     }
     return (
       <Form.Item {...formItemProps}>
-        {element.renderReadonly && element.renderReadonly() !== undefined
-          ? element.renderReadonly()
-          : getFieldDecorator(elementName, {
-              initialValue: hasOwnProperty(element, 'initialValue') ? element.initialValue : undefined,
-              rules: pickRules.rules
-            })(
-              // <Comp {...compProps}>{element.children}</Comp>
-              // @ts-ignore
-              <WrapComp element={element} compProps={compProps} Children={Comp} />
-            )}
+        {(() => {
+          if (element.renderReadonly) {
+            const readonlyObj = { form, formItemProps, element, Form };
+            let res;
+            if (typeof element.renderReadonly === 'function') {
+              res = element.renderReadonly(readonlyObj);
+            }
+            if (typeof element.renderReadonly === 'string') {
+              const renderReadonlyFunction = parseStringFunction(element.renderReadonly);
+              res = renderReadonlyFunction(readonlyObj);
+            }
+            if (res !== undefined) {
+              return res;
+            }
+          }
+          return getFieldDecorator(elementName, {
+            initialValue: hasOwnProperty(element, 'initialValue') ? element.initialValue : undefined,
+            rules: pickRules.rules
+          })(
+            // <Comp {...compProps}>{element.children}</Comp>
+            // @ts-ignore
+            <WrapComp element={element} compProps={compProps} Children={Comp} />
+          );
+        })()}
       </Form.Item>
     );
   });
-  if (typeof element.onVisible === 'function') {
-    if (
-      element.onVisible({
-        form,
-        formItemProps,
-        element,
-        Form
-      })
-    ) {
-      return renderJsx();
+  if (hasOwnProperty(element, 'onVisible')) {
+    if (typeof element.onVisible === 'function') {
+      if (element.onVisible({ form, formItemProps, element, Form })) {
+        return renderJsx();
+      }
     }
+    // 兼容字符串可见函数
+    if (typeof element.onVisible === 'string') {
+      const onVisibleFunction = parseStringFunction(element.onVisible);
+      const formValues = form.getFieldsValue();
+      if (onVisibleFunction.call(formValues, { form, formItemProps, element, Form })) {
+        return renderJsx();
+      }
+    }
+
     return <></>;
   }
   if (typeof element.render === 'function') {
