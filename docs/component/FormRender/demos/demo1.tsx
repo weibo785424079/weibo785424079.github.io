@@ -30,6 +30,16 @@ export default () => {
         }
       },
       {
+        type: 'Input',
+        name: 'phone',
+        label: '手机号',
+        required: true,
+        rules: [{ pattern: /^[1][3,4,5,7,8,9][0-9]{9}$/, message: '输入正确的手机号' }],
+        onChange(val) {
+          console.log('边安华', val);
+        }
+      },
+      {
         type: 'InputSearch',
         name: 'userNameSearch',
         label: '用户名搜索',

@@ -60,7 +60,7 @@ export default () => {
       },
       {
         type: 'Input',
-        name: 'city',
+        name: 'textInput',
         label: '文本输入',
         renderReadonly: "function(obj){return obj.form.getFieldsValue().Radio ? undefined : '默认值'}"
       }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormProps, FormItemProps } from 'antd/es/form';
-import { FormComponentProps } from 'antd/lib/form/Form';
-import { WrappedFormUtils } from 'antd/es/form/Form';
+import { FormComponentProps, WrappedFormUtils, ValidationRule } from 'antd/es/form/Form';
 import { RowProps } from 'antd/es/row';
 import { ColProps } from 'antd/es/col';
 import { ButtonProps } from 'antd/es/button';
@@ -12,9 +11,10 @@ export type TNoopObject = Record<string, any>;
 export type TNoopFunction = (...args: any) => any;
 
 export interface IFormSourceItem {
-  label: any;
+  label: string;
   value: any;
   children?: IFormSourceItem[];
+  [key: string]: any;
 }
 
 export interface IFormItemRulesItem {
@@ -39,12 +39,12 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   key?: string;
   widget?: React.ReactNode;
   type?: widgetsType | 'Button';
-  rules?: string;
+  rules?: ValidationRule[];
   initialValue?: any;
   valuePropName?: string;
   name?: string; // 显示的字段名
   enumLabels?: any[];
-  enumValues?: string[]; // 枚举值需要与source进行合并进行显示,value值会进行去重
+  enumValues?: any[]; // 枚举值需要与source进行合并进行显示,value值会进行去重
   format?: string; // 日期格式化，使用moment
   source?: IFormSourceItem[];
   sourceLabelMap?: string; // source数组label值映射
@@ -57,7 +57,7 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   // readonly?: boolean; // antd部分组件不支持
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
-  visible?: boolean | string;
+  visible?: boolean | string; // 字符串并且包含this为字符串表达式，内部自动转换
   beforeNode?: React.ReactNode;
   children?: React.ReactNode;
   afterNode?: React.ReactNode;
@@ -109,7 +109,7 @@ export interface IFormSchema extends FormProps {
   ColProps?: ColProps; // column > 1
   widgets?: TNoopObject;
   disabled?: boolean; // 全局控制禁用状态
-  readonly?: boolean;
+  readonly?: boolean; // 预留字段
   width?: string | number;
   debug?: boolean; // debug为true，控制台显示日志,process.env.NODE_ENV === 'development' && debug
   initialValues?: TNoopObject;

@@ -11,7 +11,7 @@ import { parseStringFunction } from './utils';
 
 import 'antd/es/button/style/index';
 
-const rulesRequired = (rules, element) => {
+const rulesRequired = (rules: ValidationRule[], element: IFormSchemaMetaItem) => {
   if (!Array.isArray(rules) || rules.length <= 0) {
     if (element.required) {
       return {
@@ -20,14 +20,23 @@ const rulesRequired = (rules, element) => {
     }
     return { rules: [] };
   }
-  return {
-    rules: rules.map((item) => {
-      if (!item.hasOwnproperty('required') && element.required) {
-        return { ...item, message: `${element.label}不可为空` };
+
+  if (element.required) {
+    let hasRequired = false;
+    const rulesTemp: ValidationRule[] = [];
+    rules.forEach((item) => {
+      if (hasOwnProperty(item, 'required')) {
+        hasRequired = true;
       }
-      return item;
-    })
-  };
+      rulesTemp.push(item);
+    });
+    if (!hasRequired) {
+      rulesTemp.push({ required: true, message: `${element.label}不可为空` });
+    }
+    // eslint-disable-next-line no-param-reassign
+    rules = rulesTemp;
+  }
+  return { rules };
 };
 
 const pickSource = (element: IFormSchemaMetaItem): IFormSourceItem[] => {

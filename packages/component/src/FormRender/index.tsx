@@ -138,7 +138,6 @@ const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
     }
     if (Object.prototype.hasOwnProperty.call(element, 'visible')) {
       if (typeof element.visible === 'string' && element.visible.indexOf('this') > -1) {
-        console.log('form', form.getFieldsValue());
         if (parseStringExpress(element.visible, form)) {
           return <React.Fragment key={key}>{ElementEl}</React.Fragment>;
         }
