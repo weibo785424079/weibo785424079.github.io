@@ -7,16 +7,13 @@ group:
   order: 1
 ---
 
-# ModalFormRender
+# FormRenderModal
 
 
-### FormRender模态框用法
+### FormRender组件模态框用法
 
 hooks用法
 <code src="./demos/demo1.tsx"/>
 
 组件用法
 <code src="./demos/demo2.tsx"/>
-
-模态框用法
-<!-- <code src="./demos/demo3.tsx"/> -->

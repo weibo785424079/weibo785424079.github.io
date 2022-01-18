@@ -21,8 +21,8 @@ export default () => {
     title: '标题',
     onOk() {
       console.log(modalRef);
-      // const values = modalRef.current.form.getFieldsValue();
-      // console.log('values22', values);
+      const values = modalRef.current.form.getFieldsValue();
+      console.log('values22', values);
     }
   }).current;
   const onClickComp = useCallback(() => {
