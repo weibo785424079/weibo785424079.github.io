@@ -23,7 +23,7 @@ export interface IFormItemRulesItem {
 
 export interface IButtonMetaItem extends ButtonProps {
   btnType?: string; // 按钮类型 reset | search
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   onClick?: (...args: any[]) => any;
   render?: TNoopFunction;
 }
@@ -37,7 +37,7 @@ export interface ISchemaEventObj {
 
 export interface IFormSchemaMetaItem extends FormItemProps {
   key?: string;
-  widget?: React.ReactNode;
+  widget?: React.ReactElement;
   type?: widgetsType | 'Button';
   rules?: ValidationRule[];
   initialValue?: any;
@@ -58,9 +58,9 @@ export interface IFormSchemaMetaItem extends FormItemProps {
   display?: string;
   required?: boolean; // 是否必传, 提示语：${title}不可为空, 为true，rules规则不显示required
   visible?: boolean | string; // 字符串并且包含this为字符串表达式，内部自动转换
-  beforeNode?: React.ReactNode;
-  children?: React.ReactNode;
-  afterNode?: React.ReactNode;
+  beforeNode?: React.ReactElement;
+  children?: React.ReactElement;
+  afterNode?: React.ReactElement;
   meta?: IFormSchemaMetaItem[];
   RowProps?: RowProps;
   ColProps?: ColProps;
@@ -78,7 +78,7 @@ export interface IFormSchemaMetaItem extends FormItemProps {
                 Item: React.ReactNode;
                 [key: string]: any;
               }
-            | React.ReactNode;
+            | React.ReactElement;
         }
       ) => any);
   onVisible?:
@@ -92,7 +92,7 @@ export interface IFormSchemaMetaItem extends FormItemProps {
               Item: React.ReactNode;
               [key: string]: any;
             }
-          | React.ReactNode;
+          | React.ReactElement;
       }) => boolean);
   renderReadonly?: string | TNoopFunction; // 渲染只读函数
   render?: TNoopFunction; // 自定义函数，组件不支持的情况可使用

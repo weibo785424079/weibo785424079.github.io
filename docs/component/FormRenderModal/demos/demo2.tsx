@@ -17,25 +17,23 @@ export default () => {
     }),
     []
   );
+  const modalOptions = useRef({
+    title: '标题',
+    onOk() {
+      console.log(modalRef);
+      // const values = modalRef.current.form.getFieldsValue();
+      // console.log('values22', values);
+    }
+  }).current;
   const onClickComp = useCallback(() => {
     console.log(modalRef.current);
-    modalRef.current.show(
-      {},
-      {
-        title: '标题',
-        onOk() {
-          console.log(modalRef);
-          const values = modalRef.current.form.getFieldsValue();
-          console.log('values22', values);
-        }
-      }
-    );
+    modalRef.current.show();
   }, []);
 
   return (
     <>
       <Button onClick={onClickComp}>打开弹框(组件用法)</Button>
-      <FormRenderModal schema={schema} ref={modalRef} />
+      <FormRenderModal schema={schema} ref={modalRef} options={modalOptions} />
     </>
   );
 };
