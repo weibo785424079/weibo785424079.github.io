@@ -10,18 +10,20 @@ export const Footer = ({ children }: { children: React.ReactNode }) => <div clas
 export const Container = ({
   children,
   style,
-  footer = null,
-  header = null,
-  border = false
+  footer,
+  header,
+  border,
+  className
 }: {
   footer?: React.ReactNode;
   header?: React.ReactNode;
   children: React.ReactElement;
   style?: React.CSSProperties;
   border?: boolean;
+  className?: string;
 }) => {
   return (
-    <div className={`site-hook-container-wrapper ${border ? 'border' : ''}`} style={style}>
+    <div className={`${className} site-hook-container-wrapper ${border ? 'border' : ''}`} style={style}>
       {header ? <Header>{header}</Header> : null}
       <Content>{children}</Content>
       {footer ? <Footer>{footer}</Footer> : null}
@@ -32,5 +34,6 @@ Container.defaultProps = {
   footer: null,
   header: null,
   style: {},
-  border: false
+  border: false,
+  className: ''
 };

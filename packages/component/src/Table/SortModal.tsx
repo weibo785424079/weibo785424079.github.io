@@ -5,7 +5,7 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { useModal, useImmutable } from '@tms/site-hook';
 import { ColumnProps } from 'antd/es/table';
 import { useTableContext, ModalContext, useModalContext } from './context';
-import type { Column } from './CacheContainer';
+import type { Column } from './interface';
 import 'antd/es/tabs/style';
 import 'antd/es/checkbox/style';
 import 'antd/es/icon/style';
@@ -211,7 +211,7 @@ export const SortTableContainer = ({ children, columns = [] }: { children: React
   const { RenderSortHideColumn, show } = useSortHideColumn();
   const ref = useRef(columns);
   ref.current = columns;
-  const value = useMemo(() => ({ show: () => show(ref.current) }), [show]);
+  const value = useMemo(() => ({ show: () => show(ref.current.filter((item) => item.key !== 'operations')) }), [show]);
   return (
     <ModalContext.Provider value={value}>
       <>

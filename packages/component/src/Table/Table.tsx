@@ -68,9 +68,9 @@ function InnerTable<T>({ className, columns = [], ...rest }: TableProps<T>) {
     });
   return (
     <Table
+      {...rest}
       components={components}
       columns={newColumns}
-      {...rest}
       className={`${className || ''} site-component-table`}
     />
   );

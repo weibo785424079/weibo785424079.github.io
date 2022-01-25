@@ -1,30 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useUnMount } from '@tms/site-hook';
 import Table from './Table';
 import CacheTableContainer, { CacheCleaner } from './CacheContainer';
+import type { DefaultData } from './interface';
+import StorageAdaptor from './adaptor/storage';
+import DBAdaptor from './adaptor/indexedDB';
 import './index.css';
 
 export { SortTableTrigger } from './SortModal';
 export { useTableContext, useModalContext } from './context';
 
+const defaultGetDefaultData: DefaultData = (id) => ({
+  id,
+  columns: [],
+  frozenNumber: -1
+});
+
 interface Props {
   id: string;
-  minWidth?: number;
   children: React.ReactElement;
+  minWidth?: number;
+  db?: boolean;
+  accountId?: string;
+  getDefaultData?: DefaultData;
 }
 
-function CacheTable({ id, minWidth, children }: Props) {
+function CacheTable({ accountId, id, minWidth, children, db, getDefaultData }: Props) {
   if (!id) {
     throw new Error('id 为必传字段!!!');
   }
+  const [adaptor] = useState(() => {
+    return db && accountId ? new DBAdaptor(accountId, getDefaultData!) : new StorageAdaptor(id, getDefaultData!);
+  });
+
+  useUnMount(() => {
+    if (adaptor && adaptor instanceof DBAdaptor) {
+      adaptor.close();
+    }
+  });
+
   return (
-    <CacheTableContainer id={id} minWidth={minWidth}>
+    <CacheTableContainer id={id} minWidth={minWidth} adaptor={adaptor!} getDefaultData={getDefaultData!}>
       {children}
     </CacheTableContainer>
   );
 }
 
 CacheTable.defaultProps = {
-  minWidth: undefined
+  minWidth: undefined,
+  db: false,
+  accountId: '',
+  getDefaultData: defaultGetDefaultData
 };
 
 export { Table, CacheTable, CacheCleaner };

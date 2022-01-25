@@ -34,6 +34,7 @@
     "dependencies": {
         "@tms/site-hook": "^0.2.0-alpha4.0",
         "@tms/storage": "^0.0.55",
+        "dexie": "^3.2.0",
         "eventemitter3": "^4.0.7",
         "rc-color-picker": "^1.2.6",
         "react-resizable": "^3.0.4",

@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { Cache } from './CacheContainer';
+import type { Cache } from './interface';
 
 const Context = createContext<{
   id: string;

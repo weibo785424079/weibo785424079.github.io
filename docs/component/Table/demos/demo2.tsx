@@ -2,21 +2,9 @@ import React from 'react';
 import { Table, CacheTable, SortTableTrigger } from '@tms/site-component';
 import { Button, Icon } from 'antd';
 
-const Demo = () => {
+const Demo2 = () => {
   return (
-    <CacheTable
-      accountId="accountId1"
-      minWidth={100}
-      id="default"
-      db
-      getDefaultData={(id) => {
-        return {
-          id,
-          columns: [],
-          frozenNumber: -1
-        };
-      }}
-    >
+    <CacheTable accountId="accountId1" minWidth={100} id="default" db>
       <Table
         rowKey="1"
         columns={[
@@ -52,7 +40,6 @@ const Demo = () => {
           },
           {
             key: 'operations',
-            fixed: 'right',
             title: (
               <>
                 <span style={{ marginRight: 10 }}>操作</span>
@@ -83,4 +70,4 @@ const Demo = () => {
   );
 };
 
-export default Demo;
+export default Demo2;

@@ -1,82 +1,48 @@
-import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
-import { get, set } from '@tms/storage';
-import { useDebounceFn, usePersistFn, useUpdate } from '@tms/site-hook';
+import React, { ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useDebounceFn, usePersistFn } from '@tms/site-hook';
 import EventEmitter3 from 'eventemitter3';
 import Context, { useTableContext } from './context';
+import type { Cache, CacheAdaptor, DefaultData } from './interface';
 
 const event = new EventEmitter3();
-
-export type Column = {
-  key: string;
-  show: 0 | 1;
-  order: number;
-  width?: number;
-};
-
-export type Cache = {
-  id: string;
-  frozenNumber: number;
-  columns: Array<Column>;
-};
-const prefix = 'site-cache-table-';
-
-const getDefaultData = (id: string) => ({
-  id,
-  columns: [],
-  frozenNumber: -1
-});
-
-export const getCahce = (id: string) => {
-  return get(prefix + id) as Cache | undefined;
-};
-
-export const create = (id: string): Cache => {
-  const defaultData = getDefaultData(id);
-  set(prefix + id, defaultData);
-  return defaultData;
-};
-
-export const setCahce = (data: { id: string } & Partial<Cache>) => {
-  const current = getCahce(data.id) || create(data.id);
-  return set(prefix + data.id, { ...current, ...data });
-};
 
 interface Props {
   children: ReactElement;
   minWidth?: number;
   id: string;
+  adaptor: CacheAdaptor;
+  getDefaultData: DefaultData;
 }
 
-const CacheTableContainer = ({ children, id, minWidth }: Props) => {
-  const cacheRef = useRef<Cache>();
-  const refreshRef = useRef(true);
+const CacheTableContainer = ({ children, id, minWidth, adaptor, getDefaultData }: Props) => {
   const passiveRefreshing = useRef(false);
   const inited = useRef(false);
+  const [state, setState] = useState<Cache>();
 
-  const state = useMemo(() => {
-    refreshRef.current = true;
-    return getCahce(id) || create(id);
-  }, [id]);
+  const init = useCallback(async () => {
+    try {
+      const cache = await Promise.resolve(adaptor.getCahce(id));
+      inited.current = true;
+      setState(cache);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, adaptor]);
 
-  if (refreshRef.current) {
-    cacheRef.current = state;
-    refreshRef.current = false;
-  }
-
-  const cache = cacheRef.current!;
-  const update = useUpdate();
+  useEffect(() => {
+    init();
+  }, [id, adaptor, init]);
 
   const refresh = usePersistFn((flag = true) => {
     passiveRefreshing.current = flag;
-    cacheRef.current = getCahce(id) || create(id);
-    update();
+    init();
   });
 
-  useDebounceFn(() => {
+  useDebounceFn(async () => {
     try {
       // 被动更新不需要重新设置storage
-      if (!passiveRefreshing.current) {
-        setCahce(cache);
+      if (!passiveRefreshing.current && state) {
+        await adaptor.setCache(id, state);
       }
       // 被动更新以及初始化不需要发布同步更新命令
       if (!passiveRefreshing.current && inited.current) {
@@ -88,7 +54,7 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
       inited.current = true;
       passiveRefreshing.current = false;
     }
-  }, cache);
+  }, state);
 
   useEffect(() => {
     event.on(id, (fn) => {
@@ -102,17 +68,17 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
   }, [id]);
 
   const setCacheState = usePersistFn((data) => {
-    const res = typeof data === 'function' ? data(cache) : data;
-    const curr = { ...cache, id, ...res };
-    cacheRef.current = curr;
-    update();
+    const res = typeof data === 'function' ? data(state) : data;
+    const curr = { ...state, id, ...res };
+    setState(curr);
   });
 
   const { orderMap, hideColumns, cacheWidth } = useMemo(() => {
+    if (!state) return {} as any;
     const $hideColumns = new Set<string>();
     const $orderMap = new Map();
     const $cacheWidth = new Map();
-    const { columns: cacheColumns, ...other } = cache;
+    const { columns: cacheColumns, ...other } = state;
 
     cacheColumns.forEach((col) => {
       if (col.show === 0) {
@@ -130,18 +96,16 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
       hideColumns: $hideColumns,
       cacheWidth: $cacheWidth
     };
-  }, [cache]);
+  }, [state]);
 
   const value = useMemo(() => {
     const currSetCache = (data: { id: string } & Partial<Cache>) => {
       setCacheState((c) => ({ ...c, ...data }));
     };
-    const cleanCache = () => {
-      const defaultData = getDefaultData(id);
-      setCacheState(defaultData);
-    };
+    const cleanCache = async () => setCacheState(await Promise.resolve(getDefaultData(id)));
+
     return {
-      ...cache,
+      ...(state || {}),
       setCacheState: currSetCache,
       orderMap,
       hideColumns,
@@ -149,8 +113,10 @@ const CacheTableContainer = ({ children, id, minWidth }: Props) => {
       cleanCache,
       minWidth
     };
-  }, [id, cache, setCacheState, orderMap, hideColumns, cacheWidth, minWidth]);
-  return <Context.Provider value={value}>{children}</Context.Provider>;
+  }, [id, state, setCacheState, orderMap, hideColumns, cacheWidth, minWidth]);
+
+  if (!inited.current) return null;
+  return <Context.Provider value={value as any}>{children}</Context.Provider>;
 };
 
 export const CacheCleaner = ({ children }: { children: React.ReactElement }) => {

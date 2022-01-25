@@ -5,11 +5,10 @@ import { Button, Layout } from 'antd';
 const { Header, Footer, Content } = Layout;
 function Demo({ name }: { name: string }) {
   const { data, bridge, hide } = useCtxModalContext<{ hobby: string }>();
-  console.log('render, child');
   bridge.useHook(() => {
-    return new Promise((resolkve) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
-        resolkve('123123');
+        resolve('123123');
       }, 3000);
     });
   });
@@ -31,7 +30,7 @@ function Demo({ name }: { name: string }) {
 }
 const Demo1 = () => {
   const [loading, setLoading] = React.useState(false);
-  const { show, hide, RenderModal, bridge, context, visible } = useCtxModal<{ hobby: string }>({
+  const { show, hide, RenderModal, bridge } = useCtxModal<{ hobby: string }>({
     title: '标题',
     okText: '关上~',
     cancelText: '取消',
@@ -54,7 +53,6 @@ const Demo1 = () => {
       loading
     }
   });
-  console.log(context, 'context', visible);
   return (
     <div>
       <Button onClick={() => show({ hobby: '汽车' })}>打开弹窗</Button>
