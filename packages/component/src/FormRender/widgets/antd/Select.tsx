@@ -21,13 +21,13 @@ const Component = ({ onChange, value, element, widgetChildProps, style, source, 
     <Select ref={ref} value={value} onChange={onChange} {...selectParams}>
       {(source || []).map((item, index) => {
         const key = item.value || index;
-        let label = item[element.sourceLabelMap] || item.label;
+        let label = item[element?.sourceLabelMap || 'label'];
         const isHtml = typeof label === 'string' && label[0] === '<';
         if (isHtml) {
           label = <span dangerouslySetInnerHTML={{ __html: label }} />;
         }
         return (
-          <Option key={key} value={item[element.sourceValueMap] || item.value} {...childParams}>
+          <Option key={key} value={item[element?.sourceValueMap || 'value']} {...childParams}>
             {label}
           </Option>
         );

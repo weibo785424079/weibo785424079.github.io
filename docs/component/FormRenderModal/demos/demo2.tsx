@@ -27,13 +27,13 @@ export default () => {
   }).current;
   const onClickComp = useCallback(() => {
     console.log(modalRef.current);
-    modalRef.current.show();
+    modalRef.current.show({ schema });
   }, []);
 
   return (
     <>
       <Button onClick={onClickComp}>打开弹框(组件用法)</Button>
-      <FormRenderModal schema={schema} ref={modalRef} options={modalOptions} />
+      <FormRenderModal ref={modalRef} options={modalOptions} />
     </>
   );
 };

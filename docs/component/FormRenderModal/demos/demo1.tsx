@@ -17,33 +17,25 @@ export default () => {
     }),
     []
   );
-  const { RenderModal, ...modal } = useFormRenderModal({ schema });
+  const { RenderModal, ...modal } = useFormRenderModal({
+    title: '标题',
+    // @ts-ignore
+    onOk() {
+      console.log(modal.formRef.current.form);
+      console.log(11111, modal.getForm());
+      // console.log('modal.form', modal.getForm());
+
+      // const values = modal.form.getFieldsValue();
+      // console.log('values22', values);
+    }
+  });
 
   return (
     <>
-      {/* <modal.RenderModal
-                beforeChildren={
-                    <div>前部分</div>
-                }
-            >
-                <div>后部分</div>
-            </modal.RenderModal> */}
       <RenderModal />
       <Button
         onClick={() => {
-          modal.show(
-            {},
-            {
-              onOk() {
-                console.log(modal.formRef.current.form);
-                console.log(11111, modal.getForm());
-                // console.log('modal.form', modal.getForm());
-
-                // const values = modal.form.getFieldsValue();
-                // console.log('values22', values);
-              }
-            }
-          );
+          modal.show({ schema });
         }}
       >
         hooks用法

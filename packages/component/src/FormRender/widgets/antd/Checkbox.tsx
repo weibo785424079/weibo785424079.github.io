@@ -17,13 +17,13 @@ const Component = ({ onChange, value, element, widgetChildProps, style, source, 
     <Checkbox.Group ref={ref} value={value} onChange={onChange} {...checkboxProps}>
       {(source || []).map((item, index) => {
         const key = item.value || index;
-        let label = item[element.sourceLabelMap] || item.label;
+        let label = item[element?.sourceLabelMap || 'label'];
         const isHtml = typeof label === 'string' && label[0] === '<';
         if (isHtml) {
           label = <span dangerouslySetInnerHTML={{ __html: label }} />;
         }
         return (
-          <Checkbox key={key} value={item[element.sourceValueMap] || item.value} {...radioItemProps}>
+          <Checkbox key={key} value={item[element?.sourceValueMap || 'value']} {...radioItemProps}>
             {label}
           </Checkbox>
         );
