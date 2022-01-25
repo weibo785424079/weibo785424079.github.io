@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha4.1](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.2.0-alpha4.0...@tms/site-hook@0.2.0-alpha4.1) (2022-01-25)
+
+**Note:** Version bump only for package @tms/site-hook
+
+
+
+
+
 # [0.2.0-alpha4.0](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.2.0...@tms/site-hook@0.2.0-alpha4.0) (2022-01-11)
 
 

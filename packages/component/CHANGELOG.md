@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-alpha15.8](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.0-alpha15.0...@tms/site-component@0.4.0-alpha15.8) (2022-01-25)
+
+
+### Bug Fixes
+
+* 修复FormRender rules规则配置，优化ts类型 ([ae996b0](https://git.taimei.com/hospital/site-front-repo/commits/ae996b0616f07883e63e20e1672b9936b6bb3d98))
+* FormRender组件change变化 ([c0490d0](https://git.taimei.com/hospital/site-front-repo/commits/c0490d029d30a3d7ff9f88acf98cc14444325a27))
+* FormRender组件change事件不触发 ([d355309](https://git.taimei.com/hospital/site-front-repo/commits/d3553095f9f061f9bb54a7a3d3905a9016f3889e))
+
+
+### Features
+
+* **cpmponent hook:** cacheTable支持indexedDB存储 ([8fc20dd](https://git.taimei.com/hospital/site-front-repo/commits/8fc20ddbf3691e98b0816c936f2ac6ab7616a6ca))
+* 导出所有组件 ([74cc2b7](https://git.taimei.com/hospital/site-front-repo/commits/74cc2b7bc6e95af9d45917119caadaec66ef20ff))
+* formRender渲染优化 ([cad7f91](https://git.taimei.com/hospital/site-front-repo/commits/cad7f91183681d5042e7b34edf32237ae1e3635a))
+* FormRender增加ref ([4154ef0](https://git.taimei.com/hospital/site-front-repo/commits/4154ef034ba43bfe1960afea1254853e133cbef4))
+* FormRender支持表达式字符串、函数字符串开发模式 ([1a7d12c](https://git.taimei.com/hospital/site-front-repo/commits/1a7d12cd2d541f4aaefe9599cd4227881602cf4e))
+
+
+
+
+
 # [0.4.0-alpha15.0](http://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.3.1...@tms/site-component@0.4.0-alpha15.0) (2022-01-11)
 
 
