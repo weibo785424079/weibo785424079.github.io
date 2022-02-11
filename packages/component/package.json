@@ -1,6 +1,6 @@
 {
     "name": "@tms/site-component",
-    "version": "0.4.0-alpha15.9",
+    "version": "0.4.0-alpha15.10",
     "main": "dist/esm/index.js",
     "module": "dist/esm/index.js",
     "types": "dist/esm/index.d.ts",

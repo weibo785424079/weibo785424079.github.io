@@ -25,7 +25,8 @@ export interface IFormRenderFormRef {
 }
 
 const FCForm = forwardRef<FormComponentProps, IFormRender>((props, ref) => {
-  const { form, formRef, onFinish, onSearch, schema } = props;
+  const { form, formRef, onFinish, onSearch } = props;
+  const schema = props.schema || {};
   const { column = 1, meta, gutter = 0 } = schema;
   if (!meta) {
     console.warn('未配置schema meta参数');
