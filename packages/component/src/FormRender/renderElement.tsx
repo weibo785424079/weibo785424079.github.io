@@ -118,8 +118,7 @@ const renderElement = ({ form, element, schema, onFinish, onSearch }: IRenderEle
   });
   const renderFunction = usePersistFn(() => {
     if (element.render && isFunction(element.render)) {
-      element.render.call(element, { form, formItemProps, element, Form });
-      return;
+      return element.render.call(element, { form, formItemProps, element, Form });
     }
     console.warn('请传入render函数');
   });
