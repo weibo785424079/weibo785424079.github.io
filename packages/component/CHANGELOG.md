@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-alpha15.12](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.0-alpha15.8...@tms/site-component@0.4.0-alpha15.12) (2022-03-21)
+
+
+### Bug Fixes
+
+* **operations:** add key to operations ([7055d49](https://git.taimei.com/hospital/site-front-repo/commits/7055d49cf6eee69663d9a29814b7c5a257a9feed))
+* 修复FormRender render函数 ([d7eb52f](https://git.taimei.com/hospital/site-front-repo/commits/d7eb52f4a338aac3c58051e11d9fc428a03a33ed))
+
+
+### Features
+
+* 调整FormRender组件类型 ([7533701](https://git.taimei.com/hospital/site-front-repo/commits/753370134574ee1a2eb4a7c0b09c0fb0ede12bdb))
+* 优化FormRender  schema参数 ([ec50a40](https://git.taimei.com/hospital/site-front-repo/commits/ec50a407297ad0184afec136b39d0d2b2be260a2))
+
+
+
+
+
 # [0.4.0-alpha15.8](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.0-alpha15.0...@tms/site-component@0.4.0-alpha15.8) (2022-01-25)
 
 
