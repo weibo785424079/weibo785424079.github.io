@@ -5,7 +5,9 @@
     "module": "dist/esm/index.js",
     "types": "dist/esm/index.d.ts",
     "license": "MIT",
-    "homepage": "http://npm.taimei.com",
+    "publishConfig": {
+        "registry": "http://npm.taimei.com"
+    },
     "files": [
         "dist",
         "package.json",
@@ -41,5 +43,5 @@
         "react-resizable": "^3.0.4",
         "react-sortable-hoc": "^2.0.0"
     },
-    "gitHead": "252401f69eb8bee6f049342a0522c057bb8541ec"
+    "gitHead": "f7460d1aeef5575a5935b4a1f2edb18da562254b"
 }
