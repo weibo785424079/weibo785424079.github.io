@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-alpha15.13](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.0-alpha15.12...@tms/site-component@0.4.0-alpha15.13) (2022-03-21)
+
+**Note:** Version bump only for package @tms/site-component
+
+
+
+
+
 # [0.4.0-alpha15.12](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.0-alpha15.8...@tms/site-component@0.4.0-alpha15.12) (2022-03-21)
 
 
