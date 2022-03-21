@@ -1,10 +1,11 @@
 {
     "name": "@tms/site-component",
-    "version": "0.4.0-alpha15.12",
+    "version": "0.4.0-alpha15.13",
     "main": "dist/esm/index.js",
     "module": "dist/esm/index.js",
     "types": "dist/esm/index.d.ts",
     "license": "MIT",
+    "homepage": "http://npm.taimei.com",
     "files": [
         "dist",
         "package.json",
@@ -40,5 +41,5 @@
         "react-resizable": "^3.0.4",
         "react-sortable-hoc": "^2.0.0"
     },
-    "gitHead": "318d49b50c6731dd97035a177abec2bceaee8cc1"
+    "gitHead": "252401f69eb8bee6f049342a0522c057bb8541ec"
 }
