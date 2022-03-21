@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import './index.css';
 
 interface Operation {
+  key?: string;
   text: string;
   action?: (...args: any[]) => void;
   visible?: boolean;
@@ -13,7 +14,7 @@ interface Operation {
 const Operations = ({
   meta,
   className,
-  layout,
+  layout
 }: {
   className?: string;
   layout?: 'horizontal' | 'vertical';
@@ -23,12 +24,12 @@ const Operations = ({
     {meta
       .filter((item) => item.visible !== false)
       .map((item, index) => {
-        const { text, action, render, disable = false, style = {} } = item;
+        const { key, text, action, render, disable = false, style = {} } = item;
         const children = (
           <span
             role="button"
             tabIndex={index}
-            key={text}
+            key={key || text}
             style={style}
             onClick={() => action?.()}
             onKeyPress={() => action?.()}
@@ -48,7 +49,7 @@ const Operations = ({
 
 Operations.defaultProps = {
   className: '',
-  layout: 'horizontal',
+  layout: 'horizontal'
 };
 
 export default Operations;
