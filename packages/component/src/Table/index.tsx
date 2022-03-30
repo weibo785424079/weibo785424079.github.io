@@ -34,8 +34,12 @@ function CacheTable({ accountId, id, minWidth, children, db, getDefaultData }: P
   });
 
   useUnMount(() => {
-    if (adaptor && adaptor instanceof DBAdaptor) {
-      adaptor.close();
+    try {
+      if (adaptor && adaptor instanceof DBAdaptor) {
+        adaptor.close();
+      }
+    } catch (error) {
+      console.log(error);
     }
   });
 

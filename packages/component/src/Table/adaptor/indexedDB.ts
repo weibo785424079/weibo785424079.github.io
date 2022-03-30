@@ -20,7 +20,7 @@ class DBAdaptor extends Dexie implements CacheAdaptor {
   }
 
   getCahce(id: string) {
-    return new Promise<Cache>((resolve) => {
+    return new Promise<Cache>((resolve, reject) => {
       this.caches
         .where('id')
         .equals(id)
@@ -38,19 +38,27 @@ class DBAdaptor extends Dexie implements CacheAdaptor {
           } else {
             resolve(tables[0].data);
           }
+        })
+        .catch((e) => {
+          reject(e);
         });
     });
   }
 
   setCache(id: string, cache: Cache) {
-    return this.caches
-      .update(id, {
-        id,
-        data: cache
-      })
-      .then((res) => {
-        return res === 1;
-      });
+    return new Promise<boolean>((resolve, reject) => {
+      this.caches
+        .update(id, {
+          id,
+          data: cache
+        })
+        .then((res) => {
+          resolve(res === 1);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    });
   }
 }
 

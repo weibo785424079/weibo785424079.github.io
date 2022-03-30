@@ -23,31 +23,31 @@ const Demo = () => {
           {
             key: '1',
             title: '首页',
-            width: 100,
+            // width: 100,
             dataIndex: '1'
           },
           {
             key: '2',
             title: '首页-2',
-            width: 100,
+            // width: 100,
             dataIndex: '2'
           },
           {
             key: '3',
             title: '首页-3',
-            width: 100,
+            // width: 100,
             dataIndex: '3'
           },
           {
             key: '4',
             title: '首页-4',
-            width: 100,
+            // width: 100,
             dataIndex: '4'
           },
           {
             key: '5',
             title: '首页-5',
-            width: 100,
+            // width: 100,
             dataIndex: '5'
           },
           {
