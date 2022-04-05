@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useUnMount } from '@tms/site-hook';
 import Table from './Table';
 import CacheTableContainer, { CacheCleaner } from './CacheContainer';
 import type { DefaultData } from './interface';
@@ -31,16 +30,6 @@ function CacheTable({ accountId, id, minWidth, children, db, getDefaultData }: P
   }
   const [adaptor] = useState(() => {
     return db && accountId ? new DBAdaptor(accountId, getDefaultData!) : new StorageAdaptor(id, getDefaultData!);
-  });
-
-  useUnMount(() => {
-    try {
-      if (adaptor && adaptor instanceof DBAdaptor) {
-        adaptor.close();
-      }
-    } catch (error) {
-      console.log(error);
-    }
   });
 
   return (

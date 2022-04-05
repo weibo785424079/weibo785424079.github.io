@@ -10,6 +10,7 @@ const ResizeableTitle = (props: any) => {
   const [{ width: defaultWidth, inited }, setDefaultWidth] = useState({ inited: false, width: 0 });
 
   useLayoutEffect(() => {
+    if (width) return;
     if (ref.current && !inited) {
       setDefaultWidth({
         inited: true,
