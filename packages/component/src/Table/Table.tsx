@@ -40,8 +40,7 @@ function InnerTable<T>({ className, columns = [], ...rest }: TableProps<T>) {
       return {
         ...col,
         fixed,
-        // width: cacheWidth.get(String(col.key!)),
-        width,
+        width: cacheWidth.get(String(col.key!)),
         onHeaderCell: () => ({
           width,
           hide: col.fixed === 'right',
