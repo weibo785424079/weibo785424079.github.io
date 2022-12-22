@@ -85,7 +85,7 @@ function useRequest<R = any, T extends(...args: any[]) => any = (...args: any[])
         if (isCurrent(fn)) {
           closeLoading({ loading: false, error, result: undefined });
         }
-        console.log(error, 'error');
+        console.log(error);
       }
     },
     [fn]
