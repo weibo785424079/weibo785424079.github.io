@@ -13,4 +13,6 @@ export * from './Table';
 
 export * from './Container';
 
+export * from './AnchorLoad';
+
 export { FormBuilder, Operations, FormUpload, getValueFromEvent, FormEditor };

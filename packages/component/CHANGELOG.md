@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.2...@tms/site-component@0.5.0) (2022-10-13)
+
+
+### Bug Fixes
+
+* 修复冻结列宽 ([cbf7cdf](https://git.taimei.com/hospital/site-front-repo/commits/cbf7cdf3ea4d39712f957419ed760a2f14b3752d))
+* 修复table组件冻结列后前新增字段样式错位 ([3ab3117](https://git.taimei.com/hospital/site-front-repo/commits/3ab3117e205d109c43a477b89c9fb956a6e1b0b4))
+
+
+### Features
+
+* **component:** add AnchorLoad ([c16290f](https://git.taimei.com/hospital/site-front-repo/commits/c16290fece2b08ec8c3b3ee5e6446327488b4055))
+* 更改版本号 ([f91fd70](https://git.taimei.com/hospital/site-front-repo/commits/f91fd70b0f69d0e711934c8ce6e3a511bd2e8dbf))
+* 回退修改 ([1eccc8d](https://git.taimei.com/hospital/site-front-repo/commits/1eccc8d7dbba03c7ca969906472d8e1f1f63cb3f))
+
+
+
+
+
 ## [0.4.2](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-component@0.4.0-alpha15.16...@tms/site-component@0.4.2) (2022-04-05)
 
 **Note:** Version bump only for package @tms/site-component
