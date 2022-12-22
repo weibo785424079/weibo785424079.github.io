@@ -1,6 +1,6 @@
 {
     "name": "@tms/site-component",
-    "version": "0.6.1",
+    "version": "0.6.2",
     "main": "dist/esm/index.js",
     "module": "dist/esm/index.js",
     "types": "dist/esm/index.d.ts",
@@ -35,7 +35,7 @@
         "react": ">=16.8.6"
     },
     "dependencies": {
-        "@tms/site-hook": "^0.2.0-alpha4.3",
+        "@tms/site-hook": "^0.2.0-alpha4.4",
         "@tms/storage": "^0.0.55",
         "dexie": "^3.2.0",
         "eventemitter3": "^4.0.7",

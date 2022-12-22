@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha4.4](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.2.0-alpha4.1...@tms/site-hook@0.2.0-alpha4.4) (2022-12-22)
+
+
+### Bug Fixes
+
+* **hook:** useRequest run ([e039cbf](https://git.taimei.com/hospital/site-front-repo/commits/e039cbf583767317e361a087877c4048f858d6eb))
+
+
+
+
+
 # [0.2.0-alpha4.3](https://git.taimei.com/hospital/site-front-repo/compare/@tms/site-hook@0.2.0-alpha4.1...@tms/site-hook@0.2.0-alpha4.3) (2022-12-22)
 
 
