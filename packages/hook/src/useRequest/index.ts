@@ -79,6 +79,7 @@ function useRequest<R = any, T extends(...args: any[]) => any = (...args: any[])
             result: optionRef.current.handleResult(result)
           });
         }
+        return result;
       } catch (error) {
         if (isCurrent(fn)) {
           closeLoading({ loading: false, error, result: undefined });
