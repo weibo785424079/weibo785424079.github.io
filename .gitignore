@@ -1,9 +1,8 @@
 node_modules
-dist
+packages/**/dist
 *.error
 .umi
 .umi-production
-dist
 docs_dist
 coverage
 template
